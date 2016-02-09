@@ -1,0 +1,19 @@
+_LCDByte: CODE, 2192 0 62
+__stringdata: SMALLCONST, 1537 0 14
+_abs: CODE, 2316 0 56
+_SetMotorLeft: CODE, 1990 0 76
+_MotorInit: CODE, 2540 0 10
+_SetMotorRight: CODE, 1914 0 76
+_main: CODE, 2130 0 62
+_LCDInit: CODE, 1700 0 132
+__initialization: CODE, 2372 0 44
+___lwdiv: CODE, 1832 0 82
+_LCDWriteString: CODE, 1552 0 148
+_isr: CODE, 8 0 214
+_SetPWMMotorRight: CODE, 2426 0 42
+_TimerPWMInit: CODE, 2510 0 30
+_ReadPWMMotorLeft: CODE, 2560 0 10
+_LCDBusyLoop: CODE, 2254 0 62
+_ReadPWMMotorRight: CODE, 2550 0 10
+_SetPWMMotorLeft: CODE, 2468 0 42
+Total: 1172
