@@ -6,8 +6,7 @@
 
 void main(void) {
     
-    //ADCInit();
-    //ADCInitiateConversion();
+    ADCInit();
     //**We are gonna generate PWM signals with timers, because we need two dutty cicles**//
     //PWMInit();
     //PWMSetDutyCycle(50);
@@ -27,7 +26,15 @@ void main(void) {
     /* Endless loop, doing nothing.
      * ISR handles ADC conversions. */
     while(1) {
- 
+        
+    LCDClear(); //Clear the display
+    LCDWriteInt(ReadBattery(),5); //Write a string
+    GO=1;
+    
+    
+    
+    for(int i=1;i<1000; i++){    
+    }
     
     
     

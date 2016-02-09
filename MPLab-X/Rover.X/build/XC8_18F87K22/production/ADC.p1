@@ -3159,119 +3159,243 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic18.h: 156: extern __nonreentrant void _delay(unsigned long);
 [; ;pic18.h: 158: extern __nonreentrant void _delaywdt(unsigned long);
 [; ;pic18.h: 160: extern __nonreentrant void _delay3(unsigned char);
-"3 ADC.c
+"2 ADC.c
+[v _DistanceLeft `ui ~T0 @X0 1 s ]
+[; ;ADC.c: 2: static unsigned int DistanceLeft;
+"3
+[v _DistanceRight `ui ~T0 @X0 1 s ]
+[; ;ADC.c: 3: static unsigned int DistanceRight;
+"4
+[v _DistanceCentral `ui ~T0 @X0 1 s ]
+[; ;ADC.c: 4: static unsigned int DistanceCentral;
+"5
+[v _Battery `ui ~T0 @X0 1 s ]
+[; ;ADC.c: 5: static unsigned int Battery;
+"8
 [v _ADCInit `(v ~T0 @X0 1 ef ]
 {
-[; ;ADC.c: 3: void ADCInit(void) {
+[; ;ADC.c: 8: void ADCInit(void) {
 [e :U _ADCInit ]
 [f ]
-[; ;ADC.c: 6: TRISA0 = 1;
-"6
-[e = _TRISA0 -> -> 1 `i `b ]
-[; ;ADC.c: 7: TRISA1 = 1;
-"7
-[e = _TRISA1 -> -> 1 `i `b ]
-[; ;ADC.c: 8: TRISA2 = 1;
-"8
-[e = _TRISA2 -> -> 1 `i `b ]
-[; ;ADC.c: 9: TRISA3 = 1;
-"9
-[e = _TRISA3 -> -> 1 `i `b ]
-[; ;ADC.c: 11: ANS0 = 1;
+[; ;ADC.c: 11: TRISA0 = 1;
 "11
-[e = _ANS0 -> -> 1 `i `b ]
-[; ;ADC.c: 12: ANS1 = 1;
+[e = _TRISA0 -> -> 1 `i `b ]
+[; ;ADC.c: 12: TRISA1 = 1;
 "12
-[e = _ANS1 -> -> 1 `i `b ]
-[; ;ADC.c: 13: ANS2 = 1;
+[e = _TRISA1 -> -> 1 `i `b ]
+[; ;ADC.c: 13: TRISA2 = 1;
 "13
-[e = _ANS2 -> -> 1 `i `b ]
-[; ;ADC.c: 14: ANS3 = 1;
+[e = _TRISA2 -> -> 1 `i `b ]
+[; ;ADC.c: 14: TRISA3 = 1;
 "14
-[e = _ANS3 -> -> 1 `i `b ]
-[; ;ADC.c: 16: ADON = 1;
+[e = _TRISA3 -> -> 1 `i `b ]
+[; ;ADC.c: 16: ANS0 = 1;
 "16
-[e = _ADON -> -> 1 `i `b ]
-[; ;ADC.c: 17: ADCON1 = 0;
+[e = _ANS0 -> -> 1 `i `b ]
+[; ;ADC.c: 17: ANS1 = 1;
 "17
-[e = _ADCON1 -> -> 0 `i `uc ]
-[; ;ADC.c: 18: ADCON2 = 0x91;
+[e = _ANS1 -> -> 1 `i `b ]
+[; ;ADC.c: 18: ANS2 = 1;
 "18
-[e = _ADCON2 -> -> 145 `i `uc ]
-[; ;ADC.c: 19: ADIF = 0;
+[e = _ANS2 -> -> 1 `i `b ]
+[; ;ADC.c: 19: ANS3 = 1;
 "19
-[e = _ADIF -> -> 0 `i `b ]
-[; ;ADC.c: 20: ADIE = 1;
-"20
-[e = _ADIE -> -> 1 `i `b ]
-[; ;ADC.c: 22: PEIE = 1;
+[e = _ANS3 -> -> 1 `i `b ]
+[; ;ADC.c: 21: ADON = 1;
+"21
+[e = _ADON -> -> 1 `i `b ]
+[; ;ADC.c: 22: ADCON1 = 0;
 "22
-[e = _PEIE -> -> 1 `i `b ]
-[; ;ADC.c: 23: GIE = 1;
+[e = _ADCON1 -> -> 0 `i `uc ]
+[; ;ADC.c: 23: ADCON2 = 0x91;
 "23
-[e = _GIE -> -> 1 `i `b ]
-[; ;ADC.c: 25: }
+[e = _ADCON2 -> -> 145 `i `uc ]
+[; ;ADC.c: 24: ADIF = 0;
+"24
+[e = _ADIF -> -> 0 `i `b ]
+[; ;ADC.c: 25: ADIE = 1;
 "25
+[e = _ADIE -> -> 1 `i `b ]
+[; ;ADC.c: 27: PEIE = 1;
+"27
+[e = _PEIE -> -> 1 `i `b ]
+[; ;ADC.c: 28: GIE = 1;
+"28
+[e = _GIE -> -> 1 `i `b ]
+[; ;ADC.c: 30: }
+"30
 [e :UE 358 ]
 }
-"27
+"32
 [v _ADCInitiateConversion `(v ~T0 @X0 1 ef ]
 {
-[; ;ADC.c: 27: void ADCInitiateConversion(void) {
+[; ;ADC.c: 32: void ADCInitiateConversion(void) {
 [e :U _ADCInitiateConversion ]
 [f ]
-[; ;ADC.c: 28: GO = 1;
-"28
+[; ;ADC.c: 33: GO = 1;
+"33
 [e = _GO -> -> 1 `i `b ]
-[; ;ADC.c: 29: }
-"29
+[; ;ADC.c: 34: }
+"34
 [e :UE 359 ]
 }
-"31
+"36
 [v _ADCGetOutput `(ui ~T0 @X0 1 ef ]
 {
-[; ;ADC.c: 31: unsigned int ADCGetOutput(void) {
+[; ;ADC.c: 36: unsigned int ADCGetOutput(void) {
 [e :U _ADCGetOutput ]
 [f ]
-"32
+"37
 [v _temp `i ~T0 @X0 1 a ]
-[; ;ADC.c: 32: int temp;
-[; ;ADC.c: 33: temp = ADRESL;
-"33
+[; ;ADC.c: 37: int temp;
+[; ;ADC.c: 38: temp = ADRESL;
+"38
 [e = _temp -> _ADRESL `i ]
-[; ;ADC.c: 34: return temp + (ADRESH << 8);
-"34
+[; ;ADC.c: 39: return temp + (ADRESH << 8);
+"39
 [e ) -> + _temp << -> _ADRESH `i -> 8 `i `ui ]
 [e $UE 360  ]
-[; ;ADC.c: 35: }
-"35
+[; ;ADC.c: 40: }
+"40
 [e :UE 360 ]
 }
-"37
+"42
 [v _ADCGetOutputLowByte `(uc ~T0 @X0 1 ef ]
 {
-[; ;ADC.c: 37: unsigned char ADCGetOutputLowByte() {
+[; ;ADC.c: 42: unsigned char ADCGetOutputLowByte() {
 [e :U _ADCGetOutputLowByte ]
 [f ]
-[; ;ADC.c: 38: return ADRESL;
-"38
+[; ;ADC.c: 43: return ADRESL;
+"43
 [e ) _ADRESL ]
 [e $UE 361  ]
-[; ;ADC.c: 39: }
-"39
+[; ;ADC.c: 44: }
+"44
 [e :UE 361 ]
 }
-"41
+"46
 [v _ADCGetOutputHighByte `(uc ~T0 @X0 1 ef ]
 {
-[; ;ADC.c: 41: unsigned char ADCGetOutputHighByte() {
+[; ;ADC.c: 46: unsigned char ADCGetOutputHighByte() {
 [e :U _ADCGetOutputHighByte ]
 [f ]
-[; ;ADC.c: 42: return ADRESH;
-"42
+[; ;ADC.c: 47: return ADRESH;
+"47
 [e ) _ADRESH ]
 [e $UE 362  ]
-[; ;ADC.c: 43: }
-"43
+[; ;ADC.c: 48: }
+"48
 [e :UE 362 ]
+}
+"52
+[v _SetDistanceLeft `(v ~T0 @X0 1 ef1`ui ]
+{
+[; ;ADC.c: 52: void SetDistanceLeft (unsigned int lecture){
+[e :U _SetDistanceLeft ]
+[v _lecture `ui ~T0 @X0 1 r1 ]
+[f ]
+[; ;ADC.c: 53: DistanceLeft=5+(1023-lecture)*0.035;
+"53
+[e = _DistanceLeft -> + -> -> 5 `i `d * -> - -> -> 1023 `i `ui _lecture `d .0.035 `ui ]
+[; ;ADC.c: 54: }
+"54
+[e :UE 363 ]
+}
+"56
+[v _ReadDistanceLeft `(ui ~T0 @X0 1 ef ]
+{
+[; ;ADC.c: 56: unsigned int ReadDistanceLeft (){
+[e :U _ReadDistanceLeft ]
+[f ]
+[; ;ADC.c: 57: return DistanceLeft;
+"57
+[e ) _DistanceLeft ]
+[e $UE 364  ]
+[; ;ADC.c: 58: }
+"58
+[e :UE 364 ]
+}
+"60
+[v _SetDistanceRight `(v ~T0 @X0 1 ef1`ui ]
+{
+[; ;ADC.c: 60: void SetDistanceRight (unsigned int lecture){
+[e :U _SetDistanceRight ]
+[v _lecture `ui ~T0 @X0 1 r1 ]
+[f ]
+[; ;ADC.c: 61: DistanceRight=5+(1023-lecture)*0.035;
+"61
+[e = _DistanceRight -> + -> -> 5 `i `d * -> - -> -> 1023 `i `ui _lecture `d .0.035 `ui ]
+[; ;ADC.c: 62: }
+"62
+[e :UE 365 ]
+}
+"64
+[v _ReadDistanceRight `(ui ~T0 @X0 1 ef ]
+{
+[; ;ADC.c: 64: unsigned int ReadDistanceRight (){
+[e :U _ReadDistanceRight ]
+[f ]
+[; ;ADC.c: 65: return DistanceRight;
+"65
+[e ) _DistanceRight ]
+[e $UE 366  ]
+[; ;ADC.c: 66: }
+"66
+[e :UE 366 ]
+}
+"68
+[v _SetDistanceCentral `(v ~T0 @X0 1 ef1`ui ]
+{
+[; ;ADC.c: 68: void SetDistanceCentral (unsigned int lecture){
+[e :U _SetDistanceCentral ]
+[v _lecture `ui ~T0 @X0 1 r1 ]
+[f ]
+[; ;ADC.c: 69: DistanceCentral=5+(1023-lecture)*0.035;
+"69
+[e = _DistanceCentral -> + -> -> 5 `i `d * -> - -> -> 1023 `i `ui _lecture `d .0.035 `ui ]
+[; ;ADC.c: 70: }
+"70
+[e :UE 367 ]
+}
+"72
+[v _ReadDistanceCentral `(ui ~T0 @X0 1 ef ]
+{
+[; ;ADC.c: 72: unsigned int ReadDistanceCentral (){
+[e :U _ReadDistanceCentral ]
+[f ]
+[; ;ADC.c: 73: return DistanceCentral;
+"73
+[e ) _DistanceCentral ]
+[e $UE 368  ]
+[; ;ADC.c: 74: }
+"74
+[e :UE 368 ]
+}
+"76
+[v _SetBattery `(v ~T0 @X0 1 ef1`ui ]
+{
+[; ;ADC.c: 76: void SetBattery (unsigned int lecture){
+[e :U _SetBattery ]
+[v _lecture `ui ~T0 @X0 1 r1 ]
+[f ]
+[; ;ADC.c: 77: Battery=lecture*3.548;
+"77
+[e = _Battery -> * -> _lecture `d .3.548 `ui ]
+[; ;ADC.c: 78: }
+"78
+[e :UE 369 ]
+}
+"80
+[v _ReadBattery `(ui ~T0 @X0 1 ef ]
+{
+[; ;ADC.c: 80: unsigned int ReadBattery (){
+[e :U _ReadBattery ]
+[f ]
+[; ;ADC.c: 81: return Battery;
+"81
+[e ) _Battery ]
+[e $UE 370  ]
+[; ;ADC.c: 82: }
+"82
+[e :UE 370 ]
 }

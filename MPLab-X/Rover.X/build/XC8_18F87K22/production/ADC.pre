@@ -4181,7 +4181,13 @@ extern __nonreentrant void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __nonreentrant void _delay3(unsigned char);
 
-# 3 "ADC.c"
+# 2 "ADC.c"
+static unsigned int DistanceLeft;
+static unsigned int DistanceRight;
+static unsigned int DistanceCentral;
+static unsigned int Battery;
+
+
 void ADCInit(void) {
 
 
@@ -4222,4 +4228,38 @@ return ADRESL;
 
 unsigned char ADCGetOutputHighByte() {
 return ADRESH;
+}
+
+
+
+void SetDistanceLeft (unsigned int lecture){
+DistanceLeft=5+(1023-lecture)*0.035;
+}
+
+unsigned int ReadDistanceLeft (){
+return DistanceLeft;
+}
+
+void SetDistanceRight (unsigned int lecture){
+DistanceRight=5+(1023-lecture)*0.035;
+}
+
+unsigned int ReadDistanceRight (){
+return DistanceRight;
+}
+
+void SetDistanceCentral (unsigned int lecture){
+DistanceCentral=5+(1023-lecture)*0.035;
+}
+
+unsigned int ReadDistanceCentral (){
+return DistanceCentral;
+}
+
+void SetBattery (unsigned int lecture){
+Battery=lecture*3.548;
+}
+
+unsigned int ReadBattery (){
+return Battery;
 }

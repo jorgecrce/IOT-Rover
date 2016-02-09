@@ -22,12 +22,53 @@ void interrupt isr(void) {
          * Start another ADC conversion.
          * Clear the ADC conversion complete flag. */
         
+        static unsigned int Readport=0;
+        unsigned int read=ADCGetOutput();
         
-        //unsigned long read=ADCGetOutput();
-        //unsigned long percentage=(read*100)/1024;
-        //PWMSetDutyCycle(percentage);
-        GO=1;
-        ADIF=0;
+        switch (Readport){
+            case 0://Read port 0. Left sensor. 
+                CHS3=0;
+                CHS2=0;
+                CHS1=0;
+                CHS0=1;
+                SetDistanceLeft (read);
+                Readport++;
+                break;
+            case 1://Read port 1. Central sensor.
+                CHS3=0;
+                CHS2=0;
+                CHS1=1;
+                CHS0=0;
+                SetDistanceCentral (read);
+                Readport++;
+                break;
+            case 2://Read port 2. Central sensor.
+                CHS3=0;
+                CHS2=0;
+                CHS1=1;
+                CHS0=1;
+                SetDistanceRight (read);
+                Readport++;
+                break;
+            case 3://Read port 3. Battery voltage.
+                CHS3=0;
+                CHS2=0;
+                CHS1=0;
+                CHS0=0;
+                SetBattery (read);
+                Readport=0;
+                break;
+            default:
+                CHS3=0;
+                CHS2=0;
+                CHS1=0;
+                CHS0=0;
+                Readport=0;
+                break;      
+        }
+
+        
+        ADIF=0;//Reset interrupt flag
         
     }
 

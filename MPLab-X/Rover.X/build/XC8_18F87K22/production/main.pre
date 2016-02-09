@@ -4196,6 +4196,16 @@ unsigned char ADCGetOutputLowByte();
 
 unsigned char ADCGetOutputHighByte();
 
+unsigned int ReadDistanceLeft ();
+void SetDistanceLeft (unsigned int lecture);
+void SetDistanceRight (unsigned int lecture);
+unsigned int ReadDistanceRight ();
+void SetDistanceCentral (unsigned int lecture);
+unsigned int ReadDistanceCentral ();
+
+void SetBattery (unsigned int lecture);
+unsigned int ReadBattery ();
+
 # 8 "motors.h"
 void MotorInit();
 void SetMotorLeft(signed int speed);
@@ -4314,7 +4324,11 @@ unsigned int ReadPWMMotorLeft ();
 # 7 "main.c"
 void main(void) {
 
-# 15
+ADCInit();
+
+
+
+
 MotorInit();
 TimerPWMInit();
 SetMotorLeft(40);
@@ -4324,10 +4338,21 @@ LCDInit(0B00000000);
 (LCDByte(0b00000001,0));
 LCDWriteString("Hello World !");
 
-# 29
+# 28
 while(1) {
 
-# 35
+(LCDByte(0b00000001,0));
+LCDWriteInt(ReadBattery(),5);
+GO=1;
+
+
+
+for(int i=1;i<1000; i++){
+}
+
+
+
+
 }
 
 }

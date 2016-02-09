@@ -4196,6 +4196,16 @@ unsigned char ADCGetOutputLowByte();
 
 unsigned char ADCGetOutputHighByte();
 
+unsigned int ReadDistanceLeft ();
+void SetDistanceLeft (unsigned int lecture);
+void SetDistanceRight (unsigned int lecture);
+unsigned int ReadDistanceRight ();
+void SetDistanceCentral (unsigned int lecture);
+unsigned int ReadDistanceCentral ();
+
+void SetBattery (unsigned int lecture);
+unsigned int ReadBattery ();
+
 # 7 "PWM.h"
 void PWMInit(void);
 
@@ -4217,8 +4227,53 @@ long dutyCycle;
 
 if (ADIF == 1) {
 
-# 29
-GO=1;
+# 25
+static unsigned int Readport=0;
+unsigned int read=ADCGetOutput();
+
+switch (Readport){
+case 0:
+CHS3=0;
+CHS2=0;
+CHS1=0;
+CHS0=1;
+SetDistanceLeft (read);
+Readport++;
+break;
+case 1:
+CHS3=0;
+CHS2=0;
+CHS1=1;
+CHS0=0;
+SetDistanceCentral (read);
+Readport++;
+break;
+case 2:
+CHS3=0;
+CHS2=0;
+CHS1=1;
+CHS0=1;
+SetDistanceRight (read);
+Readport++;
+break;
+case 3:
+CHS3=0;
+CHS2=0;
+CHS1=0;
+CHS0=0;
+SetBattery (read);
+Readport=0;
+break;
+default:
+CHS3=0;
+CHS2=0;
+CHS1=0;
+CHS0=0;
+Readport=0;
+break;
+}
+
+
 ADIF=0;
 
 }

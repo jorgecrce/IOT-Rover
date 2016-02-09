@@ -1,4 +1,9 @@
 #include <xc.h>
+static unsigned int DistanceLeft;
+static unsigned int DistanceRight;
+static unsigned int DistanceCentral;
+static unsigned int Battery;
+
 
 void ADCInit(void) {
 
@@ -40,4 +45,38 @@ unsigned char ADCGetOutputLowByte() {
 
 unsigned char ADCGetOutputHighByte() {
     return ADRESH;
+}
+
+
+
+void SetDistanceLeft (unsigned int lecture){
+    DistanceLeft=5+(1023-lecture)*0.035;//Not exact, but it gives us an idea.
+}
+
+unsigned int ReadDistanceLeft (){
+    return DistanceLeft;
+}
+
+void SetDistanceRight (unsigned int lecture){
+    DistanceRight=5+(1023-lecture)*0.035;//Not exact, but it gives us an idea.
+}
+
+unsigned int ReadDistanceRight (){
+    return DistanceRight;
+}
+
+void SetDistanceCentral (unsigned int lecture){
+    DistanceCentral=5+(1023-lecture)*0.035;//Not exact, but it gives us an idea.
+}
+
+unsigned int ReadDistanceCentral (){
+    return DistanceCentral;
+}
+
+void SetBattery (unsigned int lecture){
+    Battery=lecture*3.548;//Hight accuracy.
+}
+
+unsigned int ReadBattery (){
+    return Battery;
 }

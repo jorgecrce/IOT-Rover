@@ -1,5 +1,7 @@
 Version 3.2 HI-TECH Software Intermediate Code
 [p mainexit ]
+"5 ADC.h
+[v _ADCInit `(v ~T0 @X0 0 ef ]
 "8 motors.h
 [v _MotorInit `(v ~T0 @X0 0 ef ]
 "8 TimerPWM.h
@@ -14,6 +16,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _LCDByte `(v ~T0 @X0 0 ef2`uc`uc ]
 "79
 [v _LCDWriteString `(v ~T0 @X0 0 ef1`*Cuc ]
+"80
+[v _LCDWriteInt `(v ~T0 @X0 0 ef2`i`c ]
+"28 ADC.h
+[v _ReadBattery `(ui ~T0 @X0 0 ef ]
+"7721 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f45k20.h
+[v _GO `Vb ~T0 @X0 0 e@32273 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -3143,6 +3151,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ADC.h: 12: unsigned int ADCGetOutput(void);
 [; ;ADC.h: 15: unsigned char ADCGetOutputLowByte();
 [; ;ADC.h: 18: unsigned char ADCGetOutputHighByte();
+[; ;ADC.h: 20: unsigned int ReadDistanceLeft ();
+[; ;ADC.h: 21: void SetDistanceLeft (unsigned int lecture);
+[; ;ADC.h: 22: void SetDistanceRight (unsigned int lecture);
+[; ;ADC.h: 23: unsigned int ReadDistanceRight ();
+[; ;ADC.h: 24: void SetDistanceCentral (unsigned int lecture);
+[; ;ADC.h: 25: unsigned int ReadDistanceCentral ();
+[; ;ADC.h: 27: void SetBattery (unsigned int lecture);
+[; ;ADC.h: 28: unsigned int ReadBattery ();
 [; ;motors.h: 8: void MotorInit();
 [; ;motors.h: 9: void SetMotorLeft(signed int speed);
 [; ;motors.h: 10: void SetMotorRight(signed int speed);
@@ -3191,40 +3207,70 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 7: void main(void) {
 [e :U _main ]
 [f ]
-[; ;main.c: 15: MotorInit();
-"15
+[; ;main.c: 9: ADCInit();
+"9
+[e ( _ADCInit ..  ]
+[; ;main.c: 14: MotorInit();
+"14
 [e ( _MotorInit ..  ]
-[; ;main.c: 16: TimerPWMInit();
-"16
+[; ;main.c: 15: TimerPWMInit();
+"15
 [e ( _TimerPWMInit ..  ]
-[; ;main.c: 17: SetMotorLeft(40);
-"17
+[; ;main.c: 16: SetMotorLeft(40);
+"16
 [e ( _SetMotorLeft (1 -> 40 `i ]
-[; ;main.c: 18: SetMotorRight(-95);
-"18
+[; ;main.c: 17: SetMotorRight(-95);
+"17
 [e ( _SetMotorRight (1 -U -> 95 `i ]
-[; ;main.c: 20: LCDInit(0B00000000);
-"20
+[; ;main.c: 19: LCDInit(0B00000000);
+"19
 [e ( _LCDInit (1 -> -> 0 `i `uc ]
-[; ;main.c: 21: (LCDByte(0b00000001,0));
-"21
+[; ;main.c: 20: (LCDByte(0b00000001,0));
+"20
 [e ( _LCDByte (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 22: LCDWriteString("Hello World !");
-"22
+[; ;main.c: 21: LCDWriteString("Hello World !");
+"21
 [e ( _LCDWriteString (1 :s 1C ]
-[; ;main.c: 29: while(1) {
-"29
+[; ;main.c: 28: while(1) {
+"28
 [e :U 360 ]
 {
-"35
+[; ;main.c: 30: (LCDByte(0b00000001,0));
+"30
+[e ( _LCDByte (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
+[; ;main.c: 31: LCDWriteInt(ReadBattery(),5);
+"31
+[e ( _LCDWriteInt (2 , -> ( _ReadBattery ..  `i -> -> 5 `i `c ]
+[; ;main.c: 32: GO=1;
+"32
+[e = _GO -> -> 1 `i `b ]
+[; ;main.c: 36: for(int i=1;i<1000; i++){
+"36
+{
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 1 `i ]
+[e $ < _i -> 1000 `i 362  ]
+[e $U 363  ]
+[e :U 362 ]
+{
+"37
+}
+"36
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 1000 `i 362  ]
+[e :U 363 ]
+"37
+}
+"42
 }
 [e :U 359 ]
-"29
+"28
 [e $U 360  ]
 [e :U 361 ]
-[; ;main.c: 35: }
 [; ;main.c: 37: }
-"37
+[; ;main.c: 42: }
+[; ;main.c: 44: }
+"44
 [e :UE 358 ]
 }
 [a 1C 72 101 108 108 111 32 87 111 114 108 100 32 33 0 ]
