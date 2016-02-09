@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
-  <executable name="dist/XC8_18F87K22/production\PWMLab.X.production.hex">
+  <executable name="dist/XC8_18F87K22/production\Rover.X.production.hex">
     <memory name="program">
       <units>bytes</units>
       <length>32768</length>

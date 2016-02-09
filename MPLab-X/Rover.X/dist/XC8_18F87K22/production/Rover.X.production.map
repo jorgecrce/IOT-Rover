@@ -3,10 +3,10 @@ Microchip MPLAB XC8 Compiler V1.36 ()
 Linker command line:
 
 --edf=C:\Program Files (x86)\Microchip\xc8\v1.36\dat\en_msgs.txt -cs \
-  -h+dist/XC8_18F87K22/production\PWMLab.X.production.sym \
-  --cmf=dist/XC8_18F87K22/production\PWMLab.X.production.cmf -z -Q18F45K20 \
-  -oC:\Users\jorge\AppData\Local\Temp\s4s.2 \
-  -Mdist/XC8_18F87K22/production/PWMLab.X.production.map -E1 -ver=XC8 \
+  -h+dist/XC8_18F87K22/production\Rover.X.production.sym \
+  --cmf=dist/XC8_18F87K22/production\Rover.X.production.cmf -z -Q18F45K20 \
+  -oC:\Users\jorge\AppData\Local\Temp\s7as.2 \
+  -Mdist/XC8_18F87K22/production/Rover.X.production.map -E1 -ver=XC8 \
   -ASTACK=0A0h-05ffh -pstack=STACK -ACODE=00h-07FFFh -ACONST=00h-07FFFh \
   -ASMALLCONST=0600h-06FFhx122 -AMEDIUMCONST=0600h-07FFFh -ACOMRAM=01h-05Fh \
   -AABS1=00h-05FFh -ABIGRAM=01h-05FFh -ARAM=060h-0FFh,0100h-01FFhx5 \
@@ -22,8 +22,8 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  C:\Users\jorge\AppData\Local\Temp\s4s.obj \
-  dist/XC8_18F87K22/production\PWMLab.X.production.obj 
+  C:\Users\jorge\AppData\Local\Temp\s7as.obj \
+  dist/XC8_18F87K22/production\Rover.X.production.obj 
 
 Object code version is 3.11
 
@@ -35,12 +35,12 @@ Call graph: (short form)
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\jorge\AppData\Local\Temp\s4s.obj
+C:\Users\jorge\AppData\Local\Temp\s7as.obj
                 end_init                             E2       E2        4        4       0
                 reset_vec                             0        0        4        0       0
                 idloc                            200000   200000        8   200000       0
                 config                           300000   300000        E   300000       0
-dist/XC8_18F87K22/production\PWMLab.X.production.obj
+dist/XC8_18F87K22/production\Rover.X.production.obj
                 intcode                               8        8       DA        4       0
                 temp                                 2B       2B        1        1       1
                 smallconst                          600      600       10      300       0
