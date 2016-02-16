@@ -3,6 +3,9 @@
 #include "motors.h"
 #include "lcd_hd44780_pic16.h"
 #include "TimerPWM.h"
+#include "serial.h"
+#include <usart.h>
+#include "driver.h"
 
 void main(void) {
     
@@ -12,34 +15,22 @@ void main(void) {
     //PWMSetDutyCycle(50);
     
     MotorInit();
+    SerialInit();
     TimerPWMInit();
     SetMotorLeft(40);
     SetMotorRight(-95);
-    
     LCDInit(LS_NONE); //Initialize the LCD Module
-    LCDClear(); //Clear the display
-    LCDWriteString("Hello World !"); //Write a string
-    
-    
     
 
-    /* Endless loop, doing nothing.
-     * ISR handles ADC conversions. */
+    /* Endless loop*/
     while(1) {
+        ADCInitiateConversion();//One analog read.
+        Go();//Take decissions to avoid obstacles. And send orders to obstacles.
         
-    LCDClear(); //Clear the display
-    LCDWriteInt(ReadBattery(),5); //Write a string
-    GO=1;
-    
-    
-    
-    for(int i=1;i<1000; i++){    
+        LCDClear();
+        LCDWriteInt(ReadDistanceCentral(),2);
+        for(int i=1;i<1000; i++){  //Wait a little to avoid flickr  
     }
-    
-    
-    
-    
     }
-
 }
 

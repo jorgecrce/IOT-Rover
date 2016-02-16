@@ -4,4 +4,6 @@
 motors.h  \
 lcd_hd44780_pic16.h  \
 TimerPWM.h  \
-ADC.h 
+driver.h  \
+ADC.h  \
+serial.h 

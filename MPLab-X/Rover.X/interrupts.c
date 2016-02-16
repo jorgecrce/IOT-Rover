@@ -2,12 +2,12 @@
 #include "ADC.h"
 #include "PWM.h"
 #include "TimerPWM.h"
+#include <usart.h>
 #define PIN1 RC4
 #define PIN2 RC5
 
 void interrupt isr(void) {
 
-    long dutyCycle; // used for the duty cycle calculation
 
     /* If the interrupt was caused by an ADC conversion complete ... */
     if (ADIF == 1) {
@@ -98,6 +98,20 @@ void interrupt isr(void) {
         TMR0H=0x00;//Start the timer from 0
         TMR0L=0x156;
 
+    }
+    
+    if (RCIF==1){
+        char CharRx = ReadUSART();   //Se lee el dato que esta en el buffer de Rx del USART
+
+        while(BusyUSART());
+        putsUSART("\n\rEcho: ");
+        while(BusyUSART());
+        WriteUSART(CharRx);
+        while(BusyUSART());
+        putsUSART("\n\r\n\rWrite: ");
+
+
+        RCIF = 0;  //Desactivamos la bandera de recepción en el buffer de entrada del USART
     }
 }
 

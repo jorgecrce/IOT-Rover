@@ -10,6 +10,8 @@
       <itemPath>lcd_hd44780_pic16.h</itemPath>
       <itemPath>myutils.h</itemPath>
       <itemPath>TimerPWM.h</itemPath>
+      <itemPath>serial.h</itemPath>
+      <itemPath>driver.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -25,6 +27,8 @@
       <itemPath>motors.c</itemPath>
       <itemPath>lcd_hd44780_pic16.c</itemPath>
       <itemPath>TimerPWM.c</itemPath>
+      <itemPath>serial.c</itemPath>
+      <itemPath>driver.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

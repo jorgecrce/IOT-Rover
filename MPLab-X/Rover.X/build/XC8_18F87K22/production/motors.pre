@@ -4295,6 +4295,874 @@ extern volatile __bit nWR @ (((unsigned) &PORTE)*8) + 1;
 
 extern volatile __bit nWRITE @ (((unsigned) &SSPSTAT)*8) + 2;
 
+# 2008 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\plib\adc.h"
+union ADCResult
+{
+int lr;
+char br[2];
+};
+
+char BusyADC (void);
+
+void ConvertADC (void);
+
+void CloseADC(void);
+
+# 2026
+int ReadADC(void);
+
+# 2046
+void OpenADC ( unsigned char ,
+unsigned char ,
+unsigned int );
+
+# 2084
+void SetChanADC(unsigned char );
+
+# 2100
+void SelChanConvADC( unsigned char );
+
+# 90 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\plib\ancomp.h"
+void Close_ancomp1( void );
+void Open_ancomp1(unsigned char config);
+void Close_ancomp2( void );
+void Open_ancomp2(unsigned char config);
+
+# 584 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\plib\spi.h"
+void OpenSPI( unsigned char sync_mode,
+unsigned char bus_mode,
+unsigned char smp_phase );
+
+signed char WriteSPI( unsigned char data_out );
+
+void getsSPI( unsigned char *rdptr, unsigned char length );
+
+void putsSPI( unsigned char *wrptr );
+
+unsigned char ReadSPI( void );
+
+# 414 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\plib\can2510.h"
+void CAN2510Initialize(  unsigned int configuration,
+ unsigned char brp,
+ unsigned char interruptFlags,
+ unsigned char SPI_syncMode,
+ unsigned char SPI_busMode,
+ unsigned char SPI_smpPhase );
+
+signed char CAN2510Init(  unsigned long BufferConfig,
+ unsigned long BitTimeConfig,
+ unsigned char interruptEnables,
+ unsigned char SPI_syncMode,
+ unsigned char SPI_busMode,
+ unsigned char SPI_smpPhase );
+
+void CAN2510Enable( void );
+
+void CAN2510Disable( void );
+
+void CAN2510Reset( void );
+
+void CAN2510SetMode(  unsigned char mode );
+
+unsigned char CAN2510ReadMode( void );
+
+unsigned char CAN2510ReadStatus( void );
+
+unsigned char CAN2510ErrorState( void );
+
+unsigned char CAN2510InterruptStatus( void );
+
+void CAN2510InterruptEnable( unsigned char interruptFlags );
+
+unsigned char CAN2510ByteRead(  unsigned char addr );
+
+void CAN2510ByteWrite(  unsigned char addr,  unsigned char value );
+
+void CAN2510SequentialRead(  unsigned char *DataArray,
+ unsigned char CAN2510addr,
+ unsigned char numbytes );
+
+void CAN2510SequentialWrite(  unsigned char *DataArray,
+ unsigned char CAN2510addr,
+ unsigned char numbytes );
+
+void CAN2510BitModify(  unsigned char address,
+ unsigned char mask,
+ unsigned char data );
+
+void CAN2510SetSingleMaskStd(  unsigned char maskNum,  unsigned int mask );
+
+void CAN2510SetSingleMaskXtd(  unsigned char maskNum,  unsigned long mask );
+
+void CAN2510SetSingleFilterStd(  unsigned char filterNum,  unsigned int filter );
+
+void CAN2510SetSingleFilterXtd(  unsigned char filterNum,  unsigned long filter );
+
+signed char CAN2510SetMsgFilterStd(  unsigned char bufferNum,
+ unsigned int mask,
+ unsigned int *filters );
+
+signed char CAN2510SetMsgFilterXtd(  unsigned char bufferNum,
+ unsigned long mask,
+ unsigned long *filters );
+
+signed char CAN2510WriteStd(  unsigned int msgId,
+ unsigned char msgPriority,
+ unsigned char numBytes,
+ unsigned char *data );
+
+signed char CAN2510WriteXtd(  unsigned long msgId,
+ unsigned char msgPriority,
+ unsigned char numBytes,
+ unsigned char *data );
+
+void CAN2510LoadBufferStd(  unsigned char bufferNum,
+ unsigned int msgId,
+ unsigned char numBytes,
+ unsigned char *data );
+
+void CAN2510LoadBufferXtd(  unsigned char bufferNum,
+ unsigned long msgId,
+ unsigned char numBytes,
+ unsigned char *data );
+
+void CAN2510LoadRTRStd(  unsigned char bufferNum,
+ unsigned int msgId,
+ unsigned char numBytes );
+
+void CAN2510LoadRTRXtd(  unsigned char bufferNum,
+ unsigned long msgId,
+ unsigned char numBytes );
+
+void CAN2510SetBufferPriority(  unsigned char bufferNum,
+ unsigned char bufferPriority );
+
+void CAN2510SendBuffer(  unsigned char bufferNumber );
+
+signed char CAN2510WriteBuffer(  unsigned char bufferNum );
+
+unsigned char CAN2510DataReady(  unsigned char bufferNum );
+
+unsigned char CAN2510DataRead(  unsigned char bufferNum,
+ unsigned long *msgId,
+ unsigned char *numBytes,
+ unsigned char *data );
+
+# 64 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\plib\capture.h"
+union capstatus
+{
+
+# 73
+struct
+{
+
+# 77
+unsigned Cap1OVF:1;
+
+# 82
+unsigned Cap2OVF:1;
+
+# 107
+unsigned ECap1OVF:1;
+
+# 115
+};
+
+unsigned :8;
+
+};
+
+extern union capstatus CapStatus;
+
+union CapResult
+{
+unsigned int lc;
+char bc[2];
+};
+
+# 474
+void OpenCapture1 ( unsigned char config);
+unsigned int ReadCapture1 (void);
+void CloseCapture1 (void);
+
+# 484
+void OpenCapture2 ( unsigned char config);
+unsigned int ReadCapture2 (void);
+void CloseCapture2 (void);
+
+# 568
+void OpenECapture1 ( unsigned char config);
+unsigned int ReadECapture1 (void);
+void CloseECapture1 (void);
+
+# 385 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\plib\compare.h"
+void OpenCompare1(unsigned char config,unsigned int period);
+void CloseCompare1(void);
+
+# 392
+void OpenCompare2(unsigned char config, unsigned int period);
+void CloseCompare2(void);
+
+# 433
+void OpenECompare1(unsigned char config,unsigned int period);
+void CloseECompare1(void);
+
+# 36 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\plib\EEP.h"
+void Busy_eep ( void );
+unsigned char Read_b_eep( unsigned int badd );
+void Write_b_eep( unsigned int badd, unsigned char bdat );
+
+# 6 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\stddef.h"
+typedef int ptrdiff_t;
+
+# 65 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\GenericTypeDefs.h"
+typedef enum _BOOL { FALSE = 0, TRUE } BOOL;
+
+
+typedef enum _BIT { CLEAR = 0, SET } BIT;
+
+# 75
+typedef signed int INT;
+typedef signed char INT8;
+typedef signed short int INT16;
+typedef signed long int INT32;
+
+# 86
+typedef unsigned int UINT;
+typedef unsigned char UINT8;
+typedef unsigned short int UINT16;
+typedef unsigned long int UINT32;
+
+# 95
+typedef unsigned short long UINT24;
+
+# 103
+typedef union
+{
+UINT8 Val;
+struct
+{
+ UINT8 b0:1;
+ UINT8 b1:1;
+ UINT8 b2:1;
+ UINT8 b3:1;
+ UINT8 b4:1;
+ UINT8 b5:1;
+ UINT8 b6:1;
+ UINT8 b7:1;
+} bits;
+} UINT8_VAL, UINT8_BITS;
+
+typedef union
+{
+UINT16 Val;
+UINT8 v[2] ;
+struct 
+{
+UINT8 LB;
+UINT8 HB;
+} byte;
+struct 
+{
+ UINT8 b0:1;
+ UINT8 b1:1;
+ UINT8 b2:1;
+ UINT8 b3:1;
+ UINT8 b4:1;
+ UINT8 b5:1;
+ UINT8 b6:1;
+ UINT8 b7:1;
+ UINT8 b8:1;
+ UINT8 b9:1;
+ UINT8 b10:1;
+ UINT8 b11:1;
+ UINT8 b12:1;
+ UINT8 b13:1;
+ UINT8 b14:1;
+ UINT8 b15:1;
+} bits;
+} UINT16_VAL, UINT16_BITS;
+
+
+
+typedef union
+{
+UINT24 Val;
+UINT8 v[3] ;
+struct 
+{
+UINT8 LB;
+UINT8 HB;
+UINT8 UB;
+} byte;
+struct 
+{
+ UINT8 b0:1;
+ UINT8 b1:1;
+ UINT8 b2:1;
+ UINT8 b3:1;
+ UINT8 b4:1;
+ UINT8 b5:1;
+ UINT8 b6:1;
+ UINT8 b7:1;
+ UINT8 b8:1;
+ UINT8 b9:1;
+ UINT8 b10:1;
+ UINT8 b11:1;
+ UINT8 b12:1;
+ UINT8 b13:1;
+ UINT8 b14:1;
+ UINT8 b15:1;
+ UINT8 b16:1;
+ UINT8 b17:1;
+ UINT8 b18:1;
+ UINT8 b19:1;
+ UINT8 b20:1;
+ UINT8 b21:1;
+ UINT8 b22:1;
+ UINT8 b23:1;
+} bits;
+} UINT24_VAL, UINT24_BITS;
+
+
+typedef union
+{
+UINT32 Val;
+UINT16 w[2] ;
+UINT8 v[4] ;
+struct 
+{
+UINT16 LW;
+UINT16 HW;
+} word;
+struct 
+{
+UINT8 LB;
+UINT8 HB;
+UINT8 UB;
+UINT8 MB;
+} byte;
+struct 
+{
+UINT16_VAL low;
+UINT16_VAL high;
+}wordUnion;
+struct 
+{
+ UINT8 b0:1;
+ UINT8 b1:1;
+ UINT8 b2:1;
+ UINT8 b3:1;
+ UINT8 b4:1;
+ UINT8 b5:1;
+ UINT8 b6:1;
+ UINT8 b7:1;
+ UINT8 b8:1;
+ UINT8 b9:1;
+ UINT8 b10:1;
+ UINT8 b11:1;
+ UINT8 b12:1;
+ UINT8 b13:1;
+ UINT8 b14:1;
+ UINT8 b15:1;
+ UINT8 b16:1;
+ UINT8 b17:1;
+ UINT8 b18:1;
+ UINT8 b19:1;
+ UINT8 b20:1;
+ UINT8 b21:1;
+ UINT8 b22:1;
+ UINT8 b23:1;
+ UINT8 b24:1;
+ UINT8 b25:1;
+ UINT8 b26:1;
+ UINT8 b27:1;
+ UINT8 b28:1;
+ UINT8 b29:1;
+ UINT8 b30:1;
+ UINT8 b31:1;
+} bits;
+} UINT32_VAL;
+
+# 343
+typedef void VOID;
+
+typedef char CHAR8;
+typedef unsigned char UCHAR8;
+
+typedef unsigned char BYTE;
+typedef unsigned short int WORD;
+typedef unsigned long DWORD;
+
+
+typedef unsigned long long QWORD;
+typedef signed char CHAR;
+typedef signed short int SHORT;
+typedef signed long LONG;
+
+
+typedef signed long long LONGLONG;
+typedef union
+{
+BYTE Val;
+struct 
+{
+ BYTE b0:1;
+ BYTE b1:1;
+ BYTE b2:1;
+ BYTE b3:1;
+ BYTE b4:1;
+ BYTE b5:1;
+ BYTE b6:1;
+ BYTE b7:1;
+} bits;
+} BYTE_VAL, BYTE_BITS;
+
+typedef union
+{
+WORD Val;
+BYTE v[2] ;
+struct 
+{
+BYTE LB;
+BYTE HB;
+} byte;
+struct 
+{
+ BYTE b0:1;
+ BYTE b1:1;
+ BYTE b2:1;
+ BYTE b3:1;
+ BYTE b4:1;
+ BYTE b5:1;
+ BYTE b6:1;
+ BYTE b7:1;
+ BYTE b8:1;
+ BYTE b9:1;
+ BYTE b10:1;
+ BYTE b11:1;
+ BYTE b12:1;
+ BYTE b13:1;
+ BYTE b14:1;
+ BYTE b15:1;
+} bits;
+} WORD_VAL, WORD_BITS;
+
+typedef union
+{
+DWORD Val;
+WORD w[2] ;
+BYTE v[4] ;
+struct 
+{
+WORD LW;
+WORD HW;
+} word;
+struct 
+{
+BYTE LB;
+BYTE HB;
+BYTE UB;
+BYTE MB;
+} byte;
+struct 
+{
+WORD_VAL low;
+WORD_VAL high;
+}wordUnion;
+struct 
+{
+ BYTE b0:1;
+ BYTE b1:1;
+ BYTE b2:1;
+ BYTE b3:1;
+ BYTE b4:1;
+ BYTE b5:1;
+ BYTE b6:1;
+ BYTE b7:1;
+ BYTE b8:1;
+ BYTE b9:1;
+ BYTE b10:1;
+ BYTE b11:1;
+ BYTE b12:1;
+ BYTE b13:1;
+ BYTE b14:1;
+ BYTE b15:1;
+ BYTE b16:1;
+ BYTE b17:1;
+ BYTE b18:1;
+ BYTE b19:1;
+ BYTE b20:1;
+ BYTE b21:1;
+ BYTE b22:1;
+ BYTE b23:1;
+ BYTE b24:1;
+ BYTE b25:1;
+ BYTE b26:1;
+ BYTE b27:1;
+ BYTE b28:1;
+ BYTE b29:1;
+ BYTE b30:1;
+ BYTE b31:1;
+} bits;
+} DWORD_VAL;
+
+
+typedef union
+{
+QWORD Val;
+DWORD d[2] ;
+WORD w[4] ;
+BYTE v[8] ;
+struct 
+{
+DWORD LD;
+DWORD HD;
+} dword;
+struct 
+{
+WORD LW;
+WORD HW;
+WORD UW;
+WORD MW;
+} word;
+struct 
+{
+ BYTE b0:1;
+ BYTE b1:1;
+ BYTE b2:1;
+ BYTE b3:1;
+ BYTE b4:1;
+ BYTE b5:1;
+ BYTE b6:1;
+ BYTE b7:1;
+ BYTE b8:1;
+ BYTE b9:1;
+ BYTE b10:1;
+ BYTE b11:1;
+ BYTE b12:1;
+ BYTE b13:1;
+ BYTE b14:1;
+ BYTE b15:1;
+ BYTE b16:1;
+ BYTE b17:1;
+ BYTE b18:1;
+ BYTE b19:1;
+ BYTE b20:1;
+ BYTE b21:1;
+ BYTE b22:1;
+ BYTE b23:1;
+ BYTE b24:1;
+ BYTE b25:1;
+ BYTE b26:1;
+ BYTE b27:1;
+ BYTE b28:1;
+ BYTE b29:1;
+ BYTE b30:1;
+ BYTE b31:1;
+ BYTE b32:1;
+ BYTE b33:1;
+ BYTE b34:1;
+ BYTE b35:1;
+ BYTE b36:1;
+ BYTE b37:1;
+ BYTE b38:1;
+ BYTE b39:1;
+ BYTE b40:1;
+ BYTE b41:1;
+ BYTE b42:1;
+ BYTE b43:1;
+ BYTE b44:1;
+ BYTE b45:1;
+ BYTE b46:1;
+ BYTE b47:1;
+ BYTE b48:1;
+ BYTE b49:1;
+ BYTE b50:1;
+ BYTE b51:1;
+ BYTE b52:1;
+ BYTE b53:1;
+ BYTE b54:1;
+ BYTE b55:1;
+ BYTE b56:1;
+ BYTE b57:1;
+ BYTE b58:1;
+ BYTE b59:1;
+ BYTE b60:1;
+ BYTE b61:1;
+ BYTE b62:1;
+ BYTE b63:1;
+} bits;
+} QWORD_VAL;
+
+# 113 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\plib\flash.h"
+extern void ReadFlash(unsigned long startaddr, unsigned int num_bytes, unsigned char *flash_array);
+
+# 120
+extern void EraseFlash(unsigned long startaddr, unsigned long endaddr);
+
+extern void WriteBlockFlash(unsigned long startaddr, unsigned char num_blocks, unsigned char *flash_array);
+
+extern void WriteBytesFlash(unsigned long startaddr, unsigned int num_bytes, unsigned char *flash_array);
+
+# 775 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\plib\i2c.h"
+void IdleI2C( void );
+
+void OpenI2C( unsigned char sync_mode, unsigned char slew );
+
+signed char WriteI2C( unsigned char data_out );
+
+signed char putsI2C( unsigned char *wrptr );
+
+unsigned char ReadI2C( void );
+
+void CloseI2C( void );
+
+# 899
+signed char WriteI2C( unsigned char data_out );
+
+signed char getsI2C( unsigned char *rdptr, unsigned char length );
+
+# 908
+signed char EEAckPolling( unsigned char control );
+
+signed char EEByteWrite( unsigned char control,
+unsigned char address,
+unsigned char data );
+
+signed int EECurrentAddRead( unsigned char control );
+
+signed char EEPageWrite( unsigned char control,
+unsigned char address,
+unsigned char *wrptr );
+
+signed int EERandomRead( unsigned char control, unsigned char address );
+
+signed char EESequentialRead( unsigned char control,
+unsigned char address,
+unsigned char *rdptr,
+unsigned char length );
+
+# 325 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\plib\mwire.h"
+void OpenMwire( unsigned char sync_mode );
+
+unsigned char ReadMwire( unsigned char high_byte,
+unsigned char low_byte );
+
+# 341
+signed char WriteMwire( unsigned char data_out );
+
+# 354
+void getsMwire( unsigned char *rdptr, unsigned char length );
+
+# 126 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\plib\portb.h"
+void OpenPORTB( unsigned char config);
+
+# 176
+void OpenRB0INT( unsigned char config);
+
+# 194
+void OpenRB1INT( unsigned char config);
+
+# 211
+void OpenRB2INT( unsigned char config);
+
+# 85 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\plib\pwm.h"
+union PWMDC
+{
+unsigned int lpwm;
+char bpwm[2];
+};
+
+# 467
+void OpenPWM1 ( char period);
+void SetDCPWM1 ( unsigned int duty_cycle);
+
+# 474
+void SetOutputPWM1 ( unsigned char output_config,
+unsigned char pwm_mode);
+
+void ClosePWM1 (void);
+
+# 485
+void OpenPWM2 ( char period);
+void SetDCPWM2( unsigned int duty_cycle);
+
+# 492
+void ClosePWM2 (void);
+
+# 16 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\plib\reset.h"
+char isMCLR(void);
+void StatusReset(void);
+char isPOR(void);
+char isWU(void);
+
+
+char isBOR(void);
+
+
+
+char isWDTTO(void);
+char isWDTWU(void);
+
+
+
+char isLVD(void);
+
+# 687 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\plib\rtcc.h"
+void Open_RTCC(void);
+void Close_RTCC(void);
+unsigned char update_RTCC(void);
+
+# 97 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\plib\sw_i2c.h"
+void SWStopI2C ( void );
+void SWStartI2C ( void );
+void SWRestartI2C ( void );
+void SWStopI2C ( void );
+
+signed char SWAckI2C( void );
+signed char Clock_test( void );
+signed int SWReadI2C( void );
+signed char SWWriteI2C(  unsigned char data_out );
+signed char SWGetsI2C(  unsigned char *rdptr,  unsigned char length );
+signed char SWPutsI2C(  unsigned char *wrptr );
+
+# 84 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\plib\sw_spi.h"
+void OpenSWSPI(void);
+
+
+char WriteSWSPI( char output);
+
+
+void SetCSSWSPI(void);
+
+
+void ClearCSSWSPI(void);
+
+# 47 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\plib\sw_uart.h"
+void OpenUART(void);
+
+unsigned char ReadUART(void);
+
+void WriteUART( unsigned char);
+
+void getsUART( char *, unsigned char);
+
+void putsUART( char *);
+
+# 79
+extern void DelayRXBitUART (void);
+extern void DelayRXHalfBitUART(void);
+extern void DelayTXBitUART (void);
+
+# 36 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\plib\timers.h"
+union Timers
+{
+unsigned int lt;
+char bt[2];
+};
+
+# 118
+void OpenTimer0 ( unsigned char config);
+void CloseTimer0 (void);
+unsigned int ReadTimer0 (void);
+void WriteTimer0 ( unsigned int timer0);
+
+# 236
+void OpenTimer1 ( unsigned char config);
+void CloseTimer1 (void);
+unsigned int ReadTimer1 (void);
+void WriteTimer1 ( unsigned int timer1);
+
+# 325
+void OpenTimer2 ( unsigned char config);
+void CloseTimer2 (void);
+
+# 391
+void OpenTimer3 ( unsigned char config);
+void CloseTimer3 (void);
+unsigned int ReadTimer3 (void);
+void WriteTimer3 ( unsigned int timer3);
+
+# 1179
+void SetTmrCCPSrc( unsigned char );
+
+# 568 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\plib\usart.h"
+union USART
+{
+unsigned char val;
+struct
+{
+unsigned RX_NINE:1;
+unsigned TX_NINE:1;
+unsigned FRAME_ERROR:1;
+unsigned OVERRUN_ERROR:1;
+unsigned fill:4;
+};
+};
+extern union USART USART_Status;
+void OpenUSART ( unsigned char config, unsigned spbrg);
+
+# 596
+char ReadUSART (void);
+void WriteUSART ( char data);
+void getsUSART ( char *buffer, unsigned char len);
+void putsUSART ( char *data);
+void putrsUSART ( const  char *data);
+
+# 654
+void baudUSART ( unsigned char baudconfig);
+
+# 87 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\plib\xlcd.h"
+void OpenXLCD( unsigned char);
+
+# 92
+void SetCGRamAddr( unsigned char);
+
+# 97
+void SetDDRamAddr( unsigned char);
+
+# 102
+unsigned char BusyXLCD(void);
+
+# 107
+unsigned char ReadAddrXLCD(void);
+
+# 112
+char ReadDataXLCD(void);
+
+# 117
+void WriteCmdXLCD( unsigned char);
+
+# 122
+void WriteDataXLCD( char);
+
+# 132
+void putsXLCD( char *);
+
+# 137
+void putrsXLCD(const char *);
+
+
+extern void DelayFor18TCY(void);
+extern void DelayPORXLCD(void);
+extern void DelayXLCD(void);
+
+# 13 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\plib\delays.h"
+void Delay1TCYx(unsigned char);
+
+# 19
+void Delay10TCYx(unsigned char);
+
+# 25
+void Delay100TCYx(unsigned char);
+
+# 31
+void Delay1KTCYx(unsigned char);
+
+# 37
+void Delay10KTCYx(unsigned char);
+
 # 18 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18.h"
 __attribute__((__unsupported__("The " "flash_write" " routine is no longer supported. Please use the MPLAB X MCC."))) void flash_write(const unsigned char *, unsigned int, __far unsigned char *);
 __attribute__((__unsupported__("The " "EraseFlash" " routine is no longer supported. Please use the MPLAB X MCC."))) void EraseFlash(unsigned long startaddr, unsigned long endaddr);
@@ -4303,6 +5171,11 @@ __attribute__((__unsupported__("The " "EraseFlash" " routine is no longer suppor
 # 42
 #pragma intrinsic(__nop)
 extern void __nop(void);
+
+# 125
+__attribute__((__unsupported__("The " "Read_b_eep" " routine is no longer supported. Please use the MPLAB X MCC."))) unsigned char Read_b_eep(unsigned int badd);
+__attribute__((__unsupported__("The " "Busy_eep" " routine is no longer supported. Please use the MPLAB X MCC."))) void Busy_eep(void);
+__attribute__((__unsupported__("The " "Write_b_eep" " routine is no longer supported. Please use the MPLAB X MCC."))) void Write_b_eep(unsigned int badd, unsigned char bdat);
 
 
 # 155
