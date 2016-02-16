@@ -119,4 +119,3 @@ void LCDBusyLoop();
 #endif
 
 #endif	/* LCD_HD44780_PIC16_H */
-
