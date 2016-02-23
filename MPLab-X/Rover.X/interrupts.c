@@ -11,16 +11,6 @@ void interrupt isr(void) {
 
     /* If the interrupt was caused by an ADC conversion complete ... */
     if (ADIF == 1) {
-
-        /* Your code goes here. */
-
-        /* Read the 10-bit output from the ADC.
-        /* Convert the ADC output to a percentage.
-         *     ADC output is 10-bit.
-         *     Percentage is (output * 100) / 1024.
-         * Send the new duty cycle to the PWM driver.
-         * Start another ADC conversion.
-         * Clear the ADC conversion complete flag. */
         
         static unsigned int Readport=0;
         unsigned int read=ADCGetOutput();

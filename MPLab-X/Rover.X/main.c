@@ -30,6 +30,6 @@ void main(void) {
         LCDClear();
         LCDWriteInt(ReadDistanceCentral(),2);
         for(int i=1;i<1000; i++){  //Wait a little to avoid flickr  
-    }
+        }
     }
 }
