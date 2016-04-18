@@ -4,8 +4,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _ADCInit `(v ~T0 @X0 0 ef ]
 "8 motors.h
 [v _MotorInit `(v ~T0 @X0 0 ef ]
-"1 serial.h
-[v _SerialInit `(v ~T0 @X0 0 ef ]
 "8 TimerPWM.h
 [v _TimerPWMInit `(v ~T0 @X0 0 ef ]
 "9 motors.h
@@ -14,16 +12,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _SetMotorRight `(v ~T0 @X0 0 ef1`i ]
 "78 lcd_hd44780_pic16.h
 [v _LCDInit `(v ~T0 @X0 0 ef1`uc ]
+"1 parallel.h
+[v _parallelInit `(v ~T0 @X0 0 ef ]
 "9 ADC.h
 [v _ADCInitiateConversion `(v ~T0 @X0 0 ef ]
 "1 driver.h
 [v _Go `(v ~T0 @X0 0 ef ]
-"84 lcd_hd44780_pic16.h
-[v _LCDByte `(v ~T0 @X0 0 ef2`uc`uc ]
-"80
-[v _LCDWriteInt `(v ~T0 @X0 0 ef2`i`c ]
-"25 ADC.h
-[v _ReadDistanceCentral `(ui ~T0 @X0 0 ef ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -3789,6 +3783,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;motors.h: 8: void MotorInit();
 [; ;motors.h: 9: void SetMotorLeft(signed int speed);
 [; ;motors.h: 10: void SetMotorRight(signed int speed);
+[; ;motors.h: 11: void Stop();
 [; ;stdint.h: 13: typedef signed char int8_t;
 [; ;stdint.h: 20: typedef signed int int16_t;
 [; ;stdint.h: 28: typedef signed short long int int24_t;
@@ -3828,77 +3823,70 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;TimerPWM.h: 10: void SetPWMMotorLeft (unsigned int percentage);
 [; ;TimerPWM.h: 11: unsigned int ReadPWMMotorRight ();
 [; ;TimerPWM.h: 12: unsigned int ReadPWMMotorLeft ();
-[; ;serial.h: 1: void SerialInit(void);
+[; ;serial.h: 8: void SerialInit(void);
+[; ;serial.h: 10: void SetSpeedRight (char lecture);
+[; ;serial.h: 11: void SetSpeedLeft (char lecture);
+[; ;serial.h: 13: int ReadSpeedRight();
+[; ;serial.h: 14: int ReadSpeedLeft();
+[; ;serial.h: 15: int ConvertPicSpeed (char velocity);
 [; ;driver.h: 1: void Go(void);
-"10 main.c
+[; ;driver.h: 2: void TurnRight90(void);
+[; ;driver.h: 3: void TurnLeft90(void);
+[; ;driver.h: 4: void TurnRight135(void);
+[; ;driver.h: 5: void TurnLeft135(void);
+[; ;driver.h: 6: void Turn180(void);
+[; ;driver.h: 7: void GoBack(void);
+[; ;parallel.h: 1: void parallelInit(void);
+[; ;parallel.h: 2: void ReadParallel();
+[; ;parallel.h: 5: signed int ReadParallelSpeedRight();
+[; ;parallel.h: 6: signed int ReadParallelSpeedLeft();
+[; ;parallel.h: 7: signed int ConvertParallelSpeed (char velocity);
+[; ;parallel.h: 8: unsigned int ReadMode();
+"11 main.c
 [v _main `(v ~T0 @X0 1 ef ]
 {
-[; ;main.c: 10: void main(void) {
+[; ;main.c: 11: void main(void) {
 [e :U _main ]
 [f ]
-[; ;main.c: 12: ADCInit();
-"12
+[; ;main.c: 13: ADCInit();
+"13
 [e ( _ADCInit ..  ]
-[; ;main.c: 17: MotorInit();
-"17
-[e ( _MotorInit ..  ]
-[; ;main.c: 18: SerialInit();
+[; ;main.c: 18: MotorInit();
 "18
-[e ( _SerialInit ..  ]
-[; ;main.c: 19: TimerPWMInit();
-"19
-[e ( _TimerPWMInit ..  ]
-[; ;main.c: 20: SetMotorLeft(40);
+[e ( _MotorInit ..  ]
+[; ;main.c: 20: TimerPWMInit();
 "20
-[e ( _SetMotorLeft (1 -> 40 `i ]
-[; ;main.c: 21: SetMotorRight(-95);
+[e ( _TimerPWMInit ..  ]
+[; ;main.c: 21: SetMotorLeft(0);
 "21
-[e ( _SetMotorRight (1 -U -> 95 `i ]
-[; ;main.c: 22: LCDInit(0B00000000);
+[e ( _SetMotorLeft (1 -> 0 `i ]
+[; ;main.c: 22: SetMotorRight(0);
 "22
+[e ( _SetMotorRight (1 -> 0 `i ]
+[; ;main.c: 23: LCDInit(0B00000000);
+"23
 [e ( _LCDInit (1 -> -> 0 `i `uc ]
-[; ;main.c: 26: while(1) {
-"26
+[; ;main.c: 24: parallelInit();
+"24
+[e ( _parallelInit ..  ]
+[; ;main.c: 29: while(1) {
+"29
 [e :U 395 ]
 {
-[; ;main.c: 27: ADCInitiateConversion();
-"27
-[e ( _ADCInitiateConversion ..  ]
-[; ;main.c: 28: Go();
-"28
-[e ( _Go ..  ]
-[; ;main.c: 30: (LCDByte(0b00000001,0));
+[; ;main.c: 30: ADCInitiateConversion();
 "30
-[e ( _LCDByte (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 31: LCDWriteInt(ReadDistanceCentral(),2);
+[e ( _ADCInitiateConversion ..  ]
+[; ;main.c: 31: Go();
 "31
-[e ( _LCDWriteInt (2 , -> ( _ReadDistanceCentral ..  `i -> -> 2 `i `c ]
-[; ;main.c: 32: for(int i=1;i<1000; i++){
-"32
-{
-[v _i `i ~T0 @X0 1 a ]
-[e = _i -> 1 `i ]
-[e $ < _i -> 1000 `i 397  ]
-[e $U 398  ]
-[e :U 397 ]
-{
-"33
-}
-"32
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 1000 `i 397  ]
-[e :U 398 ]
-"33
-}
-"34
+[e ( _Go ..  ]
+"35
 }
 [e :U 394 ]
-"26
+"29
 [e $U 395  ]
 [e :U 396 ]
-[; ;main.c: 33: }
-[; ;main.c: 34: }
 [; ;main.c: 35: }
-"35
+[; ;main.c: 36: }
+"36
 [e :UE 393 ]
 }

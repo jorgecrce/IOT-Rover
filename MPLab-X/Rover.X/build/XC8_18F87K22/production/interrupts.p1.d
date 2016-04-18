@@ -3,4 +3,5 @@
  interrupts.c  \
 PWM.h  \
 TimerPWM.h  \
-ADC.h 
+ADC.h  \
+serial.h 

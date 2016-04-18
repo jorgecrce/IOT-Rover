@@ -6,3 +6,10 @@
  */
 
 void SerialInit(void);
+
+void SetSpeedRight (char lecture);
+void SetSpeedLeft (char lecture);
+
+int  ReadSpeedRight();
+int ReadSpeedLeft();
+int ConvertPicSpeed (char velocity);

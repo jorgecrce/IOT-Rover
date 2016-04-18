@@ -7,16 +7,16 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RC0 `Vb ~T25 @X0 0 e@31760 ]
 "8207
 [v _RC1 `Vb ~T25 @X0 0 e@31761 ]
-"10 TimerPWM.h
-[v _SetPWMMotorLeft `(v ~T0 @X0 0 ef1`ui ]
-"92 C:\Program Files (x86)\Microchip\xc8\v1.36\include\stdlib.h
-[v _abs `(i ~T0 @X0 0 ef1`i ]
-"8215 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f45k20.h
+"8215
 [v _RC2 `Vb ~T25 @X0 0 e@31762 ]
 "8217
 [v _RC3 `Vb ~T25 @X0 0 e@31763 ]
-"9 TimerPWM.h
+"10 TimerPWM.h
+[v _SetPWMMotorLeft `(v ~T0 @X0 0 ef1`ui ]
+"9
 [v _SetPWMMotorRight `(v ~T0 @X0 0 ef1`ui ]
+"92 C:\Program Files (x86)\Microchip\xc8\v1.36\include\stdlib.h
+[v _abs `(i ~T0 @X0 0 ef1`i ]
 [; ;__size_t.h: 4: typedef unsigned size_t;
 [; ;stdarg.h: 7: typedef void * va_list[1];
 [; ;stdarg.h: 10: extern void * __va_start(void);
@@ -3850,124 +3850,158 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;TimerPWM.h: 10: void SetPWMMotorLeft (unsigned int percentage);
 [; ;TimerPWM.h: 11: unsigned int ReadPWMMotorRight ();
 [; ;TimerPWM.h: 12: unsigned int ReadPWMMotorLeft ();
-"23 motors.c
+[; ;motors.h: 8: void MotorInit();
+[; ;motors.h: 9: void SetMotorLeft(signed int speed);
+[; ;motors.h: 10: void SetMotorRight(signed int speed);
+[; ;motors.h: 11: void Stop();
+"19 motors.c
+[v _MotorRightSpeed `i ~T0 @X0 1 s ]
+[i _MotorRightSpeed
+-> 0 `i
+]
+[; ;motors.c: 19: static signed int MotorRightSpeed=0;
+"20
+[v _MotorLeftSpeed `i ~T0 @X0 1 s ]
+[i _MotorLeftSpeed
+-> 0 `i
+]
+[; ;motors.c: 20: static signed int MotorLeftSpeed=0;
+"27
 [v _MotorInit `(v ~T0 @X0 1 ef ]
 {
-[; ;motors.c: 23: void MotorInit(){
+[; ;motors.c: 27: void MotorInit(){
 [e :U _MotorInit ]
 [f ]
-[; ;motors.c: 24: TRISC = 0b11000000;
-"24
+[; ;motors.c: 28: TRISC = 0b11000000;
+"28
 [e = _TRISC -> -> 192 `i `uc ]
-[; ;motors.c: 25: }
-"25
+[; ;motors.c: 29: RC0=1;
+"29
+[e = _RC0 -> -> 1 `i `b ]
+[; ;motors.c: 30: RC1=0;
+"30
+[e = _RC1 -> -> 0 `i `b ]
+[; ;motors.c: 31: RC2=1;
+"31
+[e = _RC2 -> -> 1 `i `b ]
+[; ;motors.c: 32: RC3=0;
+"32
+[e = _RC3 -> -> 0 `i `b ]
+[; ;motors.c: 33: SetPWMMotorLeft(0);
+"33
+[e ( _SetPWMMotorLeft (1 -> -> 0 `i `ui ]
+[; ;motors.c: 34: SetPWMMotorRight(0);
+"34
+[e ( _SetPWMMotorRight (1 -> -> 0 `i `ui ]
+[; ;motors.c: 35: }
+"35
 [e :UE 398 ]
 }
-"27
+"37
 [v _SetMotorLeft `(v ~T0 @X0 1 ef1`i ]
 {
-[; ;motors.c: 27: void SetMotorLeft(signed int speed){
+[; ;motors.c: 37: void SetMotorLeft(signed int speed){
 [e :U _SetMotorLeft ]
 [v _speed `i ~T0 @X0 1 r1 ]
 [f ]
-[; ;motors.c: 30: if(speed>0){
-"30
+[; ;motors.c: 39: MotorLeftSpeed=speed;
+"39
+[e = _MotorLeftSpeed _speed ]
+[; ;motors.c: 42: if(speed>0){
+"42
 [e $ ! > _speed -> 0 `i 400  ]
 {
-[; ;motors.c: 32: RC0=1;
-"32
+[; ;motors.c: 44: RC0=1;
+"44
 [e = _RC0 -> -> 1 `i `b ]
-[; ;motors.c: 33: RC1=0;
-"33
+[; ;motors.c: 45: RC1=0;
+"45
 [e = _RC1 -> -> 0 `i `b ]
-"34
+"46
 }
-[; ;motors.c: 34: }else if (speed<0){
+[; ;motors.c: 46: }else if (speed<0){
 [e $U 401  ]
 [e :U 400 ]
 [e $ ! < _speed -> 0 `i 402  ]
 {
-[; ;motors.c: 36: RC0=0;
-"36
+[; ;motors.c: 48: RC0=0;
+"48
 [e = _RC0 -> -> 0 `i `b ]
-[; ;motors.c: 37: RC1=1;
-"37
+[; ;motors.c: 49: RC1=1;
+"49
 [e = _RC1 -> -> 1 `i `b ]
-"38
+"50
 }
-[; ;motors.c: 38: }else{
-[e $U 403  ]
 [e :U 402 ]
-{
-[; ;motors.c: 40: RC0=0;
-"40
-[e = _RC0 -> -> 0 `i `b ]
-[; ;motors.c: 41: RC1=0;
-"41
-[e = _RC1 -> -> 0 `i `b ]
-"42
-}
-[e :U 403 ]
+"62
 [e :U 401 ]
-[; ;motors.c: 42: }
-[; ;motors.c: 45: SetPWMMotorLeft(abs(speed));
-"45
+[; ;motors.c: 50: }
+[; ;motors.c: 62: SetPWMMotorLeft(abs(speed));
 [e ( _SetPWMMotorLeft (1 -> ( _abs (1 _speed `ui ]
-[; ;motors.c: 46: }
-"46
+[; ;motors.c: 63: }
+"63
 [e :UE 399 ]
 }
-"47
+"64
 [v _SetMotorRight `(v ~T0 @X0 1 ef1`i ]
 {
-[; ;motors.c: 47: void SetMotorRight(signed int speed){
+[; ;motors.c: 64: void SetMotorRight(signed int speed){
 [e :U _SetMotorRight ]
 [v _speed `i ~T0 @X0 1 r1 ]
 [f ]
-[; ;motors.c: 50: if(speed>0){
-"50
-[e $ ! > _speed -> 0 `i 405  ]
+[; ;motors.c: 66: MotorRightSpeed=speed;
+"66
+[e = _MotorRightSpeed _speed ]
+[; ;motors.c: 69: if(speed>0){
+"69
+[e $ ! > _speed -> 0 `i 404  ]
 {
-[; ;motors.c: 52: RC2=1;
-"52
+[; ;motors.c: 71: RC2=1;
+"71
 [e = _RC2 -> -> 1 `i `b ]
-[; ;motors.c: 53: RC3=0;
-"53
+[; ;motors.c: 72: RC3=0;
+"72
 [e = _RC3 -> -> 0 `i `b ]
-"54
+"73
 }
-[; ;motors.c: 54: }else if (speed<0){
-[e $U 406  ]
-[e :U 405 ]
-[e $ ! < _speed -> 0 `i 407  ]
+[; ;motors.c: 73: }else if (speed<0){
+[e $U 405  ]
+[e :U 404 ]
+[e $ ! < _speed -> 0 `i 406  ]
 {
-[; ;motors.c: 56: RC2=0;
-"56
+[; ;motors.c: 75: RC2=0;
+"75
 [e = _RC2 -> -> 0 `i `b ]
-[; ;motors.c: 57: RC3=1;
-"57
+[; ;motors.c: 76: RC3=1;
+"76
 [e = _RC3 -> -> 1 `i `b ]
-"58
+"77
 }
-[; ;motors.c: 58: }else{
-[e $U 408  ]
-[e :U 407 ]
+[e :U 406 ]
+"89
+[e :U 405 ]
+[; ;motors.c: 77: }
+[; ;motors.c: 89: SetPWMMotorRight(abs(speed));
+[e ( _SetPWMMotorRight (1 -> ( _abs (1 _speed `ui ]
+[; ;motors.c: 90: }
+"90
+[e :UE 403 ]
+}
+"92
+[v _Stop `(v ~T0 @X0 1 ef ]
 {
-[; ;motors.c: 60: RC2=0;
-"60
-[e = _RC2 -> -> 0 `i `b ]
-[; ;motors.c: 61: RC3=0;
-"61
-[e = _RC3 -> -> 0 `i `b ]
-"62
+[; ;motors.c: 92: void Stop(){
+[e :U _Stop ]
+[f ]
+[; ;motors.c: 93: if((MotorLeftSpeed==0) && (MotorRightSpeed==0)){
+"93
+[e $ ! && == _MotorLeftSpeed -> 0 `i == _MotorRightSpeed -> 0 `i 408  ]
+{
+"96
 }
 [e :U 408 ]
-[e :U 406 ]
-[; ;motors.c: 62: }
-[; ;motors.c: 65: SetPWMMotorRight(abs(speed));
-"65
-[e ( _SetPWMMotorRight (1 -> ( _abs (1 _speed `ui ]
-[; ;motors.c: 66: }
-"66
-[e :UE 404 ]
+[; ;motors.c: 96: }
+[; ;motors.c: 98: }
+"98
+[e :UE 407 ]
 }

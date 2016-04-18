@@ -5095,14 +5095,23 @@ void SetPWMMotorLeft (unsigned int percentage);
 unsigned int ReadPWMMotorRight ();
 unsigned int ReadPWMMotorLeft ();
 
-# 9 "interrupts.c"
+# 8 "serial.h"
+void SerialInit(void);
+
+void SetSpeedRight (char lecture);
+void SetSpeedLeft (char lecture);
+
+int ReadSpeedRight();
+int ReadSpeedLeft();
+int ConvertPicSpeed (char velocity);
+
+# 10 "interrupts.c"
 void interrupt isr(void) {
 
 
 
 if (ADIF == 1) {
 
-# 25
 static unsigned int Readport=0;
 unsigned int read=ADCGetOutput();
 
@@ -5160,17 +5169,17 @@ static unsigned int PWMRight;
 static unsigned int iteration;
 
 if (iteration==20){
-RC4=0;
 RC5=0;
+RC4=0;
 iteration=0;
 PWMRight=ReadPWMMotorRight();
 PWMLeft=ReadPWMMotorLeft();
 }
 if (PWMRight==iteration){
-RC4=1;
+RC5=1;
 }
 if (PWMLeft==iteration){
-RC5=1;
+RC4=1;
 }
 iteration++;
 
@@ -5182,7 +5191,26 @@ TMR0L=0x156;
 }
 
 if (RCIF==1){
+
+static int counter=0;
+
 char CharRx = ReadUSART();
+
+if (counter==0){
+if (CharRx=='b'){
+counter=1;
+}else if (CharRx=='c'){
+counter=2;
+}
+}else if (counter==1){
+SetSpeedRight(CharRx);
+counter=0;
+}else if (counter==2){
+SetSpeedLeft(CharRx);
+counter=0;
+}else{
+counter=0;
+}
 
 while((!TXSTAbits.TRMT));
 putsUSART("\n\rEcho: ");
@@ -5195,4 +5223,3 @@ putsUSART("\n\r\n\rWrite: ");
 RCIF = 0;
 }
 }
-

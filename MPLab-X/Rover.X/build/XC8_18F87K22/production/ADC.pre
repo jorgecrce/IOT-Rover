@@ -5058,9 +5058,9 @@ extern __nonreentrant void _delaywdt(unsigned long);
 extern __nonreentrant void _delay3(unsigned char);
 
 # 2 "ADC.c"
-static unsigned int DistanceLeft;
-static unsigned int DistanceRight;
-static unsigned int DistanceCentral;
+static unsigned int DistanceLeft=50;
+static unsigned int DistanceRight=50;
+static unsigned int DistanceCentral=50;
 static unsigned int Battery;
 
 
@@ -5109,7 +5109,7 @@ return ADRESH;
 
 
 void SetDistanceLeft (unsigned int lecture){
-DistanceLeft=5+(1023-lecture)*0.035;
+DistanceLeft=5+(1023-lecture)*0.042;
 }
 
 unsigned int ReadDistanceLeft (){
@@ -5117,7 +5117,7 @@ return DistanceLeft;
 }
 
 void SetDistanceRight (unsigned int lecture){
-DistanceRight=5+(1023-lecture)*0.035;
+DistanceRight=5+(1023-lecture)*0.042;
 }
 
 unsigned int ReadDistanceRight (){
@@ -5125,7 +5125,7 @@ return DistanceRight;
 }
 
 void SetDistanceCentral (unsigned int lecture){
-DistanceCentral=5+(1023-lecture)*0.035;
+DistanceCentral=5+(1023-lecture)*0.042;
 }
 
 unsigned int ReadDistanceCentral (){
@@ -5133,6 +5133,8 @@ return DistanceCentral;
 }
 
 void SetBattery (unsigned int lecture){
+
+
 Battery=lecture*3.548;
 }
 

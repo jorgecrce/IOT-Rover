@@ -5057,7 +5057,21 @@ extern __nonreentrant void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __nonreentrant void _delay3(unsigned char);
 
+# 8 "serial.h"
+void SerialInit(void);
+
+void SetSpeedRight (char lecture);
+void SetSpeedLeft (char lecture);
+
+int ReadSpeedRight();
+int ReadSpeedLeft();
+int ConvertPicSpeed (char velocity);
+
 # 13 "serial.c"
+static signed int SpeedLeft=0;
+static signed int SpeedRight=0;
+
+
 void SerialInit(void) {
 
 OpenUSART(0b01111111 &
@@ -5065,5 +5079,60 @@ OpenUSART(0b01111111 &
 0b11111110 &
 0b11111101 &
 0b11111111 &
-0b11111111, 6);
+0b11101111, 51);
+}
+
+void SetSpeedRight (char lecture){
+SpeedRight=ConvertPicSpeed(lecture);
+}
+void SetSpeedLeft (char lecture){
+SpeedLeft=ConvertPicSpeed(lecture);
+}
+
+int ReadSpeedRight(){
+return SpeedRight;
+}
+int ReadSpeedLeft(){
+return SpeedLeft;
+}
+
+int ConvertPicSpeed (char velocity){
+switch(velocity){
+case '0':
+return -100;
+break;
+case '1':
+return -80;
+break;
+case '2':
+return -60;
+break;
+case '3':
+return -40;
+break;
+case '4':
+return -20;
+break;
+case '5':
+return 0;
+break;
+case '6':
+return 20;
+break;
+case '7':
+return 40;
+break;
+case '8':
+return 60;
+break;
+case '9':
+return 80;
+break;
+case 'a':
+return 100;
+break;
+default:
+return 0;
+break;
+}
 }

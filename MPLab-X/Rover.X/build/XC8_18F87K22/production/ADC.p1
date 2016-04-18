@@ -3786,13 +3786,22 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic18.h: 160: extern __nonreentrant void _delay3(unsigned char);
 "2 ADC.c
 [v _DistanceLeft `ui ~T0 @X0 1 s ]
-[; ;ADC.c: 2: static unsigned int DistanceLeft;
+[i _DistanceLeft
+-> -> 50 `i `ui
+]
+[; ;ADC.c: 2: static unsigned int DistanceLeft=50;
 "3
 [v _DistanceRight `ui ~T0 @X0 1 s ]
-[; ;ADC.c: 3: static unsigned int DistanceRight;
+[i _DistanceRight
+-> -> 50 `i `ui
+]
+[; ;ADC.c: 3: static unsigned int DistanceRight=50;
 "4
 [v _DistanceCentral `ui ~T0 @X0 1 s ]
-[; ;ADC.c: 4: static unsigned int DistanceCentral;
+[i _DistanceCentral
+-> -> 50 `i `ui
+]
+[; ;ADC.c: 4: static unsigned int DistanceCentral=50;
 "5
 [v _Battery `ui ~T0 @X0 1 s ]
 [; ;ADC.c: 5: static unsigned int Battery;
@@ -3919,9 +3928,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U _SetDistanceLeft ]
 [v _lecture `ui ~T0 @X0 1 r1 ]
 [f ]
-[; ;ADC.c: 53: DistanceLeft=5+(1023-lecture)*0.035;
+[; ;ADC.c: 53: DistanceLeft=5+(1023-lecture)*0.042;
 "53
-[e = _DistanceLeft -> + -> -> 5 `i `d * -> - -> -> 1023 `i `ui _lecture `d .0.035 `ui ]
+[e = _DistanceLeft -> + -> -> 5 `i `d * -> - -> -> 1023 `i `ui _lecture `d .0.042 `ui ]
 [; ;ADC.c: 54: }
 "54
 [e :UE 398 ]
@@ -3947,9 +3956,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U _SetDistanceRight ]
 [v _lecture `ui ~T0 @X0 1 r1 ]
 [f ]
-[; ;ADC.c: 61: DistanceRight=5+(1023-lecture)*0.035;
+[; ;ADC.c: 61: DistanceRight=5+(1023-lecture)*0.042;
 "61
-[e = _DistanceRight -> + -> -> 5 `i `d * -> - -> -> 1023 `i `ui _lecture `d .0.035 `ui ]
+[e = _DistanceRight -> + -> -> 5 `i `d * -> - -> -> 1023 `i `ui _lecture `d .0.042 `ui ]
 [; ;ADC.c: 62: }
 "62
 [e :UE 400 ]
@@ -3975,9 +3984,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U _SetDistanceCentral ]
 [v _lecture `ui ~T0 @X0 1 r1 ]
 [f ]
-[; ;ADC.c: 69: DistanceCentral=5+(1023-lecture)*0.035;
+[; ;ADC.c: 69: DistanceCentral=5+(1023-lecture)*0.042;
 "69
-[e = _DistanceCentral -> + -> -> 5 `i `d * -> - -> -> 1023 `i `ui _lecture `d .0.035 `ui ]
+[e = _DistanceCentral -> + -> -> 5 `i `d * -> - -> -> 1023 `i `ui _lecture `d .0.042 `ui ]
 [; ;ADC.c: 70: }
 "70
 [e :UE 402 ]
@@ -4003,24 +4012,24 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U _SetBattery ]
 [v _lecture `ui ~T0 @X0 1 r1 ]
 [f ]
-[; ;ADC.c: 77: Battery=lecture*3.548;
-"77
+[; ;ADC.c: 79: Battery=lecture*3.548;
+"79
 [e = _Battery -> * -> _lecture `d .3.548 `ui ]
-[; ;ADC.c: 78: }
-"78
+[; ;ADC.c: 80: }
+"80
 [e :UE 404 ]
 }
-"80
+"82
 [v _ReadBattery `(ui ~T0 @X0 1 ef ]
 {
-[; ;ADC.c: 80: unsigned int ReadBattery (){
+[; ;ADC.c: 82: unsigned int ReadBattery (){
 [e :U _ReadBattery ]
 [f ]
-[; ;ADC.c: 81: return Battery;
-"81
+[; ;ADC.c: 83: return Battery;
+"83
 [e ) _Battery ]
 [e $UE 405  ]
-[; ;ADC.c: 82: }
-"82
+[; ;ADC.c: 84: }
+"84
 [e :UE 405 ]
 }

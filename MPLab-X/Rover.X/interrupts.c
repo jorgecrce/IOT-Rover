@@ -3,8 +3,9 @@
 #include "PWM.h"
 #include "TimerPWM.h"
 #include <usart.h>
-#define PIN1 RC4
-#define PIN2 RC5
+#include "serial.h"
+#define PIN1 RC5///Estaban mal!!!
+#define PIN2 RC4
 
 void interrupt isr(void) {
 
@@ -90,9 +91,28 @@ void interrupt isr(void) {
 
     }
     
-    if (RCIF==1){
+    if (RCIF==1){//Interruption caused by reception in the serial port
+        
+        static int counter=0;
+        
         char CharRx = ReadUSART();   //Se lee el dato que esta en el buffer de Rx del USART
 
+        if (counter==0){
+            if (CharRx=='b'){
+                counter=1;
+            }else if (CharRx=='c'){
+                counter=2;
+            }
+        }else if (counter==1){
+            SetSpeedRight(CharRx);
+            counter=0;
+        }else if (counter==2){
+            SetSpeedLeft(CharRx);
+            counter=0;                    
+        }else{
+            counter=0;
+        }
+        
         while(BusyUSART());
         putsUSART("\n\rEcho: ");
         while(BusyUSART());
@@ -104,4 +124,3 @@ void interrupt isr(void) {
         RCIF = 0;  //Desactivamos la bandera de recepción en el buffer de entrada del USART
     }
 }
-

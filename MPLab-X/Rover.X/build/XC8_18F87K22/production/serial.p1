@@ -1,6 +1,8 @@
 Version 3.2 HI-TECH Software Intermediate Code
 "581 C:\Program Files (x86)\Microchip\xc8\v1.36\include\plib\usart.h
 [v _OpenUSART `(v ~T0 @X0 0 ef2`uc`ui ]
+"15 serial.h
+[v _ConvertPicSpeed `(i ~T0 @X0 0 ef1`uc ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -3750,21 +3752,250 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic18.h: 156: extern __nonreentrant void _delay(unsigned long);
 [; ;pic18.h: 158: extern __nonreentrant void _delaywdt(unsigned long);
 [; ;pic18.h: 160: extern __nonreentrant void _delay3(unsigned char);
+[; ;serial.h: 8: void SerialInit(void);
+[; ;serial.h: 10: void SetSpeedRight (char lecture);
+[; ;serial.h: 11: void SetSpeedLeft (char lecture);
+[; ;serial.h: 13: int ReadSpeedRight();
+[; ;serial.h: 14: int ReadSpeedLeft();
+[; ;serial.h: 15: int ConvertPicSpeed (char velocity);
 "13 serial.c
+[v _SpeedLeft `i ~T0 @X0 1 s ]
+[i _SpeedLeft
+-> 0 `i
+]
+[; ;serial.c: 13: static signed int SpeedLeft=0;
+"14
+[v _SpeedRight `i ~T0 @X0 1 s ]
+[i _SpeedRight
+-> 0 `i
+]
+[; ;serial.c: 14: static signed int SpeedRight=0;
+"17
 [v _SerialInit `(v ~T0 @X0 1 ef ]
 {
-[; ;serial.c: 13: void SerialInit(void) {
+[; ;serial.c: 17: void SerialInit(void) {
 [e :U _SerialInit ]
 [f ]
-[; ;serial.c: 15: OpenUSART(0b01111111 &
-[; ;serial.c: 16: 0b11111111 &
-[; ;serial.c: 17: 0b11111110 &
-[; ;serial.c: 18: 0b11111101 &
-[; ;serial.c: 19: 0b11111111 &
-[; ;serial.c: 20: 0b11111111, 6);
-"20
-[e ( _OpenUSART (2 , -> & & & & & -> 127 `i -> 255 `i -> 254 `i -> 253 `i -> 255 `i -> 255 `i `uc -> -> 6 `i `ui ]
-[; ;serial.c: 21: }
-"21
+[; ;serial.c: 19: OpenUSART(0b01111111 &
+[; ;serial.c: 20: 0b11111111 &
+[; ;serial.c: 21: 0b11111110 &
+[; ;serial.c: 22: 0b11111101 &
+[; ;serial.c: 23: 0b11111111 &
+[; ;serial.c: 24: 0b11101111, 51);
+"24
+[e ( _OpenUSART (2 , -> & & & & & -> 127 `i -> 255 `i -> 254 `i -> 253 `i -> 255 `i -> 239 `i `uc -> -> 51 `i `ui ]
+[; ;serial.c: 25: }
+"25
 [e :UE 393 ]
+}
+"27
+[v _SetSpeedRight `(v ~T0 @X0 1 ef1`uc ]
+{
+[; ;serial.c: 27: void SetSpeedRight (char lecture){
+[e :U _SetSpeedRight ]
+[v _lecture `uc ~T0 @X0 1 r1 ]
+[f ]
+[; ;serial.c: 28: SpeedRight=ConvertPicSpeed(lecture);
+"28
+[e = _SpeedRight ( _ConvertPicSpeed (1 _lecture ]
+[; ;serial.c: 29: }
+"29
+[e :UE 394 ]
+}
+"30
+[v _SetSpeedLeft `(v ~T0 @X0 1 ef1`uc ]
+{
+[; ;serial.c: 30: void SetSpeedLeft (char lecture){
+[e :U _SetSpeedLeft ]
+[v _lecture `uc ~T0 @X0 1 r1 ]
+[f ]
+[; ;serial.c: 31: SpeedLeft=ConvertPicSpeed(lecture);
+"31
+[e = _SpeedLeft ( _ConvertPicSpeed (1 _lecture ]
+[; ;serial.c: 32: }
+"32
+[e :UE 395 ]
+}
+"34
+[v _ReadSpeedRight `(i ~T0 @X0 1 ef ]
+{
+[; ;serial.c: 34: int ReadSpeedRight(){
+[e :U _ReadSpeedRight ]
+[f ]
+[; ;serial.c: 35: return SpeedRight;
+"35
+[e ) _SpeedRight ]
+[e $UE 396  ]
+[; ;serial.c: 36: }
+"36
+[e :UE 396 ]
+}
+"37
+[v _ReadSpeedLeft `(i ~T0 @X0 1 ef ]
+{
+[; ;serial.c: 37: int ReadSpeedLeft(){
+[e :U _ReadSpeedLeft ]
+[f ]
+[; ;serial.c: 38: return SpeedLeft;
+"38
+[e ) _SpeedLeft ]
+[e $UE 397  ]
+[; ;serial.c: 39: }
+"39
+[e :UE 397 ]
+}
+"41
+[v _ConvertPicSpeed `(i ~T0 @X0 1 ef1`uc ]
+{
+[; ;serial.c: 41: int ConvertPicSpeed (char velocity){
+[e :U _ConvertPicSpeed ]
+[v _velocity `uc ~T0 @X0 1 r1 ]
+[f ]
+[; ;serial.c: 42: switch(velocity){
+"42
+[e $U 400  ]
+{
+[; ;serial.c: 43: case '0':
+"43
+[e :U 401 ]
+[; ;serial.c: 44: return -100;
+"44
+[e ) -U -> 100 `i ]
+[e $UE 398  ]
+[; ;serial.c: 45: break;
+"45
+[e $U 399  ]
+[; ;serial.c: 46: case '1':
+"46
+[e :U 402 ]
+[; ;serial.c: 47: return -80;
+"47
+[e ) -U -> 80 `i ]
+[e $UE 398  ]
+[; ;serial.c: 48: break;
+"48
+[e $U 399  ]
+[; ;serial.c: 49: case '2':
+"49
+[e :U 403 ]
+[; ;serial.c: 50: return -60;
+"50
+[e ) -U -> 60 `i ]
+[e $UE 398  ]
+[; ;serial.c: 51: break;
+"51
+[e $U 399  ]
+[; ;serial.c: 52: case '3':
+"52
+[e :U 404 ]
+[; ;serial.c: 53: return -40;
+"53
+[e ) -U -> 40 `i ]
+[e $UE 398  ]
+[; ;serial.c: 54: break;
+"54
+[e $U 399  ]
+[; ;serial.c: 55: case '4':
+"55
+[e :U 405 ]
+[; ;serial.c: 56: return -20;
+"56
+[e ) -U -> 20 `i ]
+[e $UE 398  ]
+[; ;serial.c: 57: break;
+"57
+[e $U 399  ]
+[; ;serial.c: 58: case '5':
+"58
+[e :U 406 ]
+[; ;serial.c: 59: return 0;
+"59
+[e ) -> 0 `i ]
+[e $UE 398  ]
+[; ;serial.c: 60: break;
+"60
+[e $U 399  ]
+[; ;serial.c: 61: case '6':
+"61
+[e :U 407 ]
+[; ;serial.c: 62: return 20;
+"62
+[e ) -> 20 `i ]
+[e $UE 398  ]
+[; ;serial.c: 63: break;
+"63
+[e $U 399  ]
+[; ;serial.c: 64: case '7':
+"64
+[e :U 408 ]
+[; ;serial.c: 65: return 40;
+"65
+[e ) -> 40 `i ]
+[e $UE 398  ]
+[; ;serial.c: 66: break;
+"66
+[e $U 399  ]
+[; ;serial.c: 67: case '8':
+"67
+[e :U 409 ]
+[; ;serial.c: 68: return 60;
+"68
+[e ) -> 60 `i ]
+[e $UE 398  ]
+[; ;serial.c: 69: break;
+"69
+[e $U 399  ]
+[; ;serial.c: 70: case '9':
+"70
+[e :U 410 ]
+[; ;serial.c: 71: return 80;
+"71
+[e ) -> 80 `i ]
+[e $UE 398  ]
+[; ;serial.c: 72: break;
+"72
+[e $U 399  ]
+[; ;serial.c: 73: case 'a':
+"73
+[e :U 411 ]
+[; ;serial.c: 74: return 100;
+"74
+[e ) -> 100 `i ]
+[e $UE 398  ]
+[; ;serial.c: 75: break;
+"75
+[e $U 399  ]
+[; ;serial.c: 76: default:
+"76
+[e :U 412 ]
+[; ;serial.c: 77: return 0;
+"77
+[e ) -> 0 `i ]
+[e $UE 398  ]
+[; ;serial.c: 78: break;
+"78
+[e $U 399  ]
+"79
+}
+[; ;serial.c: 79: }
+[e $U 399  ]
+"42
+[e :U 400 ]
+[e [\ _velocity , $ -> -> 48 `ui `uc 401
+ , $ -> -> 49 `ui `uc 402
+ , $ -> -> 50 `ui `uc 403
+ , $ -> -> 51 `ui `uc 404
+ , $ -> -> 52 `ui `uc 405
+ , $ -> -> 53 `ui `uc 406
+ , $ -> -> 54 `ui `uc 407
+ , $ -> -> 55 `ui `uc 408
+ , $ -> -> 56 `ui `uc 409
+ , $ -> -> 57 `ui `uc 410
+ , $ -> -> 97 `ui `uc 411
+ 412 ]
+"79
+[e :U 399 ]
+[; ;serial.c: 80: }
+"80
+[e :UE 398 ]
 }

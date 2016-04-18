@@ -8,6 +8,10 @@
 
 #include <xc.h>
 #include <usart.h>
+#include "serial.h"
+
+static signed int SpeedLeft=0;
+static signed int SpeedRight=0;
 
 
 void SerialInit(void) {
@@ -17,5 +21,60 @@ void SerialInit(void) {
             USART_ASYNCH_MODE &     //Modo asincrono (fullduplex)
             USART_EIGHT_BIT &       //8 bits de datos
             USART_CONT_RX &         //Recepción continua
-            USART_BRGH_HIGH, 6);  //9600 Baudios //8928 bps  //SPBRG = (Fosc / (16 x Baud rate)) - 1, BRGH = 1 High Speed
+            USART_BRGH_LOW, 51);  //9600 Baudios //8928 bps  //SPBRG = (Fosc / (16 x Baud rate)) - 1, BRGH = 1 High Speed
+}//HIGH and 12 for 8928bps- LOW and 51 for 300bps
+
+void SetSpeedRight (char lecture){
+    SpeedRight=ConvertPicSpeed(lecture);
+}
+void SetSpeedLeft (char lecture){
+    SpeedLeft=ConvertPicSpeed(lecture);
+}
+
+int  ReadSpeedRight(){
+    return SpeedRight;
+}
+int ReadSpeedLeft(){
+    return SpeedLeft;
+}
+
+int ConvertPicSpeed (char velocity){
+    switch(velocity){
+        case '0':
+            return -100;
+            break;
+        case '1':
+            return -80;
+            break;
+        case '2':
+            return -60;
+            break;
+        case '3':
+            return -40;
+            break;
+        case '4':
+            return -20;
+            break;
+        case '5':
+            return 0;
+            break;
+        case '6':
+            return 20;
+            break;
+        case '7':
+            return 40;
+            break;
+        case '8':
+            return 60;
+            break;
+        case '9':
+            return 80;
+            break;
+        case 'a':
+            return 100;
+            break;
+        default:
+            return 0;
+            break;        
+    }
 }

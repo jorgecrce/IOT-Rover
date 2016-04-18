@@ -22,11 +22,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 "8467 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f45k20.h
 [v _TMR0IF `Vb ~T0 @X0 0 e@32658 ]
 [t ~ __deprecated__ ]
-[t T23 __deprecated__ ]
-"8219
-[v _RC4 `Vb ~T23 @X0 0 e@31764 ]
+[t T24 __deprecated__ ]
 "8221
-[v _RC5 `Vb ~T23 @X0 0 e@31765 ]
+[v _RC5 `Vb ~T24 @X0 0 e@31765 ]
+"8219
+[v _RC4 `Vb ~T24 @X0 0 e@31764 ]
 "11 TimerPWM.h
 [v _ReadPWMMotorRight `(ui ~T0 @X0 0 ef ]
 "12
@@ -39,6 +39,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RCIF `Vb ~T0 @X0 0 e@31989 ]
 "596 C:\Program Files (x86)\Microchip\xc8\v1.36\include\plib\usart.h
 [v _ReadUSART `(uc ~T0 @X0 0 ef ]
+"10 serial.h
+[v _SetSpeedRight `(v ~T0 @X0 0 ef1`uc ]
+"11
+[v _SetSpeedLeft `(v ~T0 @X0 0 ef1`uc ]
 "4051 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f45k20.h
 [s S192 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S192 . TX9D TRMT BRGH SENDB SYNC TXEN TX9 CSRC ]
@@ -3850,291 +3854,370 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;TimerPWM.h: 10: void SetPWMMotorLeft (unsigned int percentage);
 [; ;TimerPWM.h: 11: unsigned int ReadPWMMotorRight ();
 [; ;TimerPWM.h: 12: unsigned int ReadPWMMotorLeft ();
-[v F4195 `(v ~T0 @X0 1 tf ]
-"9 interrupts.c
-[v _isr `IF4195 ~T0 @X0 1 e ]
+[; ;serial.h: 8: void SerialInit(void);
+[; ;serial.h: 10: void SetSpeedRight (char lecture);
+[; ;serial.h: 11: void SetSpeedLeft (char lecture);
+[; ;serial.h: 13: int ReadSpeedRight();
+[; ;serial.h: 14: int ReadSpeedLeft();
+[; ;serial.h: 15: int ConvertPicSpeed (char velocity);
+[v F4205 `(v ~T0 @X0 1 tf ]
+"10 interrupts.c
+[v _isr `IF4205 ~T0 @X0 1 e ]
 {
-[; ;interrupts.c: 9: void interrupt isr(void) {
+[; ;interrupts.c: 10: void interrupt isr(void) {
 [e :U _isr ]
 [f ]
-[; ;interrupts.c: 13: if (ADIF == 1) {
-"13
+[; ;interrupts.c: 14: if (ADIF == 1) {
+"14
 [e $ ! == -> _ADIF `i -> 1 `i 394  ]
 {
-"25
-[v F4196 `ui ~T0 @X0 1 s Readport ]
-[i F4196
+"16
+[v F4206 `ui ~T0 @X0 1 s Readport ]
+[i F4206
 -> -> 0 `i `ui
 ]
-"26
+"17
 [v _read `ui ~T0 @X0 1 a ]
-[; ;interrupts.c: 25: static unsigned int Readport=0;
-[; ;interrupts.c: 26: unsigned int read=ADCGetOutput();
+[; ;interrupts.c: 16: static unsigned int Readport=0;
+[; ;interrupts.c: 17: unsigned int read=ADCGetOutput();
 [e = _read ( _ADCGetOutput ..  ]
-[; ;interrupts.c: 28: switch (Readport){
-"28
+[; ;interrupts.c: 19: switch (Readport){
+"19
 [e $U 396  ]
 {
-[; ;interrupts.c: 29: case 0:
-"29
+[; ;interrupts.c: 20: case 0:
+"20
 [e :U 397 ]
-[; ;interrupts.c: 30: CHS3=0;
-"30
+[; ;interrupts.c: 21: CHS3=0;
+"21
 [e = _CHS3 -> -> 0 `i `b ]
-[; ;interrupts.c: 31: CHS2=0;
-"31
+[; ;interrupts.c: 22: CHS2=0;
+"22
 [e = _CHS2 -> -> 0 `i `b ]
-[; ;interrupts.c: 32: CHS1=0;
-"32
+[; ;interrupts.c: 23: CHS1=0;
+"23
 [e = _CHS1 -> -> 0 `i `b ]
-[; ;interrupts.c: 33: CHS0=1;
-"33
+[; ;interrupts.c: 24: CHS0=1;
+"24
 [e = _CHS0 -> -> 1 `i `b ]
-[; ;interrupts.c: 34: SetDistanceLeft (read);
-"34
+[; ;interrupts.c: 25: SetDistanceLeft (read);
+"25
 [e ( _SetDistanceLeft (1 _read ]
-[; ;interrupts.c: 35: Readport++;
-"35
-[e ++ F4196 -> -> 1 `i `ui ]
-[; ;interrupts.c: 36: break;
-"36
+[; ;interrupts.c: 26: Readport++;
+"26
+[e ++ F4206 -> -> 1 `i `ui ]
+[; ;interrupts.c: 27: break;
+"27
 [e $U 395  ]
-[; ;interrupts.c: 37: case 1:
-"37
-[e :U 398 ]
-[; ;interrupts.c: 38: CHS3=0;
-"38
-[e = _CHS3 -> -> 0 `i `b ]
-[; ;interrupts.c: 39: CHS2=0;
-"39
-[e = _CHS2 -> -> 0 `i `b ]
-[; ;interrupts.c: 40: CHS1=1;
-"40
-[e = _CHS1 -> -> 1 `i `b ]
-[; ;interrupts.c: 41: CHS0=0;
-"41
-[e = _CHS0 -> -> 0 `i `b ]
-[; ;interrupts.c: 42: SetDistanceCentral (read);
-"42
-[e ( _SetDistanceCentral (1 _read ]
-[; ;interrupts.c: 43: Readport++;
-"43
-[e ++ F4196 -> -> 1 `i `ui ]
-[; ;interrupts.c: 44: break;
-"44
-[e $U 395  ]
-[; ;interrupts.c: 45: case 2:
-"45
-[e :U 399 ]
-[; ;interrupts.c: 46: CHS3=0;
-"46
-[e = _CHS3 -> -> 0 `i `b ]
-[; ;interrupts.c: 47: CHS2=0;
-"47
-[e = _CHS2 -> -> 0 `i `b ]
-[; ;interrupts.c: 48: CHS1=1;
-"48
-[e = _CHS1 -> -> 1 `i `b ]
-[; ;interrupts.c: 49: CHS0=1;
-"49
-[e = _CHS0 -> -> 1 `i `b ]
-[; ;interrupts.c: 50: SetDistanceRight (read);
-"50
-[e ( _SetDistanceRight (1 _read ]
-[; ;interrupts.c: 51: Readport++;
-"51
-[e ++ F4196 -> -> 1 `i `ui ]
-[; ;interrupts.c: 52: break;
-"52
-[e $U 395  ]
-[; ;interrupts.c: 53: case 3:
-"53
-[e :U 400 ]
-[; ;interrupts.c: 54: CHS3=0;
-"54
-[e = _CHS3 -> -> 0 `i `b ]
-[; ;interrupts.c: 55: CHS2=0;
-"55
-[e = _CHS2 -> -> 0 `i `b ]
-[; ;interrupts.c: 56: CHS1=0;
-"56
-[e = _CHS1 -> -> 0 `i `b ]
-[; ;interrupts.c: 57: CHS0=0;
-"57
-[e = _CHS0 -> -> 0 `i `b ]
-[; ;interrupts.c: 58: SetBattery (read);
-"58
-[e ( _SetBattery (1 _read ]
-[; ;interrupts.c: 59: Readport=0;
-"59
-[e = F4196 -> -> 0 `i `ui ]
-[; ;interrupts.c: 60: break;
-"60
-[e $U 395  ]
-[; ;interrupts.c: 61: default:
-"61
-[e :U 401 ]
-[; ;interrupts.c: 62: CHS3=0;
-"62
-[e = _CHS3 -> -> 0 `i `b ]
-[; ;interrupts.c: 63: CHS2=0;
-"63
-[e = _CHS2 -> -> 0 `i `b ]
-[; ;interrupts.c: 64: CHS1=0;
-"64
-[e = _CHS1 -> -> 0 `i `b ]
-[; ;interrupts.c: 65: CHS0=0;
-"65
-[e = _CHS0 -> -> 0 `i `b ]
-[; ;interrupts.c: 66: Readport=0;
-"66
-[e = F4196 -> -> 0 `i `ui ]
-[; ;interrupts.c: 67: break;
-"67
-[e $U 395  ]
-"68
-}
-[; ;interrupts.c: 68: }
-[e $U 395  ]
+[; ;interrupts.c: 28: case 1:
 "28
+[e :U 398 ]
+[; ;interrupts.c: 29: CHS3=0;
+"29
+[e = _CHS3 -> -> 0 `i `b ]
+[; ;interrupts.c: 30: CHS2=0;
+"30
+[e = _CHS2 -> -> 0 `i `b ]
+[; ;interrupts.c: 31: CHS1=1;
+"31
+[e = _CHS1 -> -> 1 `i `b ]
+[; ;interrupts.c: 32: CHS0=0;
+"32
+[e = _CHS0 -> -> 0 `i `b ]
+[; ;interrupts.c: 33: SetDistanceCentral (read);
+"33
+[e ( _SetDistanceCentral (1 _read ]
+[; ;interrupts.c: 34: Readport++;
+"34
+[e ++ F4206 -> -> 1 `i `ui ]
+[; ;interrupts.c: 35: break;
+"35
+[e $U 395  ]
+[; ;interrupts.c: 36: case 2:
+"36
+[e :U 399 ]
+[; ;interrupts.c: 37: CHS3=0;
+"37
+[e = _CHS3 -> -> 0 `i `b ]
+[; ;interrupts.c: 38: CHS2=0;
+"38
+[e = _CHS2 -> -> 0 `i `b ]
+[; ;interrupts.c: 39: CHS1=1;
+"39
+[e = _CHS1 -> -> 1 `i `b ]
+[; ;interrupts.c: 40: CHS0=1;
+"40
+[e = _CHS0 -> -> 1 `i `b ]
+[; ;interrupts.c: 41: SetDistanceRight (read);
+"41
+[e ( _SetDistanceRight (1 _read ]
+[; ;interrupts.c: 42: Readport++;
+"42
+[e ++ F4206 -> -> 1 `i `ui ]
+[; ;interrupts.c: 43: break;
+"43
+[e $U 395  ]
+[; ;interrupts.c: 44: case 3:
+"44
+[e :U 400 ]
+[; ;interrupts.c: 45: CHS3=0;
+"45
+[e = _CHS3 -> -> 0 `i `b ]
+[; ;interrupts.c: 46: CHS2=0;
+"46
+[e = _CHS2 -> -> 0 `i `b ]
+[; ;interrupts.c: 47: CHS1=0;
+"47
+[e = _CHS1 -> -> 0 `i `b ]
+[; ;interrupts.c: 48: CHS0=0;
+"48
+[e = _CHS0 -> -> 0 `i `b ]
+[; ;interrupts.c: 49: SetBattery (read);
+"49
+[e ( _SetBattery (1 _read ]
+[; ;interrupts.c: 50: Readport=0;
+"50
+[e = F4206 -> -> 0 `i `ui ]
+[; ;interrupts.c: 51: break;
+"51
+[e $U 395  ]
+[; ;interrupts.c: 52: default:
+"52
+[e :U 401 ]
+[; ;interrupts.c: 53: CHS3=0;
+"53
+[e = _CHS3 -> -> 0 `i `b ]
+[; ;interrupts.c: 54: CHS2=0;
+"54
+[e = _CHS2 -> -> 0 `i `b ]
+[; ;interrupts.c: 55: CHS1=0;
+"55
+[e = _CHS1 -> -> 0 `i `b ]
+[; ;interrupts.c: 56: CHS0=0;
+"56
+[e = _CHS0 -> -> 0 `i `b ]
+[; ;interrupts.c: 57: Readport=0;
+"57
+[e = F4206 -> -> 0 `i `ui ]
+[; ;interrupts.c: 58: break;
+"58
+[e $U 395  ]
+"59
+}
+[; ;interrupts.c: 59: }
+[e $U 395  ]
+"19
 [e :U 396 ]
-[e [\ F4196 , $ -> -> 0 `i `ui 397
+[e [\ F4206 , $ -> -> 0 `i `ui 397
  , $ -> -> 1 `i `ui 398
  , $ -> -> 2 `i `ui 399
  , $ -> -> 3 `i `ui 400
  401 ]
-"68
+"59
 [e :U 395 ]
-[; ;interrupts.c: 71: ADIF=0;
-"71
+[; ;interrupts.c: 62: ADIF=0;
+"62
 [e = _ADIF -> -> 0 `i `b ]
-"73
+"64
 }
 [e :U 394 ]
-[; ;interrupts.c: 73: }
-[; ;interrupts.c: 75: if (TMR0IF==1)
-"75
+[; ;interrupts.c: 64: }
+[; ;interrupts.c: 66: if (TMR0IF==1)
+"66
 [e $ ! == -> _TMR0IF `i -> 1 `i 402  ]
-[; ;interrupts.c: 76: {
-"76
+[; ;interrupts.c: 67: {
+"67
 {
-"77
-[v F4198 `ui ~T0 @X0 1 s PWMLeft ]
-"78
-[v F4199 `ui ~T0 @X0 1 s PWMRight ]
-"79
-[v F4200 `ui ~T0 @X0 1 s iteration ]
-[; ;interrupts.c: 77: static unsigned int PWMLeft;
-[; ;interrupts.c: 78: static unsigned int PWMRight;
-[; ;interrupts.c: 79: static unsigned int iteration;
-[; ;interrupts.c: 81: if (iteration==20){
-"81
-[e $ ! == F4200 -> -> 20 `i `ui 403  ]
+"68
+[v F4208 `ui ~T0 @X0 1 s PWMLeft ]
+"69
+[v F4209 `ui ~T0 @X0 1 s PWMRight ]
+"70
+[v F4210 `ui ~T0 @X0 1 s iteration ]
+[; ;interrupts.c: 68: static unsigned int PWMLeft;
+[; ;interrupts.c: 69: static unsigned int PWMRight;
+[; ;interrupts.c: 70: static unsigned int iteration;
+[; ;interrupts.c: 72: if (iteration==20){
+"72
+[e $ ! == F4210 -> -> 20 `i `ui 403  ]
 {
-[; ;interrupts.c: 82: RC4=0;
-"82
-[e = _RC4 -> -> 0 `i `b ]
-[; ;interrupts.c: 83: RC5=0;
-"83
+[; ;interrupts.c: 73: RC5=0;
+"73
 [e = _RC5 -> -> 0 `i `b ]
-[; ;interrupts.c: 84: iteration=0;
-"84
-[e = F4200 -> -> 0 `i `ui ]
-[; ;interrupts.c: 85: PWMRight=ReadPWMMotorRight();
-"85
-[e = F4199 ( _ReadPWMMotorRight ..  ]
-[; ;interrupts.c: 86: PWMLeft=ReadPWMMotorLeft();
-"86
-[e = F4198 ( _ReadPWMMotorLeft ..  ]
-"87
+[; ;interrupts.c: 74: RC4=0;
+"74
+[e = _RC4 -> -> 0 `i `b ]
+[; ;interrupts.c: 75: iteration=0;
+"75
+[e = F4210 -> -> 0 `i `ui ]
+[; ;interrupts.c: 76: PWMRight=ReadPWMMotorRight();
+"76
+[e = F4209 ( _ReadPWMMotorRight ..  ]
+[; ;interrupts.c: 77: PWMLeft=ReadPWMMotorLeft();
+"77
+[e = F4208 ( _ReadPWMMotorLeft ..  ]
+"78
 }
 [e :U 403 ]
-[; ;interrupts.c: 87: }
-[; ;interrupts.c: 88: if (PWMRight==iteration){
-"88
-[e $ ! == F4199 F4200 404  ]
+[; ;interrupts.c: 78: }
+[; ;interrupts.c: 79: if (PWMRight==iteration){
+"79
+[e $ ! == F4209 F4210 404  ]
 {
-[; ;interrupts.c: 89: RC4=1;
-"89
-[e = _RC4 -> -> 1 `i `b ]
-"90
+[; ;interrupts.c: 80: RC5=1;
+"80
+[e = _RC5 -> -> 1 `i `b ]
+"81
 }
 [e :U 404 ]
-[; ;interrupts.c: 90: }
-[; ;interrupts.c: 91: if (PWMLeft==iteration){
-"91
-[e $ ! == F4198 F4200 405  ]
+[; ;interrupts.c: 81: }
+[; ;interrupts.c: 82: if (PWMLeft==iteration){
+"82
+[e $ ! == F4208 F4210 405  ]
 {
-[; ;interrupts.c: 92: RC5=1;
-"92
-[e = _RC5 -> -> 1 `i `b ]
-"93
+[; ;interrupts.c: 83: RC4=1;
+"83
+[e = _RC4 -> -> 1 `i `b ]
+"84
 }
 [e :U 405 ]
-[; ;interrupts.c: 93: }
-[; ;interrupts.c: 94: iteration++;
-"94
-[e ++ F4200 -> -> 1 `i `ui ]
-[; ;interrupts.c: 97: TMR0IF=0;
-"97
+[; ;interrupts.c: 84: }
+[; ;interrupts.c: 85: iteration++;
+"85
+[e ++ F4210 -> -> 1 `i `ui ]
+[; ;interrupts.c: 88: TMR0IF=0;
+"88
 [e = _TMR0IF -> -> 0 `i `b ]
-[; ;interrupts.c: 98: TMR0H=0x00;
-"98
+[; ;interrupts.c: 89: TMR0H=0x00;
+"89
 [e = _TMR0H -> -> 0 `i `uc ]
-[; ;interrupts.c: 99: TMR0L=0x156;
-"99
+[; ;interrupts.c: 90: TMR0L=0x156;
+"90
 [e = _TMR0L -> -> 342 `i `uc ]
-"101
+"92
 }
 [e :U 402 ]
-[; ;interrupts.c: 101: }
-[; ;interrupts.c: 103: if (RCIF==1){
-"103
+[; ;interrupts.c: 92: }
+[; ;interrupts.c: 94: if (RCIF==1){
+"94
 [e $ ! == -> _RCIF `i -> 1 `i 406  ]
 {
-"104
+"96
+[v F4211 `i ~T0 @X0 1 s counter ]
+[i F4211
+-> 0 `i
+]
+"98
 [v _CharRx `uc ~T0 @X0 1 a ]
-[; ;interrupts.c: 104: char CharRx = ReadUSART();
+[; ;interrupts.c: 96: static int counter=0;
+[; ;interrupts.c: 98: char CharRx = ReadUSART();
 [e = _CharRx ( _ReadUSART ..  ]
-[; ;interrupts.c: 106: while((!TXSTAbits.TRMT));
-"106
-[e $U 407  ]
+[; ;interrupts.c: 100: if (counter==0){
+"100
+[e $ ! == F4211 -> 0 `i 407  ]
+{
+[; ;interrupts.c: 101: if (CharRx=='b'){
+"101
+[e $ ! == -> _CharRx `ui -> 98 `ui 408  ]
+{
+[; ;interrupts.c: 102: counter=1;
+"102
+[e = F4211 -> 1 `i ]
+"103
+}
+[; ;interrupts.c: 103: }else if (CharRx=='c'){
+[e $U 409  ]
 [e :U 408 ]
-[e :U 407 ]
-[e $ ! != -> . . _TXSTAbits 0 1 `i -> -> -> 0 `i `Vuc `i 408  ]
-[e :U 409 ]
-[; ;interrupts.c: 107: putsUSART("\n\rEcho: ");
-"107
-[e ( _putsUSART (1 -> :s 1C `*uc ]
-[; ;interrupts.c: 108: while((!TXSTAbits.TRMT));
-"108
-[e $U 410  ]
-[e :U 411 ]
+[e $ ! == -> _CharRx `ui -> 99 `ui 410  ]
+{
+[; ;interrupts.c: 104: counter=2;
+"104
+[e = F4211 -> 2 `i ]
+"105
+}
 [e :U 410 ]
-[e $ ! != -> . . _TXSTAbits 0 1 `i -> -> -> 0 `i `Vuc `i 411  ]
-[e :U 412 ]
-[; ;interrupts.c: 109: WriteUSART(CharRx);
+"106
+[e :U 409 ]
+}
+[; ;interrupts.c: 105: }
+[; ;interrupts.c: 106: }else if (counter==1){
+[e $U 411  ]
+[e :U 407 ]
+[e $ ! == F4211 -> 1 `i 412  ]
+{
+[; ;interrupts.c: 107: SetSpeedRight(CharRx);
+"107
+[e ( _SetSpeedRight (1 _CharRx ]
+[; ;interrupts.c: 108: counter=0;
+"108
+[e = F4211 -> 0 `i ]
 "109
-[e ( _WriteUSART (1 _CharRx ]
-[; ;interrupts.c: 110: while((!TXSTAbits.TRMT));
-"110
+}
+[; ;interrupts.c: 109: }else if (counter==2){
 [e $U 413  ]
-[e :U 414 ]
-[e :U 413 ]
-[e $ ! != -> . . _TXSTAbits 0 1 `i -> -> -> 0 `i `Vuc `i 414  ]
-[e :U 415 ]
-[; ;interrupts.c: 111: putsUSART("\n\r\n\rWrite: ");
+[e :U 412 ]
+[e $ ! == F4211 -> 2 `i 414  ]
+{
+[; ;interrupts.c: 110: SetSpeedLeft(CharRx);
+"110
+[e ( _SetSpeedLeft (1 _CharRx ]
+[; ;interrupts.c: 111: counter=0;
 "111
-[e ( _putsUSART (1 -> :s 2C `*uc ]
-[; ;interrupts.c: 114: RCIF = 0;
+[e = F4211 -> 0 `i ]
+"112
+}
+[; ;interrupts.c: 112: }else{
+[e $U 415  ]
+[e :U 414 ]
+{
+[; ;interrupts.c: 113: counter=0;
+"113
+[e = F4211 -> 0 `i ]
 "114
+}
+[e :U 415 ]
+[e :U 413 ]
+[e :U 411 ]
+[; ;interrupts.c: 114: }
+[; ;interrupts.c: 116: while((!TXSTAbits.TRMT));
+"116
+[e $U 416  ]
+[e :U 417 ]
+[e :U 416 ]
+[e $ ! != -> . . _TXSTAbits 0 1 `i -> -> -> 0 `i `Vuc `i 417  ]
+[e :U 418 ]
+[; ;interrupts.c: 117: putsUSART("\n\rEcho: ");
+"117
+[e ( _putsUSART (1 -> :s 1C `*uc ]
+[; ;interrupts.c: 118: while((!TXSTAbits.TRMT));
+"118
+[e $U 419  ]
+[e :U 420 ]
+[e :U 419 ]
+[e $ ! != -> . . _TXSTAbits 0 1 `i -> -> -> 0 `i `Vuc `i 420  ]
+[e :U 421 ]
+[; ;interrupts.c: 119: WriteUSART(CharRx);
+"119
+[e ( _WriteUSART (1 _CharRx ]
+[; ;interrupts.c: 120: while((!TXSTAbits.TRMT));
+"120
+[e $U 422  ]
+[e :U 423 ]
+[e :U 422 ]
+[e $ ! != -> . . _TXSTAbits 0 1 `i -> -> -> 0 `i `Vuc `i 423  ]
+[e :U 424 ]
+[; ;interrupts.c: 121: putsUSART("\n\r\n\rWrite: ");
+"121
+[e ( _putsUSART (1 -> :s 2C `*uc ]
+[; ;interrupts.c: 124: RCIF = 0;
+"124
 [e = _RCIF -> -> 0 `i `b ]
-"115
+"125
 }
 [e :U 406 ]
-[; ;interrupts.c: 115: }
-[; ;interrupts.c: 116: }
-"116
+[; ;interrupts.c: 125: }
+[; ;interrupts.c: 126: }
+"126
 [e :UE 393 ]
 }
 [a 1C 10 13 69 99 104 111 58 32 0 ]

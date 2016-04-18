@@ -1,6 +1,12 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"84 lcd_hd44780_pic16.h
-[v _LCDByte `(v ~T0 @X0 0 ef2`uc`uc ]
+"2 parallel.h
+[v _ReadParallel `(v ~T0 @X0 0 ef ]
+"8
+[v _ReadMode `(ui ~T0 @X0 0 ef ]
+"6
+[v _ReadParallelSpeedLeft `(i ~T0 @X0 0 ef ]
+"5
+[v _ReadParallelSpeedRight `(i ~T0 @X0 0 ef ]
 "25 ADC.h
 [v _ReadDistanceCentral `(ui ~T0 @X0 0 ef ]
 "23
@@ -11,8 +17,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _SetMotorLeft `(v ~T0 @X0 0 ef1`i ]
 "10
 [v _SetMotorRight `(v ~T0 @X0 0 ef1`i ]
-"79 lcd_hd44780_pic16.h
-[v _LCDWriteString `(v ~T0 @X0 0 ef1`*Cuc ]
+"4 driver.h
+[v _TurnRight135 `(v ~T0 @X0 0 ef ]
+"5
+[v _TurnLeft135 `(v ~T0 @X0 0 ef ]
+"3
+[v _TurnLeft90 `(v ~T0 @X0 0 ef ]
+"2
+[v _TurnRight90 `(v ~T0 @X0 0 ef ]
+[v F4155 `(v ~T0 @X0 1 tf1`ul ]
+"156 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18.h
+[v __delay `JF4155 ~T0 @X0 0 e ]
+[p i __delay ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -3765,6 +3781,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;motors.h: 8: void MotorInit();
 [; ;motors.h: 9: void SetMotorLeft(signed int speed);
 [; ;motors.h: 10: void SetMotorRight(signed int speed);
+[; ;motors.h: 11: void Stop();
 [; ;stdint.h: 13: typedef signed char int8_t;
 [; ;stdint.h: 20: typedef signed int int16_t;
 [; ;stdint.h: 28: typedef signed short long int int24_t;
@@ -3812,194 +3829,327 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ADC.h: 25: unsigned int ReadDistanceCentral ();
 [; ;ADC.h: 27: void SetBattery (unsigned int lecture);
 [; ;ADC.h: 28: unsigned int ReadBattery ();
-"14 driver.c
+[; ;driver.h: 1: void Go(void);
+[; ;driver.h: 2: void TurnRight90(void);
+[; ;driver.h: 3: void TurnLeft90(void);
+[; ;driver.h: 4: void TurnRight135(void);
+[; ;driver.h: 5: void TurnLeft135(void);
+[; ;driver.h: 6: void Turn180(void);
+[; ;driver.h: 7: void GoBack(void);
+[; ;parallel.h: 1: void parallelInit(void);
+[; ;parallel.h: 2: void ReadParallel();
+[; ;parallel.h: 5: signed int ReadParallelSpeedRight();
+[; ;parallel.h: 6: signed int ReadParallelSpeedLeft();
+[; ;parallel.h: 7: signed int ConvertParallelSpeed (char velocity);
+[; ;parallel.h: 8: unsigned int ReadMode();
+[; ;stdlib.h: 7: typedef unsigned short wchar_t;
+[; ;stdlib.h: 15: typedef struct {
+[; ;stdlib.h: 16: int rem;
+[; ;stdlib.h: 17: int quot;
+[; ;stdlib.h: 18: } div_t;
+[; ;stdlib.h: 19: typedef struct {
+[; ;stdlib.h: 20: unsigned rem;
+[; ;stdlib.h: 21: unsigned quot;
+[; ;stdlib.h: 22: } udiv_t;
+[; ;stdlib.h: 23: typedef struct {
+[; ;stdlib.h: 24: long quot;
+[; ;stdlib.h: 25: long rem;
+[; ;stdlib.h: 26: } ldiv_t;
+[; ;stdlib.h: 27: typedef struct {
+[; ;stdlib.h: 28: unsigned long quot;
+[; ;stdlib.h: 29: unsigned long rem;
+[; ;stdlib.h: 30: } uldiv_t;
+[; ;stdlib.h: 53: extern double atof(const char *);
+[; ;stdlib.h: 54: extern double strtod(const char *, const char **);
+[; ;stdlib.h: 55: extern int atoi(const char *);
+[; ;stdlib.h: 56: extern unsigned xtoi(const char *);
+[; ;stdlib.h: 57: extern long atol(const char *);
+[; ;stdlib.h: 58: extern long strtol(const char *, char **, int);
+[; ;stdlib.h: 60: extern int rand(void);
+[; ;stdlib.h: 61: extern void srand(unsigned int);
+[; ;stdlib.h: 62: extern void * calloc(size_t, size_t);
+[; ;stdlib.h: 63: extern div_t div(int numer, int denom);
+[; ;stdlib.h: 64: extern udiv_t udiv(unsigned numer, unsigned denom);
+[; ;stdlib.h: 65: extern ldiv_t ldiv(long numer, long denom);
+[; ;stdlib.h: 66: extern uldiv_t uldiv(unsigned long numer,unsigned long denom);
+[; ;stdlib.h: 67: extern unsigned long _lrotl(unsigned long value, unsigned int shift);
+[; ;stdlib.h: 68: extern unsigned long _lrotr(unsigned long value, unsigned int shift);
+[; ;stdlib.h: 69: extern unsigned int _rotl(unsigned int value, unsigned int shift);
+[; ;stdlib.h: 70: extern unsigned int _rotr(unsigned int value, unsigned int shift);
+[; ;stdlib.h: 75: extern void * malloc(size_t);
+[; ;stdlib.h: 76: extern void free(void *);
+[; ;stdlib.h: 77: extern void * realloc(void *, size_t);
+[; ;stdlib.h: 86: extern int atexit(void (*)(void));
+[; ;stdlib.h: 87: extern char * getenv(const char *);
+[; ;stdlib.h: 88: extern char ** environ;
+[; ;stdlib.h: 89: extern int system(char *);
+[; ;stdlib.h: 90: extern void qsort(void *, size_t, size_t, int (*)(const void *, const void *));
+[; ;stdlib.h: 91: extern void * bsearch(const void *, void *, size_t, size_t, int(*)(const void *, const void *));
+[; ;stdlib.h: 92: extern int abs(int);
+[; ;stdlib.h: 93: extern long labs(long);
+[; ;stdlib.h: 95: extern char * itoa(char * buf, int val, int base);
+[; ;stdlib.h: 96: extern char * utoa(char * buf, unsigned val, int base);
+[; ;stdlib.h: 101: extern char * ltoa(char * buf, long val, int base);
+[; ;stdlib.h: 102: extern char * ultoa(char * buf, unsigned long val, int base);
+[; ;stdlib.h: 104: extern char * ftoa(float f, int * status);
+"20 driver.c
 [v _Go `(v ~T0 @X0 1 ef ]
 {
-[; ;driver.c: 14: void Go(void) {
+[; ;driver.c: 20: void Go(void) {
 [e :U _Go ]
 [f ]
-[; ;driver.c: 15: (LCDByte(0b00000001,0));
-"15
-[e ( _LCDByte (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
-[; ;driver.c: 16: if (ReadDistanceCentral()>30){
-"16
-[e $ ! > ( _ReadDistanceCentral ..  -> -> 30 `i `ui 394  ]
-{
-[; ;driver.c: 17: if (ReadDistanceRight()>30){
-"17
-[e $ ! > ( _ReadDistanceRight ..  -> -> 30 `i `ui 395  ]
-{
-[; ;driver.c: 18: if (ReadDistanceLeft()>30){
-"18
-[e $ ! > ( _ReadDistanceLeft ..  -> -> 30 `i `ui 396  ]
-{
-[; ;driver.c: 19: SetMotorLeft(100);
-"19
-[e ( _SetMotorLeft (1 -> 100 `i ]
-[; ;driver.c: 20: SetMotorRight(100);
-"20
-[e ( _SetMotorRight (1 -> 100 `i ]
-[; ;driver.c: 21: LCDWriteString("1");
+[; ;driver.c: 21: ReadParallel();
 "21
-[e ( _LCDWriteString (1 :s 1C ]
-"22
-}
-[; ;driver.c: 22: }else{
-[e $U 397  ]
-[e :U 396 ]
-{
-[; ;driver.c: 23: SetMotorLeft(100);
+[e ( _ReadParallel ..  ]
+[; ;driver.c: 23: if(ReadMode()==0){
 "23
-[e ( _SetMotorLeft (1 -> 100 `i ]
-[; ;driver.c: 24: SetMotorRight(50);
+[e $ ! == ( _ReadMode ..  -> -> 0 `i `ui 398  ]
+{
 "24
-[e ( _SetMotorRight (1 -> 50 `i ]
-[; ;driver.c: 25: LCDWriteString("2");
+[v _SpeedLeft `i ~T0 @X0 1 a ]
+[v _SpeedRight `i ~T0 @X0 1 a ]
+[; ;driver.c: 24: signed int SpeedLeft, SpeedRight;
+[; ;driver.c: 25: SpeedLeft=ReadParallelSpeedLeft();
 "25
-[e ( _LCDWriteString (1 :s 2C ]
+[e = _SpeedLeft ( _ReadParallelSpeedLeft ..  ]
+[; ;driver.c: 26: SpeedRight=ReadParallelSpeedRight();
 "26
-}
-[e :U 397 ]
-"27
-}
-[; ;driver.c: 26: }
-[; ;driver.c: 27: }else{
-[e $U 398  ]
-[e :U 395 ]
-{
-[; ;driver.c: 28: if (ReadDistanceLeft()>30){
+[e = _SpeedRight ( _ReadParallelSpeedRight ..  ]
+[; ;driver.c: 28: if(SpeedRight>0 && SpeedLeft>0){
 "28
-[e $ ! > ( _ReadDistanceLeft ..  -> -> 30 `i `ui 399  ]
+[e $ ! && > _SpeedRight -> 0 `i > _SpeedLeft -> 0 `i 399  ]
 {
-[; ;driver.c: 29: SetMotorLeft(50);
+[; ;driver.c: 29: if ((ReadDistanceCentral()<35) || (ReadDistanceRight()<30) || (ReadDistanceLeft()<30)){
 "29
-[e ( _SetMotorLeft (1 -> 50 `i ]
-[; ;driver.c: 30: SetMotorRight(100);
+[e $ ! || || < ( _ReadDistanceCentral ..  -> -> 35 `i `ui < ( _ReadDistanceRight ..  -> -> 30 `i `ui < ( _ReadDistanceLeft ..  -> -> 30 `i `ui 400  ]
+{
+[; ;driver.c: 30: SetMotorLeft(0);
 "30
-[e ( _SetMotorRight (1 -> 100 `i ]
-[; ;driver.c: 31: LCDWriteString("3");
+[e ( _SetMotorLeft (1 -> 0 `i ]
+[; ;driver.c: 31: SetMotorRight(0);
 "31
-[e ( _LCDWriteString (1 :s 3C ]
+[e ( _SetMotorRight (1 -> 0 `i ]
 "32
 }
 [; ;driver.c: 32: }else{
-[e $U 400  ]
-[e :U 399 ]
+[e $U 401  ]
+[e :U 400 ]
 {
-[; ;driver.c: 33: SetMotorLeft(-50);
+[; ;driver.c: 33: SetMotorLeft (SpeedLeft);
 "33
-[e ( _SetMotorLeft (1 -U -> 50 `i ]
-[; ;driver.c: 34: SetMotorRight(50);
+[e ( _SetMotorLeft (1 _SpeedLeft ]
+[; ;driver.c: 34: SetMotorRight(SpeedRight);
 "34
-[e ( _SetMotorRight (1 -> 50 `i ]
-[; ;driver.c: 35: LCDWriteString("4");
+[e ( _SetMotorRight (1 _SpeedRight ]
 "35
-[e ( _LCDWriteString (1 :s 4C ]
+}
+[e :U 401 ]
 "36
 }
-[e :U 400 ]
-"37
-}
-[e :U 398 ]
+[; ;driver.c: 35: }
+[; ;driver.c: 36: }else{
+[e $U 402  ]
+[e :U 399 ]
+{
+[; ;driver.c: 38: SetMotorLeft (SpeedLeft);
 "38
-}
-[; ;driver.c: 36: }
-[; ;driver.c: 37: }
-[; ;driver.c: 38: }else{
-[e $U 401  ]
-[e :U 394 ]
-{
-[; ;driver.c: 39: if (ReadDistanceRight()>30){
+[e ( _SetMotorLeft (1 _SpeedLeft ]
+[; ;driver.c: 39: SetMotorRight(SpeedRight);
 "39
-[e $ ! > ( _ReadDistanceRight ..  -> -> 30 `i `ui 402  ]
-{
-[; ;driver.c: 40: if (ReadDistanceLeft()>30){
+[e ( _SetMotorRight (1 _SpeedRight ]
 "40
-[e $ ! > ( _ReadDistanceLeft ..  -> -> 30 `i `ui 403  ]
-{
-[; ;driver.c: 41: SetMotorLeft(50);
-"41
-[e ( _SetMotorLeft (1 -> 50 `i ]
-[; ;driver.c: 42: SetMotorRight(-50);
-"42
-[e ( _SetMotorRight (1 -U -> 50 `i ]
-[; ;driver.c: 43: LCDWriteString("5");
-"43
-[e ( _LCDWriteString (1 :s 5C ]
-"44
 }
-[; ;driver.c: 44: }else{
-[e $U 404  ]
-[e :U 403 ]
-{
-[; ;driver.c: 45: SetMotorLeft(50);
-"45
-[e ( _SetMotorLeft (1 -> 50 `i ]
-[; ;driver.c: 46: SetMotorRight(-50);
-"46
-[e ( _SetMotorRight (1 -U -> 50 `i ]
-[; ;driver.c: 47: LCDWriteString("6");
-"47
-[e ( _LCDWriteString (1 :s 6C ]
-"48
-}
-[e :U 404 ]
-"49
-}
-[; ;driver.c: 48: }
-[; ;driver.c: 49: }else{
-[e $U 405  ]
 [e :U 402 ]
-{
-[; ;driver.c: 50: if (ReadDistanceLeft()>30){
-"50
-[e $ ! > ( _ReadDistanceLeft ..  -> -> 30 `i `ui 406  ]
-{
-[; ;driver.c: 51: SetMotorLeft(50);
-"51
-[e ( _SetMotorLeft (1 -> 50 `i ]
-[; ;driver.c: 52: SetMotorRight(100);
-"52
-[e ( _SetMotorRight (1 -> 100 `i ]
-[; ;driver.c: 53: LCDWriteString("7");
-"53
-[e ( _LCDWriteString (1 :s 7C ]
-"54
+"43
 }
-[; ;driver.c: 54: }else{
+[; ;driver.c: 40: }
+[; ;driver.c: 43: }else if (ReadMode()==1){
+[e $U 403  ]
+[e :U 398 ]
+[e $ ! == ( _ReadMode ..  -> -> 1 `i `ui 404  ]
+{
+[; ;driver.c: 44: if (ReadDistanceCentral()<35){
+"44
+[e $ ! < ( _ReadDistanceCentral ..  -> -> 35 `i `ui 405  ]
+{
+[; ;driver.c: 45: if(ReadDistanceRight()>ReadDistanceLeft()){
+"45
+[e $ ! > ( _ReadDistanceRight ..  ( _ReadDistanceLeft ..  406  ]
+{
+[; ;driver.c: 46: TurnRight135();
+"46
+[e ( _TurnRight135 ..  ]
+"47
+}
+[; ;driver.c: 47: }else{
 [e $U 407  ]
 [e :U 406 ]
 {
-[; ;driver.c: 55: SetMotorLeft(-100);
-"55
-[e ( _SetMotorLeft (1 -U -> 100 `i ]
-[; ;driver.c: 56: SetMotorRight(-80);
-"56
-[e ( _SetMotorRight (1 -U -> 80 `i ]
-[; ;driver.c: 57: LCDWriteString("8");
-"57
-[e ( _LCDWriteString (1 :s 8C ]
-"58
+[; ;driver.c: 48: TurnLeft135();
+"48
+[e ( _TurnLeft135 ..  ]
+"49
 }
 [e :U 407 ]
-"59
+"50
 }
+[; ;driver.c: 49: }
+[; ;driver.c: 50: }else if (ReadDistanceRight()<30){
+[e $U 408  ]
 [e :U 405 ]
-"60
+[e $ ! < ( _ReadDistanceRight ..  -> -> 30 `i `ui 409  ]
+{
+[; ;driver.c: 51: TurnLeft90();
+"51
+[e ( _TurnLeft90 ..  ]
+"52
 }
-[e :U 401 ]
+[; ;driver.c: 52: }else if (ReadDistanceLeft()<30){
+[e $U 410  ]
+[e :U 409 ]
+[e $ ! < ( _ReadDistanceLeft ..  -> -> 30 `i `ui 411  ]
+{
+[; ;driver.c: 53: TurnRight90();
+"53
+[e ( _TurnRight90 ..  ]
+"54
+}
+[; ;driver.c: 54: }else{
+[e $U 412  ]
+[e :U 411 ]
+{
+[; ;driver.c: 55: SetMotorRight(40);
+"55
+[e ( _SetMotorRight (1 -> 40 `i ]
+[; ;driver.c: 56: SetMotorLeft(40);
+"56
+[e ( _SetMotorLeft (1 -> 40 `i ]
+"57
+}
+[e :U 412 ]
+[e :U 410 ]
+[e :U 408 ]
+"58
+}
+[e :U 404 ]
+"59
+[e :U 403 ]
+[; ;driver.c: 57: }
 [; ;driver.c: 58: }
 [; ;driver.c: 59: }
-[; ;driver.c: 60: }
-[; ;driver.c: 61: }
-"61
-[e :UE 393 ]
+[e :UE 397 ]
 }
-[a 8C 56 0 ]
-[a 7C 55 0 ]
-[a 6C 54 0 ]
-[a 5C 53 0 ]
-[a 4C 52 0 ]
-[a 3C 51 0 ]
-[a 2C 50 0 ]
-[a 1C 49 0 ]
+"60
+[v _TurnRight90 `(v ~T0 @X0 1 ef ]
+{
+[; ;driver.c: 60: void TurnRight90(void){
+[e :U _TurnRight90 ]
+[f ]
+[; ;driver.c: 61: SetMotorRight(-100);
+"61
+[e ( _SetMotorRight (1 -U -> 100 `i ]
+[; ;driver.c: 62: SetMotorLeft(100);
+"62
+[e ( _SetMotorLeft (1 -> 100 `i ]
+[; ;driver.c: 63: _delay((unsigned long)((100)*(1000000/4000.0)));
+"63
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 1000000 `l `d .4000.0 `ul ]
+[; ;driver.c: 64: }
+"64
+[e :UE 413 ]
+}
+"66
+[v _TurnLeft90 `(v ~T0 @X0 1 ef ]
+{
+[; ;driver.c: 66: void TurnLeft90(void){
+[e :U _TurnLeft90 ]
+[f ]
+[; ;driver.c: 67: SetMotorRight(100);
+"67
+[e ( _SetMotorRight (1 -> 100 `i ]
+[; ;driver.c: 68: SetMotorLeft(-100);
+"68
+[e ( _SetMotorLeft (1 -U -> 100 `i ]
+[; ;driver.c: 69: _delay((unsigned long)((100)*(1000000/4000.0)));
+"69
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 1000000 `l `d .4000.0 `ul ]
+[; ;driver.c: 70: }
+"70
+[e :UE 414 ]
+}
+"72
+[v _TurnRight135 `(v ~T0 @X0 1 ef ]
+{
+[; ;driver.c: 72: void TurnRight135(void){
+[e :U _TurnRight135 ]
+[f ]
+[; ;driver.c: 73: SetMotorRight(-100);
+"73
+[e ( _SetMotorRight (1 -U -> 100 `i ]
+[; ;driver.c: 74: SetMotorLeft(100);
+"74
+[e ( _SetMotorLeft (1 -> 100 `i ]
+[; ;driver.c: 75: _delay((unsigned long)((150)*(1000000/4000.0)));
+"75
+[e ( __delay (1 -> * -> -> 150 `i `d / -> -> 1000000 `l `d .4000.0 `ul ]
+[; ;driver.c: 76: }
+"76
+[e :UE 415 ]
+}
+"78
+[v _TurnLeft135 `(v ~T0 @X0 1 ef ]
+{
+[; ;driver.c: 78: void TurnLeft135(void){
+[e :U _TurnLeft135 ]
+[f ]
+[; ;driver.c: 79: SetMotorRight(100);
+"79
+[e ( _SetMotorRight (1 -> 100 `i ]
+[; ;driver.c: 80: SetMotorLeft(-100);
+"80
+[e ( _SetMotorLeft (1 -U -> 100 `i ]
+[; ;driver.c: 81: _delay((unsigned long)((150)*(1000000/4000.0)));
+"81
+[e ( __delay (1 -> * -> -> 150 `i `d / -> -> 1000000 `l `d .4000.0 `ul ]
+[; ;driver.c: 82: }
+"82
+[e :UE 416 ]
+}
+"84
+[v _Turn180 `(v ~T0 @X0 1 ef ]
+{
+[; ;driver.c: 84: void Turn180(void){
+[e :U _Turn180 ]
+[f ]
+[; ;driver.c: 85: SetMotorRight(100);
+"85
+[e ( _SetMotorRight (1 -> 100 `i ]
+[; ;driver.c: 86: SetMotorLeft(-100);
+"86
+[e ( _SetMotorLeft (1 -U -> 100 `i ]
+[; ;driver.c: 87: _delay((unsigned long)((200)*(1000000/4000.0)));
+"87
+[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 1000000 `l `d .4000.0 `ul ]
+[; ;driver.c: 89: }
+"89
+[e :UE 417 ]
+}
+"91
+[v _GoBack `(v ~T0 @X0 1 ef ]
+{
+[; ;driver.c: 91: void GoBack(){
+[e :U _GoBack ]
+[f ]
+[; ;driver.c: 92: SetMotorRight(-50);
+"92
+[e ( _SetMotorRight (1 -U -> 50 `i ]
+[; ;driver.c: 93: SetMotorLeft(-50);
+"93
+[e ( _SetMotorLeft (1 -U -> 50 `i ]
+[; ;driver.c: 94: _delay((unsigned long)((500)*(1000000/4000.0)));
+"94
+[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 1000000 `l `d .4000.0 `ul ]
+[; ;driver.c: 96: }
+"96
+[e :UE 418 ]
+}

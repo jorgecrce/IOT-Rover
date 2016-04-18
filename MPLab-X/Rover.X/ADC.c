@@ -1,7 +1,7 @@
 #include <xc.h>
-static unsigned int DistanceLeft;
-static unsigned int DistanceRight;
-static unsigned int DistanceCentral;
+static unsigned int DistanceLeft=50;
+static unsigned int DistanceRight=50;
+static unsigned int DistanceCentral=50;
 static unsigned int Battery;
 
 
@@ -50,7 +50,7 @@ unsigned char ADCGetOutputHighByte() {
 
 
 void SetDistanceLeft (unsigned int lecture){
-    DistanceLeft=5+(1023-lecture)*0.035;//Not exact, but it gives us an idea.
+    DistanceLeft=5+(1023-lecture)*0.042;//Not exact, but it gives us an idea.
 }
 
 unsigned int ReadDistanceLeft (){
@@ -58,7 +58,7 @@ unsigned int ReadDistanceLeft (){
 }
 
 void SetDistanceRight (unsigned int lecture){
-    DistanceRight=5+(1023-lecture)*0.035;//Not exact, but it gives us an idea.
+    DistanceRight=5+(1023-lecture)*0.042;//Not exact, but it gives us an idea.
 }
 
 unsigned int ReadDistanceRight (){
@@ -66,7 +66,7 @@ unsigned int ReadDistanceRight (){
 }
 
 void SetDistanceCentral (unsigned int lecture){
-    DistanceCentral=5+(1023-lecture)*0.035;//Not exact, but it gives us an idea.
+    DistanceCentral=5+(1023-lecture)*0.042;//Not exact, but it gives us an idea.
 }
 
 unsigned int ReadDistanceCentral (){
@@ -74,6 +74,8 @@ unsigned int ReadDistanceCentral (){
 }
 
 void SetBattery (unsigned int lecture){
+    //Measure bridge with 997+9800 ohm resistors
+    //v/
     Battery=lecture*3.548;//Hight accuracy.
 }
 

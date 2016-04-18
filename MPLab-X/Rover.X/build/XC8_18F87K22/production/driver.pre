@@ -5061,6 +5061,7 @@ extern __nonreentrant void _delay3(unsigned char);
 void MotorInit();
 void SetMotorLeft(signed int speed);
 void SetMotorRight(signed int speed);
+void Stop();
 
 # 13 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\stdint.h"
 typedef signed char int8_t;
@@ -5190,52 +5191,169 @@ unsigned int ReadDistanceCentral ();
 void SetBattery (unsigned int lecture);
 unsigned int ReadBattery ();
 
-# 14 "driver.c"
+# 1 "driver.h"
+void Go(void);
+void TurnRight90(void);
+void TurnLeft90(void);
+void TurnRight135(void);
+void TurnLeft135(void);
+void Turn180(void);
+void GoBack(void);
+
+# 1 "parallel.h"
+void parallelInit(void);
+void ReadParallel();
+
+
+signed int ReadParallelSpeedRight();
+signed int ReadParallelSpeedLeft();
+signed int ConvertParallelSpeed (char velocity);
+unsigned int ReadMode();
+
+# 7 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\stdlib.h"
+typedef unsigned short wchar_t;
+
+# 15
+typedef struct {
+int rem;
+int quot;
+} div_t;
+typedef struct {
+unsigned rem;
+unsigned quot;
+} udiv_t;
+typedef struct {
+long quot;
+long rem;
+} ldiv_t;
+typedef struct {
+unsigned long quot;
+unsigned long rem;
+} uldiv_t;
+
+# 53
+extern double atof(const char *);
+extern double strtod(const char *, const char **);
+extern int atoi(const char *);
+extern unsigned xtoi(const char *);
+extern long atol(const char *);
+extern long strtol(const char *, char **, int);
+
+extern int rand(void);
+extern void srand(unsigned int);
+extern void * calloc(size_t, size_t);
+extern div_t div(int numer, int denom);
+extern udiv_t udiv(unsigned numer, unsigned denom);
+extern ldiv_t ldiv(long numer, long denom);
+extern uldiv_t uldiv(unsigned long numer,unsigned long denom);
+extern unsigned long _lrotl(unsigned long value, unsigned int shift);
+extern unsigned long _lrotr(unsigned long value, unsigned int shift);
+extern unsigned int _rotl(unsigned int value, unsigned int shift);
+extern unsigned int _rotr(unsigned int value, unsigned int shift);
+
+
+
+
+extern void * malloc(size_t);
+extern void free(void *);
+extern void * realloc(void *, size_t);
+
+# 86
+extern int atexit(void (*)(void));
+extern char * getenv(const char *);
+extern char ** environ;
+extern int system(char *);
+extern void qsort(void *, size_t, size_t, int (*)(const void *, const void *));
+extern void * bsearch(const void *, void *, size_t, size_t, int(*)(const void *, const void *));
+extern int abs(int);
+extern long labs(long);
+
+extern char * itoa(char * buf, int val, int base);
+extern char * utoa(char * buf, unsigned val, int base);
+
+
+
+
+extern char * ltoa(char * buf, long val, int base);
+extern char * ultoa(char * buf, unsigned long val, int base);
+
+extern char * ftoa(float f, int * status);
+
+# 20 "driver.c"
 void Go(void) {
-(LCDByte(0b00000001,0));
-if (ReadDistanceCentral()>30){
-if (ReadDistanceRight()>30){
-if (ReadDistanceLeft()>30){
+ReadParallel();
+
+if(ReadMode()==0){
+signed int SpeedLeft, SpeedRight;
+SpeedLeft=ReadParallelSpeedLeft();
+SpeedRight=ReadParallelSpeedRight();
+
+if(SpeedRight>0 && SpeedLeft>0){
+if ((ReadDistanceCentral()<35) || (ReadDistanceRight()<30) || (ReadDistanceLeft()<30)){
+SetMotorLeft(0);
+SetMotorRight(0);
+}else{
+SetMotorLeft (SpeedLeft);
+SetMotorRight(SpeedRight);
+}
+}else{
+
+SetMotorLeft (SpeedLeft);
+SetMotorRight(SpeedRight);
+}
+
+
+}else if (ReadMode()==1){
+if (ReadDistanceCentral()<35){
+if(ReadDistanceRight()>ReadDistanceLeft()){
+TurnRight135();
+}else{
+TurnLeft135();
+}
+}else if (ReadDistanceRight()<30){
+TurnLeft90();
+}else if (ReadDistanceLeft()<30){
+TurnRight90();
+}else{
+SetMotorRight(40);
+SetMotorLeft(40);
+}
+}
+}
+void TurnRight90(void){
+SetMotorRight(-100);
 SetMotorLeft(100);
+_delay((unsigned long)((100)*(1000000/4000.0)));
+}
+
+void TurnLeft90(void){
 SetMotorRight(100);
-LCDWriteString("1");
-}else{
-SetMotorLeft(100);
-SetMotorRight(50);
-LCDWriteString("2");
-}
-}else{
-if (ReadDistanceLeft()>30){
-SetMotorLeft(50);
-SetMotorRight(100);
-LCDWriteString("3");
-}else{
-SetMotorLeft(-50);
-SetMotorRight(50);
-LCDWriteString("4");
-}
-}
-}else{
-if (ReadDistanceRight()>30){
-if (ReadDistanceLeft()>30){
-SetMotorLeft(50);
-SetMotorRight(-50);
-LCDWriteString("5");
-}else{
-SetMotorLeft(50);
-SetMotorRight(-50);
-LCDWriteString("6");
-}
-}else{
-if (ReadDistanceLeft()>30){
-SetMotorLeft(50);
-SetMotorRight(100);
-LCDWriteString("7");
-}else{
 SetMotorLeft(-100);
-SetMotorRight(-80);
-LCDWriteString("8");
+_delay((unsigned long)((100)*(1000000/4000.0)));
 }
+
+void TurnRight135(void){
+SetMotorRight(-100);
+SetMotorLeft(100);
+_delay((unsigned long)((150)*(1000000/4000.0)));
 }
+
+void TurnLeft135(void){
+SetMotorRight(100);
+SetMotorLeft(-100);
+_delay((unsigned long)((150)*(1000000/4000.0)));
 }
+
+void Turn180(void){
+SetMotorRight(100);
+SetMotorLeft(-100);
+_delay((unsigned long)((200)*(1000000/4000.0)));
+
+}
+
+void GoBack(){
+SetMotorRight(-50);
+SetMotorLeft(-50);
+_delay((unsigned long)((500)*(1000000/4000.0)));
+
 }

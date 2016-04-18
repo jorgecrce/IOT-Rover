@@ -5193,12 +5193,30 @@ void SetPWMMotorLeft (unsigned int percentage);
 unsigned int ReadPWMMotorRight ();
 unsigned int ReadPWMMotorLeft ();
 
-# 23 "motors.c"
+# 8 "motors.h"
+void MotorInit();
+void SetMotorLeft(signed int speed);
+void SetMotorRight(signed int speed);
+void Stop();
+
+# 19 "motors.c"
+static signed int MotorRightSpeed=0;
+static signed int MotorLeftSpeed=0;
+
+# 27
 void MotorInit(){
 TRISC = 0b11000000;
+RC0=1;
+RC1=0;
+RC2=1;
+RC3=0;
+SetPWMMotorLeft(0);
+SetPWMMotorRight(0);
 }
 
 void SetMotorLeft(signed int speed){
+
+MotorLeftSpeed=speed;
 
 
 if(speed>0){
@@ -5209,16 +5227,14 @@ RC1=0;
 
 RC0=0;
 RC1=1;
-}else{
-
-RC0=0;
-RC1=0;
 }
 
-
+# 62
 SetPWMMotorLeft(abs(speed));
 }
 void SetMotorRight(signed int speed){
+
+MotorRightSpeed=speed;
 
 
 if(speed>0){
@@ -5229,12 +5245,16 @@ RC3=0;
 
 RC2=0;
 RC3=1;
-}else{
-
-RC2=0;
-RC3=0;
 }
 
-
+# 89
 SetPWMMotorRight(abs(speed));
+}
+
+void Stop(){
+if((MotorLeftSpeed==0) && (MotorRightSpeed==0)){
+
+
+}
+
 }

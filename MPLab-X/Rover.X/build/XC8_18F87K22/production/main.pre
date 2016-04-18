@@ -5086,6 +5086,7 @@ unsigned int ReadBattery ();
 void MotorInit();
 void SetMotorLeft(signed int speed);
 void SetMotorRight(signed int speed);
+void Stop();
 
 # 13 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\stdint.h"
 typedef signed char int8_t;
@@ -5197,13 +5198,36 @@ void SetPWMMotorLeft (unsigned int percentage);
 unsigned int ReadPWMMotorRight ();
 unsigned int ReadPWMMotorLeft ();
 
-# 1 "serial.h"
+# 8 "serial.h"
 void SerialInit(void);
+
+void SetSpeedRight (char lecture);
+void SetSpeedLeft (char lecture);
+
+int ReadSpeedRight();
+int ReadSpeedLeft();
+int ConvertPicSpeed (char velocity);
 
 # 1 "driver.h"
 void Go(void);
+void TurnRight90(void);
+void TurnLeft90(void);
+void TurnRight135(void);
+void TurnLeft135(void);
+void Turn180(void);
+void GoBack(void);
 
-# 10 "main.c"
+# 1 "parallel.h"
+void parallelInit(void);
+void ReadParallel();
+
+
+signed int ReadParallelSpeedRight();
+signed int ReadParallelSpeedLeft();
+signed int ConvertParallelSpeed (char velocity);
+unsigned int ReadMode();
+
+# 11 "main.c"
 void main(void) {
 
 ADCInit();
@@ -5212,11 +5236,13 @@ ADCInit();
 
 
 MotorInit();
-SerialInit();
+
 TimerPWMInit();
-SetMotorLeft(40);
-SetMotorRight(-95);
+SetMotorLeft(0);
+SetMotorRight(0);
 LCDInit(0B00000000);
+parallelInit();
+
 
 
 
@@ -5224,10 +5250,7 @@ while(1) {
 ADCInitiateConversion();
 Go();
 
-(LCDByte(0b00000001,0));
-LCDWriteInt(ReadDistanceCentral(),2);
-for(int i=1;i<1000; i++){
-}
-}
-}
 
+
+}
+}

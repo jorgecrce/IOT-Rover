@@ -6,6 +6,7 @@
 #include "serial.h"
 #include <usart.h>
 #include "driver.h"
+#include "parallel.h"
 
 void main(void) {
     
@@ -15,21 +16,21 @@ void main(void) {
     //PWMSetDutyCycle(50);
     
     MotorInit();
-    SerialInit();
+    //SerialInit();
     TimerPWMInit();
-    SetMotorLeft(40);
-    SetMotorRight(-95);
+    SetMotorLeft(0);
+    SetMotorRight(0);
     LCDInit(LS_NONE); //Initialize the LCD Module
+    parallelInit();
+    
     
 
     /* Endless loop*/
     while(1) {
         ADCInitiateConversion();//One analog read.
         Go();//Take decissions to avoid obstacles. And send orders to obstacles.
+        //LCDGotoXY(0,0);
+        //LCDWriteString("Hello world");
         
-        LCDClear();
-        LCDWriteInt(ReadDistanceCentral(),2);
-        for(int i=1;i<1000; i++){  //Wait a little to avoid flickr  
-        }
     }
 }
