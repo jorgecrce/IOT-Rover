@@ -5282,10 +5282,11 @@ extern char * ultoa(char * buf, unsigned long val, int base);
 
 extern char * ftoa(float f, int * status);
 
-# 20 "driver.c"
+# 23 "driver.c"
 void Go(void) {
 ReadParallel();
 
+# 28
 if(ReadMode()==0){
 signed int SpeedLeft, SpeedRight;
 SpeedLeft=ReadParallelSpeedLeft();
@@ -5300,13 +5301,12 @@ SetMotorLeft (SpeedLeft);
 SetMotorRight(SpeedRight);
 }
 }else{
-
 SetMotorLeft (SpeedLeft);
 SetMotorRight(SpeedRight);
 }
 
-
 }else if (ReadMode()==1){
+
 if (ReadDistanceCentral()<37){
 if(ReadDistanceRight()>ReadDistanceLeft()){
 TurnRight135();
@@ -5323,6 +5323,8 @@ SetMotorLeft(40);
 }
 }
 }
+
+# 69
 void TurnRight90(void){
 SetMotorRight(-100);
 SetMotorLeft(100);
@@ -5358,5 +5360,4 @@ void GoBack(){
 SetMotorRight(-50);
 SetMotorLeft(-50);
 _delay((unsigned long)((500)*(1000000/4000.0)));
-
 }

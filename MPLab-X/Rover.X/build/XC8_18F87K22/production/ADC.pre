@@ -5187,12 +5187,11 @@ unsigned int ReadBattery ();
 
 void ShowLecturesInLCD (void);
 
-# 4 "ADC.c"
+# 5 "ADC.c"
 static unsigned int DistanceLeft=50;
 static unsigned int DistanceRight=50;
 static unsigned int DistanceCentral=50;
 static unsigned int Battery;
-
 
 void ADCInit(void) {
 
@@ -5222,25 +5221,28 @@ void ADCInitiateConversion(void) {
 GO = 1;
 }
 
+
 unsigned int ADCGetOutput(void) {
 int temp;
 temp = ADRESL;
 return temp + (ADRESH << 8);
 }
 
+
 unsigned char ADCGetOutputLowByte() {
 return ADRESL;
 }
+
 
 unsigned char ADCGetOutputHighByte() {
 return ADRESH;
 }
 
 
-
 void SetDistanceLeft (unsigned int lecture){
 DistanceLeft=5+(1023-lecture)*0.042;
 }
+
 
 unsigned int ReadDistanceLeft (){
 return DistanceLeft;
@@ -5261,22 +5263,19 @@ DistanceCentral=5+(1023-lecture)*0.042;
 
 unsigned int ReadDistanceCentral (){
 return DistanceCentral;
-
 }
 
 void SetBattery (unsigned int lecture){
 
-
 Battery=((lecture*3.548)-11)*100;
-
 }
 
 unsigned int ReadBattery (){
 return Battery;
 }
 
-void ShowLecturesInLCD (void){
 
+void ShowLecturesInLCD (void){
 
 LCDGotoXY(0,0);
 LCDWriteString("Right-Front-Left");

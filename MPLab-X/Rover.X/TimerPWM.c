@@ -7,10 +7,15 @@
 #include <xc.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+/*Variables to keep saved the PWM values
+ */
 static unsigned int PWMRight;
 static unsigned int PWMLeft;
 
-
+/*This functions starts the timer and the timer interruptions
+ * 
+ */
 void TimerPWMInit(){
     GIE=1;//Enable global interruptions
     TMR0IE=1;//Timer0 Interruption
@@ -27,18 +32,23 @@ void TimerPWMInit(){
     TMR0ON=1;//Start timer
 }
 
+/*Sets the speed of the motor.
+ * It receives a value from 0 to 100 from the motor.c module
+ * and converts it to values from 20 to 0, which are used by 
+ * the interruption
+ */
 void SetPWMMotorLeft (unsigned int percentage){
     PWMLeft=20-percentage/5;
 }
-
 void SetPWMMotorRight (unsigned int percentage){
     PWMRight=20-percentage/5;
 }
 
+/*Returns the actual value of the PWM variables
+ */
 unsigned int ReadPWMMotorRight (){
     return PWMRight;
 }
-
 unsigned int ReadPWMMotorLeft (){
     return PWMLeft;
 }

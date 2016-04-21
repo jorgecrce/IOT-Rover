@@ -3825,12 +3825,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;TimerPWM.h: 10: void SetPWMMotorLeft (unsigned int percentage);
 [; ;TimerPWM.h: 11: unsigned int ReadPWMMotorRight ();
 [; ;TimerPWM.h: 12: unsigned int ReadPWMMotorLeft ();
-[; ;serial.h: 8: void SerialInit(void);
-[; ;serial.h: 10: void SetSpeedRight (char lecture);
-[; ;serial.h: 11: void SetSpeedLeft (char lecture);
-[; ;serial.h: 13: int ReadSpeedRight();
-[; ;serial.h: 14: int ReadSpeedLeft();
-[; ;serial.h: 15: int ConvertPicSpeed (char velocity);
 [; ;driver.h: 1: void Go(void);
 [; ;driver.h: 2: void TurnRight90(void);
 [; ;driver.h: 3: void TurnLeft90(void);
@@ -3844,51 +3838,51 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;parallel.h: 6: signed int ReadParallelSpeedLeft();
 [; ;parallel.h: 7: signed int ConvertParallelSpeed (char velocity);
 [; ;parallel.h: 8: unsigned int ReadMode();
-"11 main.c
+"9 main.c
 [v _main `(v ~T0 @X0 1 ef ]
 {
-[; ;main.c: 11: void main(void) {
+[; ;main.c: 9: void main(void) {
 [e :U _main ]
 [f ]
-[; ;main.c: 13: ADCInit();
-"13
+[; ;main.c: 11: ADCInit();
+"11
 [e ( _ADCInit ..  ]
-[; ;main.c: 18: MotorInit();
-"18
+[; ;main.c: 12: MotorInit();
+"12
 [e ( _MotorInit ..  ]
-[; ;main.c: 20: TimerPWMInit();
-"20
+[; ;main.c: 13: TimerPWMInit();
+"13
 [e ( _TimerPWMInit ..  ]
-[; ;main.c: 21: LCDInit(0B00000000);
-"21
+[; ;main.c: 14: LCDInit(0B00000000);
+"14
 [e ( _LCDInit (1 -> -> 0 `i `uc ]
-[; ;main.c: 22: parallelInit();
-"22
+[; ;main.c: 15: parallelInit();
+"15
 [e ( _parallelInit ..  ]
-[; ;main.c: 23: SetMotorLeft(0);
-"23
+[; ;main.c: 16: SetMotorLeft(0);
+"16
 [e ( _SetMotorLeft (1 -> 0 `i ]
-[; ;main.c: 24: SetMotorRight(0);
-"24
+[; ;main.c: 17: SetMotorRight(0);
+"17
 [e ( _SetMotorRight (1 -> 0 `i ]
-[; ;main.c: 29: while(1) {
-"29
+[; ;main.c: 20: while(1) {
+"20
 [e :U 395 ]
 {
-[; ;main.c: 30: ADCInitiateConversion();
-"30
+[; ;main.c: 21: ADCInitiateConversion();
+"21
 [e ( _ADCInitiateConversion ..  ]
-[; ;main.c: 31: Go();
-"31
+[; ;main.c: 22: Go();
+"22
 [e ( _Go ..  ]
-"35
+"23
 }
 [e :U 394 ]
-"29
+"20
 [e $U 395  ]
 [e :U 396 ]
-[; ;main.c: 35: }
-[; ;main.c: 36: }
-"36
+[; ;main.c: 23: }
+[; ;main.c: 24: }
+"24
 [e :UE 393 ]
 }

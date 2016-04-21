@@ -7,23 +7,23 @@
 [v _ADCInit ADCInit `(v  1 e 1 0 ]
 "34
 [v _ADCInitiateConversion ADCInitiateConversion `(v  1 e 1 0 ]
-"38
+"39
 [v _ADCGetOutput ADCGetOutput `(ui  1 e 2 0 ]
-"54
+"56
 [v _SetDistanceLeft SetDistanceLeft `(v  1 e 1 0 ]
-"58
+"61
 [v _ReadDistanceLeft ReadDistanceLeft `(ui  1 e 2 0 ]
-"62
+"65
 [v _SetDistanceRight SetDistanceRight `(v  1 e 1 0 ]
-"67
+"70
 [v _ReadDistanceRight ReadDistanceRight `(ui  1 e 2 0 ]
-"71
+"74
 [v _SetDistanceCentral SetDistanceCentral `(v  1 e 1 0 ]
-"75
+"78
 [v _ReadDistanceCentral ReadDistanceCentral `(ui  1 e 2 0 ]
-"80
+"82
 [v _SetBattery SetBattery `(v  1 e 1 0 ]
-"91
+"92
 [v _ShowLecturesInLCD ShowLecturesInLCD `(v  1 e 1 0 ]
 "4 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\abs.c
 [v _abs abs `(i  1 e 2 0 ]
@@ -59,23 +59,17 @@
 [v ___lmul __lmul `(ul  1 e 4 0 ]
 "73 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\pic18\plib\USART\uopen.c
 [v _OpenUSART OpenUSART `(v  1 e 1 0 ]
-"14 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\pic18\plib\USART\uputs.c
-[v _putsUSART putsUSART `(v  1 e 1 0 ]
-"15 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\pic18\plib\USART\uread.c
-[v _ReadUSART ReadUSART `(uc  1 e 1 0 ]
-"13 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\pic18\plib\USART\uwrite.c
-[v _WriteUSART WriteUSART `(v  1 e 1 0 ]
-"20 D:\HRPD\MPLab-X\Rover.X\driver.c
+"23 D:\HRPD\MPLab-X\Rover.X\driver.c
 [v _Go Go `(v  1 e 1 0 ]
-"60
+"69
 [v _TurnRight90 TurnRight90 `(v  1 e 1 0 ]
-"66
+"75
 [v _TurnLeft90 TurnLeft90 `(v  1 e 1 0 ]
-"72
+"81
 [v _TurnRight135 TurnRight135 `(v  1 e 1 0 ]
-"78
+"87
 [v _TurnLeft135 TurnLeft135 `(v  1 e 1 0 ]
-"10 D:\HRPD\MPLab-X\Rover.X\interrupts.c
+"9 D:\HRPD\MPLab-X\Rover.X\interrupts.c
 [v _isr isr `II(v  1 e 1 0 ]
 "83 D:\HRPD\MPLab-X\Rover.X\lcd_hd44780_pic16.c
 [v _LCDByte LCDByte `(v  1 e 1 0 ]
@@ -91,49 +85,45 @@
 [v _LCDWriteInt LCDWriteInt `(v  1 e 1 0 ]
 "355
 [v _LCDGotoXY LCDGotoXY `(v  1 e 1 0 ]
-"11 D:\HRPD\MPLab-X\Rover.X\main.c
+"9 D:\HRPD\MPLab-X\Rover.X\main.c
 [v _main main `(v  1 e 1 0 ]
-"28 D:\HRPD\MPLab-X\Rover.X\motors.c
+"27 D:\HRPD\MPLab-X\Rover.X\motors.c
 [v _MotorInit MotorInit `(v  1 e 1 0 ]
-"38
-[v _SetMotorLeft SetMotorLeft `(v  1 e 1 0 ]
-"57
-[v _SetMotorRight SetMotorRight `(v  1 e 1 0 ]
-"21 D:\HRPD\MPLab-X\Rover.X\parallel.c
-[v _parallelInit parallelInit `(v  1 e 1 0 ]
-"29
-[v _ReadParallel ReadParallel `(v  1 e 1 0 ]
-"44
-[v _ReadParallelSpeedRight ReadParallelSpeedRight `(i  1 e 2 0 ]
-"47
-[v _ReadParallelSpeedLeft ReadParallelSpeedLeft `(i  1 e 2 0 ]
-"51
-[v _ReadMode ReadMode `(ui  1 e 2 0 ]
-"54
-[v _ConvertParallelSpeed ConvertParallelSpeed `(i  1 e 2 0 ]
-"27 D:\HRPD\MPLab-X\Rover.X\serial.c
-[v _SetSpeedRight SetSpeedRight `(v  1 e 1 0 ]
-"30
-[v _SetSpeedLeft SetSpeedLeft `(v  1 e 1 0 ]
 "41
+[v _SetMotorLeft SetMotorLeft `(v  1 e 1 0 ]
+"61
+[v _SetMotorRight SetMotorRight `(v  1 e 1 0 ]
+"24 D:\HRPD\MPLab-X\Rover.X\parallel.c
+[v _parallelInit parallelInit `(v  1 e 1 0 ]
+"39
+[v _ReadParallel ReadParallel `(v  1 e 1 0 ]
+"56
+[v _ReadParallelSpeedRight ReadParallelSpeedRight `(i  1 e 2 0 ]
+"59
+[v _ReadParallelSpeedLeft ReadParallelSpeedLeft `(i  1 e 2 0 ]
+"62
+[v _ReadMode ReadMode `(ui  1 e 2 0 ]
+"70
+[v _ConvertParallelSpeed ConvertParallelSpeed `(i  1 e 2 0 ]
+"41 D:\HRPD\MPLab-X\Rover.X\serial.c
 [v _ConvertPicSpeed ConvertPicSpeed `(i  1 e 2 0 ]
-"14 D:\HRPD\MPLab-X\Rover.X\TimerPWM.c
+"19 D:\HRPD\MPLab-X\Rover.X\TimerPWM.c
 [v _TimerPWMInit TimerPWMInit `(v  1 e 1 0 ]
-"30
+"40
 [v _SetPWMMotorLeft SetPWMMotorLeft `(v  1 e 1 0 ]
-"34
+"43
 [v _SetPWMMotorRight SetPWMMotorRight `(v  1 e 1 0 ]
-"38
+"49
 [v _ReadPWMMotorRight ReadPWMMotorRight `(ui  1 e 2 0 ]
-"42
+"52
 [v _ReadPWMMotorLeft ReadPWMMotorLeft `(ui  1 e 2 0 ]
-"4 D:\HRPD\MPLab-X\Rover.X\ADC.c
+"5 D:\HRPD\MPLab-X\Rover.X\ADC.c
 [v _DistanceLeft DistanceLeft `ui  1 s 2 DistanceLeft ]
-"5
-[v _DistanceRight DistanceRight `ui  1 s 2 DistanceRight ]
 "6
-[v _DistanceCentral DistanceCentral `ui  1 s 2 DistanceCentral ]
+[v _DistanceRight DistanceRight `ui  1 s 2 DistanceRight ]
 "7
+[v _DistanceCentral DistanceCentral `ui  1 s 2 DistanceCentral ]
+"8
 [v _Battery Battery `ui  1 s 2 Battery ]
 "489 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f45k20.h
 [v _ANSELH ANSELH `VEuc  1 e 1 @3967 ]
@@ -147,7 +137,7 @@
 [v _TRISC TRISC `VEuc  1 e 1 @3988 ]
 "2778
 [v _TRISD TRISD `VEuc  1 e 1 @3989 ]
-[s S349 . 1 `uc 1 TRISD0 1 0 :1:0 
+[s S215 . 1 `uc 1 TRISD0 1 0 :1:0 
 `uc 1 TRISD1 1 0 :1:1 
 `uc 1 TRISD2 1 0 :1:2 
 `uc 1 TRISD3 1 0 :1:3 
@@ -157,7 +147,7 @@
 `uc 1 TRISD7 1 0 :1:7 
 ]
 "2810
-[s S358 . 1 `uc 1 RD0 1 0 :1:0 
+[s S224 . 1 `uc 1 RD0 1 0 :1:0 
 `uc 1 RD1 1 0 :1:1 
 `uc 1 RD2 1 0 :1:2 
 `uc 1 RD3 1 0 :1:3 
@@ -166,78 +156,8 @@
 `uc 1 RD6 1 0 :1:6 
 `uc 1 RD7 1 0 :1:7 
 ]
-[u S367 . 1 `S349 1 . 1 0 `S358 1 . 1 0 ]
-[v _TRISDbits TRISDbits `VES367  1 e 1 @3989 ]
-[s S592 . 1 `uc 1 RX9D 1 0 :1:0 
-`uc 1 OERR 1 0 :1:1 
-`uc 1 FERR 1 0 :1:2 
-`uc 1 ADDEN 1 0 :1:3 
-`uc 1 CREN 1 0 :1:4 
-`uc 1 SREN 1 0 :1:5 
-`uc 1 RX9 1 0 :1:6 
-`uc 1 SPEN 1 0 :1:7 
-]
-"4025
-[s S601 . 1 `uc 1 . 1 0 :3:0 
-`uc 1 ADEN 1 0 :1:3 
-]
-[s S604 . 1 `uc 1 . 1 0 :5:0 
-`uc 1 SRENA 1 0 :1:5 
-]
-[s S607 . 1 `uc 1 . 1 0 :6:0 
-`uc 1 RC8_9 1 0 :1:6 
-]
-[s S610 . 1 `uc 1 . 1 0 :6:0 
-`uc 1 RC9 1 0 :1:6 
-]
-[s S613 . 1 `uc 1 RCD8 1 0 :1:0 
-]
-[u S615 . 1 `S592 1 . 1 0 `S601 1 . 1 0 `S604 1 . 1 0 `S607 1 . 1 0 `S610 1 . 1 0 `S613 1 . 1 0 ]
-[v _RCSTAbits RCSTAbits `VES615  1 e 1 @4011 ]
-[s S78 . 1 `uc 1 TX9D 1 0 :1:0 
-`uc 1 TRMT 1 0 :1:1 
-`uc 1 BRGH 1 0 :1:2 
-`uc 1 SENDB 1 0 :1:3 
-`uc 1 SYNC 1 0 :1:4 
-`uc 1 TXEN 1 0 :1:5 
-`uc 1 TX9 1 0 :1:6 
-`uc 1 CSRC 1 0 :1:7 
-]
-"4100
-[s S87 . 1 `uc 1 . 1 0 :2:0 
-`uc 1 BRGH1 1 0 :1:2 
-]
-[s S90 . 1 `uc 1 . 1 0 :7:0 
-`uc 1 CSRC1 1 0 :1:7 
-]
-[s S93 . 1 `uc 1 . 1 0 :3:0 
-`uc 1 SENDB1 1 0 :1:3 
-]
-[s S96 . 1 `uc 1 . 1 0 :4:0 
-`uc 1 SYNC1 1 0 :1:4 
-]
-[s S99 . 1 `uc 1 . 1 0 :1:0 
-`uc 1 TRMT1 1 0 :1:1 
-]
-[s S102 . 1 `uc 1 . 1 0 :6:0 
-`uc 1 TX91 1 0 :1:6 
-]
-[s S105 . 1 `uc 1 TX9D1 1 0 :1:0 
-]
-[s S107 . 1 `uc 1 . 1 0 :5:0 
-`uc 1 TXEN1 1 0 :1:5 
-]
-[s S110 . 1 `uc 1 . 1 0 :6:0 
-`uc 1 TX8_9 1 0 :1:6 
-]
-[s S113 . 1 `uc 1 TXD8 1 0 :1:0 
-]
-[u S115 . 1 `S78 1 . 1 0 `S87 1 . 1 0 `S90 1 . 1 0 `S93 1 . 1 0 `S96 1 . 1 0 `S99 1 . 1 0 `S102 1 . 1 0 `S105 1 . 1 0 `S107 1 . 1 0 `S110 1 . 1 0 `S113 1 . 1 0 ]
-[v _TXSTAbits TXSTAbits `VES115  1 e 1 @4012 ]
-"4490
-[v _TXREG TXREG `VEuc  1 e 1 @4013 ]
-"4501
-[v _RCREG RCREG `VEuc  1 e 1 @4014 ]
+[u S233 . 1 `S215 1 . 1 0 `S224 1 . 1 0 ]
+[v _TRISDbits TRISDbits `VES233  1 e 1 @3989 ]
 "5149
 [v _ADCON2 ADCON2 `VEuc  1 e 1 @4032 ]
 "5219
@@ -292,8 +212,6 @@
 [v _RC4 RC4 `VEb  1 e 0 @31764 ]
 "8221
 [v _RC5 RC5 `VEb  1 e 0 @31765 ]
-"8239
-[v _RCIF RCIF `VEb  1 e 0 @31989 ]
 "8255
 [v _RD4 RD4 `VEb  1 e 0 @31772 ]
 "8257
@@ -324,15 +242,6 @@
 [v _TRISA2 TRISA2 `VEb  1 e 0 @31890 ]
 "8509
 [v _TRISA3 TRISA3 `VEb  1 e 0 @31891 ]
-[s S848 . 1 `uc 1 RX_NINE 1 0 :1:0 
-`uc 1 TX_NINE 1 0 :1:1 
-`uc 1 FRAME_ERROR 1 0 :1:2 
-`uc 1 OVERRUN_ERROR 1 0 :1:3 
-`uc 1 fill 1 0 :4:4 
-]
-"5 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\pic18\plib\USART\udefs.c
-[u S854 USART 1 `uc 1 val 1 0 `S848 1 . 1 0 ]
-[v _USART_Status USART_Status `S854  1 e 1 0 ]
 "15 D:\HRPD\MPLab-X\Rover.X\custom_char.h
 [v ___cgram __cgram `[64]uc  1 e 64 0 ]
 "20 D:\HRPD\MPLab-X\Rover.X\motors.c
@@ -343,35 +252,35 @@
 [v parallel@SpeedLeft SpeedLeft `i  1 s 2 SpeedLeft ]
 "14
 [v parallel@SpeedRight SpeedRight `i  1 s 2 SpeedRight ]
-"19
+"20
 [v _Mode Mode `ui  1 s 2 Mode ]
 "13 D:\HRPD\MPLab-X\Rover.X\serial.c
 [v _SpeedLeft SpeedLeft `i  1 s 2 SpeedLeft ]
 "14
 [v _SpeedRight SpeedRight `i  1 s 2 SpeedRight ]
-"10 D:\HRPD\MPLab-X\Rover.X\TimerPWM.c
+"13 D:\HRPD\MPLab-X\Rover.X\TimerPWM.c
 [v _PWMRight PWMRight `ui  1 s 2 PWMRight ]
-"11
+"14
 [v _PWMLeft PWMLeft `ui  1 s 2 PWMLeft ]
-"11 D:\HRPD\MPLab-X\Rover.X\main.c
+"9 D:\HRPD\MPLab-X\Rover.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"36
+"24
 } 0
-"21 D:\HRPD\MPLab-X\Rover.X\parallel.c
+"24 D:\HRPD\MPLab-X\Rover.X\parallel.c
 [v _parallelInit parallelInit `(v  1 e 1 0 ]
 {
-"27
+"29
 } 0
-"14 D:\HRPD\MPLab-X\Rover.X\TimerPWM.c
+"19 D:\HRPD\MPLab-X\Rover.X\TimerPWM.c
 [v _TimerPWMInit TimerPWMInit `(v  1 e 1 0 ]
 {
-"28
+"33
 } 0
-"28 D:\HRPD\MPLab-X\Rover.X\motors.c
+"27 D:\HRPD\MPLab-X\Rover.X\motors.c
 [v _MotorInit MotorInit `(v  1 e 1 0 ]
 {
-"36
+"35
 } 0
 "196 D:\HRPD\MPLab-X\Rover.X\lcd_hd44780_pic16.c
 [v _LCDInit LCDInit `(v  1 e 1 0 ]
@@ -410,51 +319,51 @@
 [v LCDBusyLoop@busy busy `uc  1 a 1 0 ]
 "194
 } 0
-"20 D:\HRPD\MPLab-X\Rover.X\driver.c
+"23 D:\HRPD\MPLab-X\Rover.X\driver.c
 [v _Go Go `(v  1 e 1 0 ]
 {
-"24
+"29
 [v Go@SpeedRight SpeedRight `i  1 a 2 16 ]
 [v Go@SpeedLeft SpeedLeft `i  1 a 2 14 ]
-"59
+"63
 } 0
-"60
+"69
 [v _TurnRight90 TurnRight90 `(v  1 e 1 0 ]
 {
-"64
+"73
 } 0
-"72
+"81
 [v _TurnRight135 TurnRight135 `(v  1 e 1 0 ]
 {
-"76
+"85
 } 0
-"66
+"75
 [v _TurnLeft90 TurnLeft90 `(v  1 e 1 0 ]
 {
-"70
+"79
 } 0
-"78
+"87
 [v _TurnLeft135 TurnLeft135 `(v  1 e 1 0 ]
 {
-"82
+"91
 } 0
-"57 D:\HRPD\MPLab-X\Rover.X\motors.c
+"61 D:\HRPD\MPLab-X\Rover.X\motors.c
 [v _SetMotorRight SetMotorRight `(v  1 e 1 0 ]
 {
 [v SetMotorRight@speed speed `i  1 p 2 9 ]
-"75
+"77
 } 0
-"34 D:\HRPD\MPLab-X\Rover.X\TimerPWM.c
+"43 D:\HRPD\MPLab-X\Rover.X\TimerPWM.c
 [v _SetPWMMotorRight SetPWMMotorRight `(v  1 e 1 0 ]
 {
 [v SetPWMMotorRight@percentage percentage `ui  1 p 2 7 ]
-"36
+"45
 } 0
-"38 D:\HRPD\MPLab-X\Rover.X\motors.c
+"41 D:\HRPD\MPLab-X\Rover.X\motors.c
 [v _SetMotorLeft SetMotorLeft `(v  1 e 1 0 ]
 {
 [v SetMotorLeft@speed speed `i  1 p 2 9 ]
-"56
+"57
 } 0
 "4 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\abs.c
 [v _abs abs `(i  1 e 2 0 ]
@@ -462,11 +371,11 @@
 [v abs@a a `i  1 p 2 0 ]
 "9
 } 0
-"30 D:\HRPD\MPLab-X\Rover.X\TimerPWM.c
+"40 D:\HRPD\MPLab-X\Rover.X\TimerPWM.c
 [v _SetPWMMotorLeft SetPWMMotorLeft `(v  1 e 1 0 ]
 {
 [v SetPWMMotorLeft@percentage percentage `ui  1 p 2 7 ]
-"32
+"42
 } 0
 "8 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\lwdiv.c
 [v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
@@ -480,54 +389,54 @@
 [v ___lwdiv@divisor divisor `ui  1 p 2 2 ]
 "31
 } 0
-"44 D:\HRPD\MPLab-X\Rover.X\parallel.c
+"56 D:\HRPD\MPLab-X\Rover.X\parallel.c
 [v _ReadParallelSpeedRight ReadParallelSpeedRight `(i  1 e 2 0 ]
 {
-"46
+"58
 } 0
-"47
+"59
 [v _ReadParallelSpeedLeft ReadParallelSpeedLeft `(i  1 e 2 0 ]
 {
-"49
+"61
 } 0
-"29
+"39
 [v _ReadParallel ReadParallel `(v  1 e 1 0 ]
 {
-"31
+"41
 [v ReadParallel@left left `uc  1 a 1 5 ]
-"30
-[v ReadParallel@lecture lecture `uc  1 a 1 4 ]
-"32
-[v ReadParallel@right right `uc  1 a 1 3 ]
 "40
+[v ReadParallel@lecture lecture `uc  1 a 1 4 ]
+"42
+[v ReadParallel@right right `uc  1 a 1 3 ]
+"51
 } 0
-"54
+"70
 [v _ConvertParallelSpeed ConvertParallelSpeed `(i  1 e 2 0 ]
 {
 [v ConvertParallelSpeed@velocity velocity `uc  1 a 1 wreg ]
 [v ConvertParallelSpeed@velocity velocity `uc  1 a 1 wreg ]
 [v ConvertParallelSpeed@velocity velocity `uc  1 a 1 2 ]
-"93
+"109
 } 0
-"51
+"62
 [v _ReadMode ReadMode `(ui  1 e 2 0 ]
 {
-"53
+"64
 } 0
-"67 D:\HRPD\MPLab-X\Rover.X\ADC.c
+"70 D:\HRPD\MPLab-X\Rover.X\ADC.c
 [v _ReadDistanceRight ReadDistanceRight `(ui  1 e 2 0 ]
 {
-"69
+"72
 } 0
-"58
+"61
 [v _ReadDistanceLeft ReadDistanceLeft `(ui  1 e 2 0 ]
 {
-"60
+"63
 } 0
-"75
+"78
 [v _ReadDistanceCentral ReadDistanceCentral `(ui  1 e 2 0 ]
 {
-"78
+"80
 } 0
 "34
 [v _ADCInitiateConversion ADCInitiateConversion `(v  1 e 1 0 ]
@@ -539,71 +448,28 @@
 {
 "32
 } 0
-"10 D:\HRPD\MPLab-X\Rover.X\interrupts.c
+"9 D:\HRPD\MPLab-X\Rover.X\interrupts.c
 [v _isr isr `II(v  1 e 1 0 ]
 {
-"98
-[v isr@CharRx CharRx `uc  1 a 1 76 ]
-"17
+"18
 [v isr@read read `ui  1 a 2 74 ]
-"16
+"17
 [v isr@Readport Readport `ui  1 s 2 Readport ]
-"68
+"74
 [v isr@PWMLeft PWMLeft `ui  1 s 2 PWMLeft ]
-"69
+"75
 [v isr@PWMRight PWMRight `ui  1 s 2 PWMRight ]
-"70
+"76
 [v isr@iteration iteration `ui  1 s 2 iteration ]
-"96
-[v isr@counter counter `i  1 s 2 counter ]
-"126
+"137
 } 0
-"14 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\pic18\plib\USART\uputs.c
-[v _putsUSART putsUSART `(v  1 e 1 0 ]
-{
-[v putsUSART@data data `*.25uc  1 p 2 1 ]
-"21
-} 0
-"13 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\pic18\plib\USART\uwrite.c
-[v _WriteUSART WriteUSART `(v  1 e 1 0 ]
-{
-[v WriteUSART@data data `uc  1 a 1 wreg ]
-[v WriteUSART@data data `uc  1 a 1 wreg ]
-"15
-[v WriteUSART@data data `uc  1 a 1 0 ]
-"23
-} 0
-"27 D:\HRPD\MPLab-X\Rover.X\serial.c
-[v _SetSpeedRight SetSpeedRight `(v  1 e 1 0 ]
-{
-[v SetSpeedRight@lecture lecture `uc  1 a 1 wreg ]
-[v SetSpeedRight@lecture lecture `uc  1 a 1 wreg ]
-[v SetSpeedRight@lecture lecture `uc  1 a 1 3 ]
-"29
-} 0
-"30
-[v _SetSpeedLeft SetSpeedLeft `(v  1 e 1 0 ]
-{
-[v SetSpeedLeft@lecture lecture `uc  1 a 1 wreg ]
-[v SetSpeedLeft@lecture lecture `uc  1 a 1 wreg ]
-[v SetSpeedLeft@lecture lecture `uc  1 a 1 3 ]
-"32
-} 0
-"41
-[v _ConvertPicSpeed ConvertPicSpeed `(i  1 e 2 0 ]
-{
-[v ConvertPicSpeed@velocity velocity `uc  1 a 1 wreg ]
-[v ConvertPicSpeed@velocity velocity `uc  1 a 1 wreg ]
-[v ConvertPicSpeed@velocity velocity `uc  1 a 1 2 ]
-"80
-} 0
-"62 D:\HRPD\MPLab-X\Rover.X\ADC.c
+"65 D:\HRPD\MPLab-X\Rover.X\ADC.c
 [v _SetDistanceRight SetDistanceRight `(v  1 e 1 0 ]
 {
 [v SetDistanceRight@lecture lecture `ui  1 p 2 53 ]
-"65
+"68
 } 0
-"91
+"92
 [v _ShowLecturesInLCD ShowLecturesInLCD `(v  1 e 1 0 ]
 {
 "105
@@ -687,19 +553,19 @@
 [v i2LCDBusyLoop@busy LCDBusyLoop `uc  1 a 1 0 ]
 "194
 } 0
-"54 D:\HRPD\MPLab-X\Rover.X\ADC.c
+"56 D:\HRPD\MPLab-X\Rover.X\ADC.c
 [v _SetDistanceLeft SetDistanceLeft `(v  1 e 1 0 ]
 {
 [v SetDistanceLeft@lecture lecture `ui  1 p 2 53 ]
-"56
+"58
 } 0
-"71
+"74
 [v _SetDistanceCentral SetDistanceCentral `(v  1 e 1 0 ]
 {
 [v SetDistanceCentral@lecture lecture `ui  1 p 2 53 ]
-"73
+"76
 } 0
-"80
+"82
 [v _SetBattery SetBattery `(v  1 e 1 0 ]
 {
 [v SetBattery@lecture lecture `ui  1 p 2 53 ]
@@ -757,27 +623,20 @@
 [v ___ftpack@sign sign `uc  1 p 1 4 ]
 "86
 } 0
-"15 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\pic18\plib\USART\uread.c
-[v _ReadUSART ReadUSART `(uc  1 e 1 0 ]
-{
-"17
-[v ReadUSART@data data `uc  1 a 1 0 ]
-"37
-} 0
-"38 D:\HRPD\MPLab-X\Rover.X\TimerPWM.c
+"49 D:\HRPD\MPLab-X\Rover.X\TimerPWM.c
 [v _ReadPWMMotorRight ReadPWMMotorRight `(ui  1 e 2 0 ]
 {
-"40
+"51
 } 0
-"42
+"52
 [v _ReadPWMMotorLeft ReadPWMMotorLeft `(ui  1 e 2 0 ]
 {
-"44
+"54
 } 0
-"38 D:\HRPD\MPLab-X\Rover.X\ADC.c
+"39 D:\HRPD\MPLab-X\Rover.X\ADC.c
 [v _ADCGetOutput ADCGetOutput `(ui  1 e 2 0 ]
 {
-"39
+"40
 [v ADCGetOutput@temp temp `i  1 a 2 4 ]
-"42
+"43
 } 0

@@ -5201,16 +5201,6 @@ void SetPWMMotorLeft (unsigned int percentage);
 unsigned int ReadPWMMotorRight ();
 unsigned int ReadPWMMotorLeft ();
 
-# 8 "serial.h"
-void SerialInit(void);
-
-void SetSpeedRight (char lecture);
-void SetSpeedLeft (char lecture);
-
-int ReadSpeedRight();
-int ReadSpeedLeft();
-int ConvertPicSpeed (char velocity);
-
 # 1 "driver.h"
 void Go(void);
 void TurnRight90(void);
@@ -5230,16 +5220,11 @@ signed int ReadParallelSpeedLeft();
 signed int ConvertParallelSpeed (char velocity);
 unsigned int ReadMode();
 
-# 11 "main.c"
+# 9 "main.c"
 void main(void) {
 
 ADCInit();
-
-
-
-
 MotorInit();
-
 TimerPWMInit();
 LCDInit(0B00000000);
 parallelInit();
@@ -5247,13 +5232,8 @@ SetMotorLeft(0);
 SetMotorRight(0);
 
 
-
-
 while(1) {
 ADCInitiateConversion();
 Go();
-
-
-
 }
 }

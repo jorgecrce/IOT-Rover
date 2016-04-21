@@ -4,10 +4,6 @@
  *
  * Created on 16 de febrero de 3016, 16:46
  */
-
-//Min speed=30
-
-
 #include <xc.h>
 #include "motors.h"
 #include "lcd_hd44780_pic16.h"
@@ -17,10 +13,19 @@
 #include <stdlib.h>
 #define _XTAL_FREQ 1000000
 
+/*This is our basic function to move the ROVER.
+ * It is call one time per program cycle
+ * has two modes, one for manual control
+ * and another is the automatic mode.
+ * The mode is selected from the webpage
+ * and received from the Arduino
+ * */
 void Go(void) {
-    ReadParallel();
+    ReadParallel();/*One lecture of the parallel port. 
+                    * This sets the mode and speed of both motors*/
+    
   
-    if(ReadMode()==0){
+    if(ReadMode()==0){//Manual mode
         signed int SpeedLeft, SpeedRight;
         SpeedLeft=ReadParallelSpeedLeft();
         SpeedRight=ReadParallelSpeedRight();
@@ -33,30 +38,34 @@ void Go(void) {
                 SetMotorLeft (SpeedLeft);
                 SetMotorRight(SpeedRight);        
             }
-        }else{
-            
+        }else{//If we are not going straight, ignore sensors
             SetMotorLeft (SpeedLeft);
             SetMotorRight(SpeedRight);             
         }
-            
+                    
+    }else if (ReadMode()==1){//Automatic mode
         
-    }else if (ReadMode()==1){
-        if (ReadDistanceCentral()<37){
+        if (ReadDistanceCentral()<37){//Obstacles in the front
             if(ReadDistanceRight()>ReadDistanceLeft()){
                 TurnRight135();
             }else{
                 TurnLeft135();
             }
-        }else if (ReadDistanceRight()<30){
+        }else if (ReadDistanceRight()<30){//Obstacles in the right
             TurnLeft90();
-        }else if (ReadDistanceLeft()<30){
+        }else if (ReadDistanceLeft()<30){//Obstacles in the left
             TurnRight90();
-        }else{
+        }else{//No obstacles!!
             SetMotorRight(40);
             SetMotorLeft(40);        
         }
     }
 }
+
+/*The next functions make some basic funcions in the robot
+ *turn a different number of degrees to the right or the left
+ * and go a little bit back
+ */
 void TurnRight90(void){
     SetMotorRight(-100);
     SetMotorLeft(100);
@@ -91,6 +100,5 @@ void Turn180(void){
 void GoBack(){
     SetMotorRight(-50);
     SetMotorLeft(-50);
-    __delay_ms(500);
-    
+    __delay_ms(500);   
 }

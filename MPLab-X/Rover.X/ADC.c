@@ -1,11 +1,11 @@
 #include <xc.h>
 #include "lcd_hd44780_pic16.h"
 #include "ADC.h"
+/*Constants for keep in memory the last measures from the ADC*/
 static unsigned int DistanceLeft=50;
 static unsigned int DistanceRight=50;
 static unsigned int DistanceCentral=50;
 static unsigned int Battery;
-
 
 void ADCInit(void) {
 
@@ -32,36 +32,39 @@ void ADCInit(void) {
 }
 
 void ADCInitiateConversion(void) {
-    GO = 1;
+    GO = 1;//Initiate one read from the ADC
 }
 
+//Returns the 10 bits read from the ADC
 unsigned int ADCGetOutput(void) {
     int temp;
     temp = ADRESL;
     return temp + (ADRESH << 8);
 }
 
+//Returns the 8 low bits read from the ADC
 unsigned char ADCGetOutputLowByte() {
     return ADRESL;
 }
 
+//Returns the 2 hight bits read from the ADC
 unsigned char ADCGetOutputHighByte() {
     return ADRESH;
 }
 
-
-
+//Updates the variable. Will be call from the ADC interrupt.
 void SetDistanceLeft (unsigned int lecture){
     DistanceLeft=5+(1023-lecture)*0.042;//Not exact, but it gives us an idea.
 }
 
+//Returns the constant. Will be called when calculating route to avoid collisions
 unsigned int ReadDistanceLeft (){
     return DistanceLeft;
 }
 
 void SetDistanceRight (unsigned int lecture){
     ShowLecturesInLCD ();
-    DistanceRight=5+(1023-lecture)*0.042;//Not exact, but it gives us an idea.
+    DistanceRight=5+(1023-lecture)*0.042;
 }
 
 unsigned int ReadDistanceRight (){
@@ -69,28 +72,25 @@ unsigned int ReadDistanceRight (){
 }
 
 void SetDistanceCentral (unsigned int lecture){
-    DistanceCentral=5+(1023-lecture)*0.042;//Not exact, but it gives us an idea.
+    DistanceCentral=5+(1023-lecture)*0.042;
 }
 
 unsigned int ReadDistanceCentral (){
     return DistanceCentral;
-
 }
 
 void SetBattery (unsigned int lecture){
     //Measure bridge with 997+9800 ohm resistors
-    //v/
-    Battery=((lecture*3.548)-11)*100;//Hight accuracy.
-    
+    Battery=((lecture*3.548)-11)*100;//Hight accuracy!.
 }
 
 unsigned int ReadBattery (){
     return Battery;
 }
 
+//Function to write the distances in the LCD. Called one time per cicle of lectures
 void ShowLecturesInLCD (void){
 //Show values in LCD
-    //LCDClear();
     LCDGotoXY(0,0);
     LCDWriteString("Right-Front-Left");
     

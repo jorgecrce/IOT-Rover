@@ -3851,111 +3851,111 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdlib.h: 101: extern char * ltoa(char * buf, long val, int base);
 [; ;stdlib.h: 102: extern char * ultoa(char * buf, unsigned long val, int base);
 [; ;stdlib.h: 104: extern char * ftoa(float f, int * status);
-"10 TimerPWM.c
+"13 TimerPWM.c
 [v _PWMRight `ui ~T0 @X0 1 s ]
-[; ;TimerPWM.c: 10: static unsigned int PWMRight;
-"11
-[v _PWMLeft `ui ~T0 @X0 1 s ]
-[; ;TimerPWM.c: 11: static unsigned int PWMLeft;
+[; ;TimerPWM.c: 13: static unsigned int PWMRight;
 "14
+[v _PWMLeft `ui ~T0 @X0 1 s ]
+[; ;TimerPWM.c: 14: static unsigned int PWMLeft;
+"19
 [v _TimerPWMInit `(v ~T0 @X0 1 ef ]
 {
-[; ;TimerPWM.c: 14: void TimerPWMInit(){
+[; ;TimerPWM.c: 19: void TimerPWMInit(){
 [e :U _TimerPWMInit ]
 [f ]
-[; ;TimerPWM.c: 15: GIE=1;
-"15
-[e = _GIE -> -> 1 `i `b ]
-[; ;TimerPWM.c: 16: TMR0IE=1;
-"16
-[e = _TMR0IE -> -> 1 `i `b ]
-[; ;TimerPWM.c: 17: T08BIT=1;
-"17
-[e = _T08BIT -> -> 1 `i `b ]
-[; ;TimerPWM.c: 18: T0CS=0;
-"18
-[e = _T0CS -> -> 0 `i `b ]
-[; ;TimerPWM.c: 19: PSA=1;
-"19
-[e = _PSA -> -> 1 `i `b ]
-[; ;TimerPWM.c: 20: T0PS2=0;
+[; ;TimerPWM.c: 20: GIE=1;
 "20
-[e = _T0PS2 -> -> 0 `i `b ]
-[; ;TimerPWM.c: 21: T0PS1=0;
+[e = _GIE -> -> 1 `i `b ]
+[; ;TimerPWM.c: 21: TMR0IE=1;
 "21
-[e = _T0PS1 -> -> 0 `i `b ]
-[; ;TimerPWM.c: 22: T0PS0=1;
+[e = _TMR0IE -> -> 1 `i `b ]
+[; ;TimerPWM.c: 22: T08BIT=1;
 "22
-[e = _T0PS0 -> -> 1 `i `b ]
-[; ;TimerPWM.c: 24: TMR0IF=0;
+[e = _T08BIT -> -> 1 `i `b ]
+[; ;TimerPWM.c: 23: T0CS=0;
+"23
+[e = _T0CS -> -> 0 `i `b ]
+[; ;TimerPWM.c: 24: PSA=1;
 "24
-[e = _TMR0IF -> -> 0 `i `b ]
-[; ;TimerPWM.c: 25: TMR0H=0x00;
+[e = _PSA -> -> 1 `i `b ]
+[; ;TimerPWM.c: 25: T0PS2=0;
 "25
-[e = _TMR0H -> -> 0 `i `uc ]
-[; ;TimerPWM.c: 26: TMR0L=156;
+[e = _T0PS2 -> -> 0 `i `b ]
+[; ;TimerPWM.c: 26: T0PS1=0;
 "26
-[e = _TMR0L -> -> 156 `i `uc ]
-[; ;TimerPWM.c: 27: TMR0ON=1;
+[e = _T0PS1 -> -> 0 `i `b ]
+[; ;TimerPWM.c: 27: T0PS0=1;
 "27
+[e = _T0PS0 -> -> 1 `i `b ]
+[; ;TimerPWM.c: 29: TMR0IF=0;
+"29
+[e = _TMR0IF -> -> 0 `i `b ]
+[; ;TimerPWM.c: 30: TMR0H=0x00;
+"30
+[e = _TMR0H -> -> 0 `i `uc ]
+[; ;TimerPWM.c: 31: TMR0L=156;
+"31
+[e = _TMR0L -> -> 156 `i `uc ]
+[; ;TimerPWM.c: 32: TMR0ON=1;
+"32
 [e = _TMR0ON -> -> 1 `i `b ]
-[; ;TimerPWM.c: 28: }
-"28
+[; ;TimerPWM.c: 33: }
+"33
 [e :UE 398 ]
 }
-"30
+"40
 [v _SetPWMMotorLeft `(v ~T0 @X0 1 ef1`ui ]
 {
-[; ;TimerPWM.c: 30: void SetPWMMotorLeft (unsigned int percentage){
+[; ;TimerPWM.c: 40: void SetPWMMotorLeft (unsigned int percentage){
 [e :U _SetPWMMotorLeft ]
 [v _percentage `ui ~T0 @X0 1 r1 ]
 [f ]
-[; ;TimerPWM.c: 31: PWMLeft=20-percentage/5;
-"31
+[; ;TimerPWM.c: 41: PWMLeft=20-percentage/5;
+"41
 [e = _PWMLeft - -> -> 20 `i `ui / _percentage -> -> 5 `i `ui ]
-[; ;TimerPWM.c: 32: }
-"32
+[; ;TimerPWM.c: 42: }
+"42
 [e :UE 399 ]
 }
-"34
+"43
 [v _SetPWMMotorRight `(v ~T0 @X0 1 ef1`ui ]
 {
-[; ;TimerPWM.c: 34: void SetPWMMotorRight (unsigned int percentage){
+[; ;TimerPWM.c: 43: void SetPWMMotorRight (unsigned int percentage){
 [e :U _SetPWMMotorRight ]
 [v _percentage `ui ~T0 @X0 1 r1 ]
 [f ]
-[; ;TimerPWM.c: 35: PWMRight=20-percentage/5;
-"35
+[; ;TimerPWM.c: 44: PWMRight=20-percentage/5;
+"44
 [e = _PWMRight - -> -> 20 `i `ui / _percentage -> -> 5 `i `ui ]
-[; ;TimerPWM.c: 36: }
-"36
+[; ;TimerPWM.c: 45: }
+"45
 [e :UE 400 ]
 }
-"38
+"49
 [v _ReadPWMMotorRight `(ui ~T0 @X0 1 ef ]
 {
-[; ;TimerPWM.c: 38: unsigned int ReadPWMMotorRight (){
+[; ;TimerPWM.c: 49: unsigned int ReadPWMMotorRight (){
 [e :U _ReadPWMMotorRight ]
 [f ]
-[; ;TimerPWM.c: 39: return PWMRight;
-"39
+[; ;TimerPWM.c: 50: return PWMRight;
+"50
 [e ) _PWMRight ]
 [e $UE 401  ]
-[; ;TimerPWM.c: 40: }
-"40
+[; ;TimerPWM.c: 51: }
+"51
 [e :UE 401 ]
 }
-"42
+"52
 [v _ReadPWMMotorLeft `(ui ~T0 @X0 1 ef ]
 {
-[; ;TimerPWM.c: 42: unsigned int ReadPWMMotorLeft (){
+[; ;TimerPWM.c: 52: unsigned int ReadPWMMotorLeft (){
 [e :U _ReadPWMMotorLeft ]
 [f ]
-[; ;TimerPWM.c: 43: return PWMLeft;
-"43
+[; ;TimerPWM.c: 53: return PWMLeft;
+"53
 [e ) _PWMLeft ]
 [e $UE 402  ]
-[; ;TimerPWM.c: 44: }
-"44
+[; ;TimerPWM.c: 54: }
+"54
 [e :UE 402 ]
 }

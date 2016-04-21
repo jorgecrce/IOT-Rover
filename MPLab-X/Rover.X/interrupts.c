@@ -3,14 +3,15 @@
 #include "PWM.h"
 #include "TimerPWM.h"
 #include <usart.h>
-#include "serial.h"
-#define PIN1 RC5///Estaban mal!!!
+#define PIN1 RC5//Pins for the PWM signal
 #define PIN2 RC4
 
-void interrupt isr(void) {
-
-
-    /* If the interrupt was caused by an ADC conversion complete ... */
+void interrupt isr(void) {//One interrupt
+    /* If the interrupt was caused by an ADC conversion complete 
+     * Here we will read one diferent input in each iteration of the interrupt
+     * First time port0, later port1... and when end, repeat from the port0 again
+     * It calls the functions of the ADC.c module to update the variables     
+     */
     if (ADIF == 1) {
         
         static unsigned int Readport=0;
@@ -57,14 +58,19 @@ void interrupt isr(void) {
                 Readport=0;
                 break;      
         }
-
-        
-        ADIF=0;//Reset interrupt flag
-        
+       
+        ADIF=0;//Reset interrupt flag   
     }
 
-    if (TMR0IF==1) //Timer overfloat. Reset flag and generate PWM signal
-    {//TWO PWM signals with only one timer!!!
+    /*If the interrupt was caused by a timer overfloat.
+     * This is used to generate by software the PWM signals
+     * as this microcontroller can only manage by hardware one PWM output.
+     * The two PWM signals are generated with just one timer
+     * The dutty cycle goes from 0 (100%) to 20 (0%)in steps of a 5%, 
+     * so the precission is not very hight, but enought for our purpose
+     */
+    if (TMR0IF==1){
+        
         static unsigned int PWMLeft;
         static unsigned int PWMRight;
         static unsigned int iteration;
@@ -84,18 +90,23 @@ void interrupt isr(void) {
         }
         iteration++;
 
-        
         TMR0IF=0;//Clear interrupt flag
         TMR0H=0x00;//Start the timer from 0
         TMR0L=0x156;
-
     }
     
-    if (RCIF==1){//Interruption caused by reception in the serial port
+    /* Interrupt caused by reception in the RX port
+     * This interrupt is not in use, as at the end there's not need for serial port
+     * and also it has not be initialized in the main.c
+     * but i keep it just in case...
+     */
+    
+    /*
+    if (RCIF==1){
         
         static int counter=0;
         
-        char CharRx = ReadUSART();   //Se lee el dato que esta en el buffer de Rx del USART
+        char CharRx = ReadUSART();
 
         if (counter==0){
             if (CharRx=='b'){
@@ -120,7 +131,7 @@ void interrupt isr(void) {
         while(BusyUSART());
         putsUSART("\n\r\n\rWrite: ");
 
-
-        RCIF = 0;  //Desactivamos la bandera de recepción en el buffer de entrada del USART
+        RCIF = 0;
     }
+     */
 }

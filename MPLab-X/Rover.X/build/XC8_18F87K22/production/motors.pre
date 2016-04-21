@@ -5200,114 +5200,11 @@ void SetMotorRight(signed int speed);
 void Stop();
 void WriteSpeedInLCD ();
 
-# 13 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\stdint.h"
-typedef signed char int8_t;
-
-# 20
-typedef signed int int16_t;
-
-# 28
-typedef signed short long int int24_t;
-
-# 36
-typedef signed long int int32_t;
-
-# 43
-typedef unsigned char uint8_t;
-
-# 49
-typedef unsigned int uint16_t;
-
-# 56
-typedef unsigned short long int uint24_t;
-
-# 63
-typedef unsigned long int uint32_t;
-
-# 71
-typedef signed char int_least8_t;
-
-# 78
-typedef signed int int_least16_t;
-
-# 90
-typedef signed short long int int_least24_t;
-
-# 98
-typedef signed long int int_least32_t;
-
-# 105
-typedef unsigned char uint_least8_t;
-
-# 111
-typedef unsigned int uint_least16_t;
-
-# 121
-typedef unsigned short long int uint_least24_t;
-
-# 128
-typedef unsigned long int uint_least32_t;
-
-# 137
-typedef signed char int_fast8_t;
-
-# 144
-typedef signed int int_fast16_t;
-
-# 156
-typedef signed short long int int_fast24_t;
-
-# 164
-typedef signed long int int_fast32_t;
-
-# 171
-typedef unsigned char uint_fast8_t;
-
-# 177
-typedef unsigned int uint_fast16_t;
-
-# 187
-typedef unsigned short long int uint_fast24_t;
-
-# 194
-typedef unsigned long int uint_fast32_t;
-
-# 200
-typedef int32_t intmax_t;
-
-
-
-
-typedef uint32_t uintmax_t;
-
-
-
-
-typedef int16_t intptr_t;
-
-
-
-
-typedef uint16_t uintptr_t;
-
-# 78 "lcd_hd44780_pic16.h"
-void LCDInit(uint8_t style);
-void LCDWriteString(const char *msg);
-void LCDWriteInt(int val,int8_t field_length);
-void LCDGotoXY(uint8_t x,uint8_t y);
-
-
-void LCDByte(uint8_t,uint8_t);
-
-
-
-void LCDBusyLoop();
-
 # 20 "motors.c"
 static signed int MotorRightSpeed=0;
 static signed int MotorLeftSpeed=0;
 
-# 28
+# 27
 void MotorInit(){
 TRISC = 0b11000000;
 RC0=1;
@@ -5318,11 +5215,10 @@ SetPWMMotorLeft(0);
 SetPWMMotorRight(0);
 }
 
+# 41
 void SetMotorLeft(signed int speed){
 
 MotorLeftSpeed=speed;
-
-
 
 if(speed>0){
 
@@ -5337,11 +5233,11 @@ RC1=1;
 
 SetPWMMotorLeft(abs(speed));
 }
+
+# 61
 void SetMotorRight(signed int speed){
 
 MotorRightSpeed=speed;
-
-
 
 if(speed>0){
 
@@ -5355,38 +5251,4 @@ RC3=1;
 
 
 SetPWMMotorRight(abs(speed));
-}
-
-void Stop(){
-if((MotorLeftSpeed==0) && (MotorRightSpeed==0)){
-
-
-}
-
-}
-
-void WriteSpeedInLCD (){
-
-
-LCDGotoXY(0,0);
-LCDWriteString("<Right  -  Left>");
-
-LCDGotoXY(0,1);
-if(MotorRightSpeed<0){
-LCDWriteString("-");
-}else{
-LCDWriteString("+");
-}
-
-LCDGotoXY(1,1);
-LCDWriteInt(abs(MotorRightSpeed), 3);
-
-LCDGotoXY(12,1);
-if(MotorLeftSpeed<0){
-LCDWriteString("-");
-}else{
-LCDWriteString("+");
-}
-LCDGotoXY(13,1);
-LCDWriteInt(abs(MotorLeftSpeed),3);
 }

@@ -5186,11 +5186,11 @@ extern char * ultoa(char * buf, unsigned long val, int base);
 
 extern char * ftoa(float f, int * status);
 
-# 10 "TimerPWM.c"
+# 13 "TimerPWM.c"
 static unsigned int PWMRight;
 static unsigned int PWMLeft;
 
-
+# 19
 void TimerPWMInit(){
 GIE=1;
 TMR0IE=1;
@@ -5207,18 +5207,18 @@ TMR0L=156;
 TMR0ON=1;
 }
 
+# 40
 void SetPWMMotorLeft (unsigned int percentage){
 PWMLeft=20-percentage/5;
 }
-
 void SetPWMMotorRight (unsigned int percentage){
 PWMRight=20-percentage/5;
 }
 
+# 49
 unsigned int ReadPWMMotorRight (){
 return PWMRight;
 }
-
 unsigned int ReadPWMMotorLeft (){
 return PWMLeft;
 }

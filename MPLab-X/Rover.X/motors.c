@@ -10,8 +10,8 @@
 #include <xc.h>
 #include "TimerPWM.h"
 #include "motors.h"
-#include "lcd_hd44780_pic16.h"
 
+/*Pins for the ports to the motor controller*/
 #define ML1 RC0
 #define ML2 RC1
 #define MR1 RC2
@@ -20,10 +20,9 @@
 static signed int MotorRightSpeed=0;
 static signed int MotorLeftSpeed=0;
 
-
-
 /*
- * 
+ * Start the port used to control the motors
+ * Also set the motors to be stopped
  */
 void MotorInit(){
     TRISC = 0b11000000; // Motors are on PORTC and output (Minus the Tx and Rx)
@@ -35,11 +34,13 @@ void MotorInit(){
     SetPWMMotorRight(0);
 }
 
+/*Function to set the speed of the left motor 
+ * ML1 and ML2 control the direction, and later we set the PWM of that motor to set the speed 
+ * the function works with a signed integer from -100 to +100
+ */
 void SetMotorLeft(signed int speed){
     
     MotorLeftSpeed=speed;
-    //WriteSpeedInLCD ();
-
     //Set direction
     if(speed>0){
         //Go forward
@@ -54,11 +55,12 @@ void SetMotorLeft(signed int speed){
     //Set speed
     SetPWMMotorLeft(abs(speed));//We need two independent PWM
 }
+
+/*Same thing for the other motor
+ */
 void SetMotorRight(signed int speed){
     
     MotorRightSpeed=speed;
-    //WriteSpeedInLCD ();
-
     //Set direction
     if(speed>0){
         //Go forward
@@ -72,38 +74,4 @@ void SetMotorRight(signed int speed){
 
     //Set speed
     SetPWMMotorRight(abs(speed));//We need two independent PWM
-}
-
-void Stop(){
-    if((MotorLeftSpeed==0) && (MotorRightSpeed==0)){
-    //MR1=0;
-    //MR2=0;
-    }
-    
-}
-
-void WriteSpeedInLCD (){
-//Show values in LCD
-    //LCDClear();
-    LCDGotoXY(0,0);
-    LCDWriteString("<Right  -  Left>");
-    
-    LCDGotoXY(0,1);
-    if(MotorRightSpeed<0){
-        LCDWriteString("-");        
-    }else{
-        LCDWriteString("+");
-    }
-    
-    LCDGotoXY(1,1);
-    LCDWriteInt(abs(MotorRightSpeed), 3);
-    
-    LCDGotoXY(12,1);
-    if(MotorLeftSpeed<0){
-        LCDWriteString("-");        
-    }else{
-        LCDWriteString("+");
-    }
-    LCDGotoXY(13,1);
-    LCDWriteInt(abs(MotorLeftSpeed),3);
 }

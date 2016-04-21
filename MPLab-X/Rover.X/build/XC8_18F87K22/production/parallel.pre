@@ -5174,23 +5174,25 @@ void LCDBusyLoop();
 static signed int SpeedLeft=0;
 static signed int SpeedRight=0;
 
-# 19
+# 20
 static unsigned int Mode=0;
 
+# 24
 void parallelInit(void) {
-
 
 TRISB=0b11111111;
 
 ANSELH=0b00000000;
 }
 
+# 39
 void ReadParallel(){
 unsigned char lecture=PORTB;
 unsigned char left=lecture>>4;
 unsigned char right=lecture & 0x0f;
 SpeedRight=ConvertParallelSpeed(right);
 SpeedLeft=ConvertParallelSpeed(left);
+
 if (left==0x0c){
 Mode=1;
 }else{
@@ -5198,18 +5200,18 @@ Mode=0;
 }
 }
 
-
-
+# 56
 signed int ReadParallelSpeedRight(){
 return SpeedRight;
 }
 signed int ReadParallelSpeedLeft(){
 return SpeedLeft;
 }
-
 unsigned int ReadMode(){
 return Mode;
 }
+
+# 70
 signed int ConvertParallelSpeed (char velocity){
 switch(velocity){
 case 0x01:
