@@ -37,25 +37,17 @@ SoftwareSerial fonaSS = SoftwareSerial(FONA_TX, FONA_RX);
 Adafruit_FONA fona = Adafruit_FONA(FONA_RST);
 
 /************************* WiFi Access Point *********************************/
-
-  // Optionally configure a GPRS APN, username, and password.
-  // You might need to do this to access your network's GPRS/data
-  // network.  Contact your provider for the exact APN, username,
-  // and password values.  Username and password are optional and
-  // can be removed, but APN is required.
 #define FONA_APN       "hs.vodafone.ie"
 #define FONA_USERNAME  ""
 #define FONA_PASSWORD  ""
 
 /************************* Adafruit.io Setup *********************************/
-
 #define AIO_SERVER      "io.adafruit.com"
 #define AIO_SERVERPORT  1883
 #define AIO_USERNAME    "jorgecrce"
 #define AIO_KEY         "5c9f4f8e308a307c1594a197b4e6e028410dc3e1"
 
 /************ Global State (you don't need to change this!) ******************/
-
 // Store the MQTT server, username, and password in flash memory.
 // This is required for using the Adafruit MQTT library.
 const char MQTT_SERVER[] PROGMEM    = AIO_SERVER;
@@ -159,11 +151,6 @@ void loop() {
   counter++;
 
   Watchdog.reset();
-  // ping the server to keep the mqtt connection alive, only needed if we're not publishing
- // if(! mqtt.ping()) {
- //   Serial.println(F("MQTT Ping failed."));
- // }
-
 }
 
 // Serialize the lat, long, altitude to a CSV string that can be published to the specified feed.
@@ -227,9 +214,9 @@ void MQTT_connect() {
 }
 
 
-void PICSpeed(int value){//Izquiera p7 - P6 - P5 - P4 - Derecha P3 - P2 - P1 - P0. 
+void PICSpeed(int value){//Left p7-P6-P5-P4 - Right P3-P2-P1-P0. 
   switch (value){
-    case -100://Alante 80 - 80
+    case -100://Front +80 - +80
       digitalWrite(P7, HIGH);
       digitalWrite(P6, LOW);
       digitalWrite(P5, HIGH);
@@ -240,7 +227,7 @@ void PICSpeed(int value){//Izquiera p7 - P6 - P5 - P4 - Derecha P3 - P2 - P1 - P
       digitalWrite(P0, LOW);
       //return '1';
       break;
-    case -80://Alante Izquierda 40 - 60
+    case -80://Front Left +40 - +60
       digitalWrite(P7, HIGH);
       digitalWrite(P6, LOW);
       digitalWrite(P5, LOW);
@@ -251,7 +238,7 @@ void PICSpeed(int value){//Izquiera p7 - P6 - P5 - P4 - Derecha P3 - P2 - P1 - P
       digitalWrite(P0, HIGH);
       //return '2';
       break;
-    case -60://Alante derecha 60 - 40
+    case -60://Front Right +60 - +40
       digitalWrite(P7, HIGH);
       digitalWrite(P6, LOW);
       digitalWrite(P5, LOW);
@@ -306,7 +293,7 @@ void PICSpeed(int value){//Izquiera p7 - P6 - P5 - P4 - Derecha P3 - P2 - P1 - P
       digitalWrite(P0, LOW);
       //return '7';
       break;
-    case 40://Derecha 40 - 0
+    case 40://Right +40 - 0
       digitalWrite(P7, HIGH);
       digitalWrite(P6, LOW);
       digitalWrite(P5, LOW);
@@ -317,7 +304,7 @@ void PICSpeed(int value){//Izquiera p7 - P6 - P5 - P4 - Derecha P3 - P2 - P1 - P
       digitalWrite(P0, LOW);
       //return '8';
       break;
-    case 60://Izquierda 0 - 40
+    case 60://Left 0 - +40
       digitalWrite(P7, LOW);
       digitalWrite(P6, LOW);
       digitalWrite(P5, LOW);
@@ -328,7 +315,7 @@ void PICSpeed(int value){//Izquiera p7 - P6 - P5 - P4 - Derecha P3 - P2 - P1 - P
       digitalWrite(P0, LOW);
       //return '9';
       break;
-    case 80: //Sobre Derecha 40 - -40
+    case 80: 40 - -40
       digitalWrite(P7, HIGH);
       digitalWrite(P6, LOW);
       digitalWrite(P5, LOW);
@@ -339,7 +326,7 @@ void PICSpeed(int value){//Izquiera p7 - P6 - P5 - P4 - Derecha P3 - P2 - P1 - P
       digitalWrite(P0, LOW);
       //return 'a';
       break;
-    case 100://Sobre izquierda
+    case 100://-40 - +40
       digitalWrite(P7, LOW);
       digitalWrite(P6, HIGH);
       digitalWrite(P5, LOW);
@@ -350,7 +337,7 @@ void PICSpeed(int value){//Izquiera p7 - P6 - P5 - P4 - Derecha P3 - P2 - P1 - P
       digitalWrite(P0, LOW);
       //return 'b';
       break;
-    case 1://Modo automático
+    case 1://Automatic mode
       digitalWrite(P7, HIGH);
       digitalWrite(P6, HIGH);
       digitalWrite(P5, LOW);
@@ -370,7 +357,8 @@ void PICSpeed(int value){//Izquiera p7 - P6 - P5 - P4 - Derecha P3 - P2 - P1 - P
       digitalWrite(P2, LOW);
       digitalWrite(P1, LOW);
       digitalWrite(P0, LOW);
-      //return '6'; //(Speed=0)
+      //return '0'; //(Speed=0)
       break;
   }
 }
+
