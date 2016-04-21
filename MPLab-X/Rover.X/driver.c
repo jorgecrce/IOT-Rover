@@ -26,7 +26,7 @@ void Go(void) {
         SpeedRight=ReadParallelSpeedRight();
         
         if(SpeedRight>0 && SpeedLeft>0){//If we go straight, considerate distance sensors
-            if ((ReadDistanceCentral()<35) || (ReadDistanceRight()<30) || (ReadDistanceLeft()<30)){//Danger!!
+            if ((ReadDistanceCentral()<37) || (ReadDistanceRight()<30) || (ReadDistanceLeft()<30)){//Danger!!
                 SetMotorLeft(0);
                 SetMotorRight(0);
             }else{//If there are not obstacles, listen the orders
@@ -41,7 +41,7 @@ void Go(void) {
             
         
     }else if (ReadMode()==1){
-        if (ReadDistanceCentral()<35){
+        if (ReadDistanceCentral()<37){
             if(ReadDistanceRight()>ReadDistanceLeft()){
                 TurnRight135();
             }else{

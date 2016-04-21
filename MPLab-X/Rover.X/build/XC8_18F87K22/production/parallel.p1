@@ -7,10 +7,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _PORTB `Vuc ~T0 @X0 0 e@3969 ]
 "7 parallel.h
 [v _ConvertParallelSpeed `(i ~T0 @X0 0 ef1`uc ]
-"81 lcd_hd44780_pic16.h
-[v _LCDGotoXY `(v ~T0 @X0 0 ef2`uc`uc ]
-"80
-[v _LCDWriteInt `(v ~T0 @X0 0 ef2`i`c ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -3877,220 +3873,189 @@ Version 3.2 HI-TECH Software Intermediate Code
 "39
 }
 [e :U 396 ]
-"42
-[v _temp `i ~T0 @X0 1 a ]
 [; ;parallel.c: 39: }
-[; ;parallel.c: 42: int temp=(int)right;
-[e = _temp -> _right `i ]
-[; ;parallel.c: 43: LCDGotoXY(0,0);
-"43
-[e ( _LCDGotoXY (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;parallel.c: 44: LCDWriteInt(temp, 4);
-"44
-[e ( _LCDWriteInt (2 , _temp -> -> 4 `i `c ]
-[; ;parallel.c: 45: LCDGotoXY(8,0);
-"45
-[e ( _LCDGotoXY (2 , -> -> 8 `i `uc -> -> 0 `i `uc ]
-[; ;parallel.c: 46: LCDWriteInt(SpeedRight,4);
-"46
-[e ( _LCDWriteInt (2 , _SpeedRight -> -> 4 `i `c ]
-[; ;parallel.c: 47: int temp=(int)left;
-"47
-[e = _temp -> _left `i ]
-[; ;parallel.c: 48: LCDGotoXY(0,1);
-"48
-[e ( _LCDGotoXY (2 , -> -> 0 `i `uc -> -> 1 `i `uc ]
-[; ;parallel.c: 49: LCDWriteInt(temp, 4);
-"49
-[e ( _LCDWriteInt (2 , _temp -> -> 4 `i `c ]
-[; ;parallel.c: 50: LCDGotoXY(8,1);
-"50
-[e ( _LCDGotoXY (2 , -> -> 8 `i `uc -> -> 1 `i `uc ]
-[; ;parallel.c: 51: LCDWriteInt(SpeedLeft,4);
-"51
-[e ( _LCDWriteInt (2 , _SpeedLeft -> -> 4 `i `c ]
-[; ;parallel.c: 52: }
-"52
+[; ;parallel.c: 40: }
+"40
 [e :UE 394 ]
 }
-"56
+"44
 [v _ReadParallelSpeedRight `(i ~T0 @X0 1 ef ]
 {
-[; ;parallel.c: 56: signed int ReadParallelSpeedRight(){
+[; ;parallel.c: 44: signed int ReadParallelSpeedRight(){
 [e :U _ReadParallelSpeedRight ]
 [f ]
-[; ;parallel.c: 57: return SpeedRight;
-"57
+[; ;parallel.c: 45: return SpeedRight;
+"45
 [e ) _SpeedRight ]
 [e $UE 397  ]
-[; ;parallel.c: 58: }
-"58
+[; ;parallel.c: 46: }
+"46
 [e :UE 397 ]
 }
-"59
+"47
 [v _ReadParallelSpeedLeft `(i ~T0 @X0 1 ef ]
 {
-[; ;parallel.c: 59: signed int ReadParallelSpeedLeft(){
+[; ;parallel.c: 47: signed int ReadParallelSpeedLeft(){
 [e :U _ReadParallelSpeedLeft ]
 [f ]
-[; ;parallel.c: 60: return SpeedLeft;
-"60
+[; ;parallel.c: 48: return SpeedLeft;
+"48
 [e ) _SpeedLeft ]
 [e $UE 398  ]
-[; ;parallel.c: 61: }
-"61
+[; ;parallel.c: 49: }
+"49
 [e :UE 398 ]
 }
-"63
+"51
 [v _ReadMode `(ui ~T0 @X0 1 ef ]
 {
-[; ;parallel.c: 63: unsigned int ReadMode(){
+[; ;parallel.c: 51: unsigned int ReadMode(){
 [e :U _ReadMode ]
 [f ]
-[; ;parallel.c: 64: return Mode;
-"64
+[; ;parallel.c: 52: return Mode;
+"52
 [e ) _Mode ]
 [e $UE 399  ]
-[; ;parallel.c: 65: }
-"65
+[; ;parallel.c: 53: }
+"53
 [e :UE 399 ]
 }
-"66
+"54
 [v _ConvertParallelSpeed `(i ~T0 @X0 1 ef1`uc ]
 {
-[; ;parallel.c: 66: signed int ConvertParallelSpeed (char velocity){
+[; ;parallel.c: 54: signed int ConvertParallelSpeed (char velocity){
 [e :U _ConvertParallelSpeed ]
 [v _velocity `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;parallel.c: 67: switch(velocity){
-"67
+[; ;parallel.c: 55: switch(velocity){
+"55
 [e $U 402  ]
 {
-[; ;parallel.c: 68: case 0x01:
-"68
+[; ;parallel.c: 56: case 0x01:
+"56
 [e :U 403 ]
-[; ;parallel.c: 69: return -100;
-"69
+[; ;parallel.c: 57: return -100;
+"57
 [e ) -U -> 100 `i ]
+[e $UE 400  ]
+[; ;parallel.c: 58: break;
+"58
+[e $U 401  ]
+[; ;parallel.c: 59: case 0x02:
+"59
+[e :U 404 ]
+[; ;parallel.c: 60: return -80;
+"60
+[e ) -U -> 80 `i ]
+[e $UE 400  ]
+[; ;parallel.c: 61: break;
+"61
+[e $U 401  ]
+[; ;parallel.c: 62: case 0x03:
+"62
+[e :U 405 ]
+[; ;parallel.c: 63: return -60;
+"63
+[e ) -U -> 60 `i ]
+[e $UE 400  ]
+[; ;parallel.c: 64: break;
+"64
+[e $U 401  ]
+[; ;parallel.c: 65: case 0x04:
+"65
+[e :U 406 ]
+[; ;parallel.c: 66: return -40;
+"66
+[e ) -U -> 40 `i ]
+[e $UE 400  ]
+[; ;parallel.c: 67: break;
+"67
+[e $U 401  ]
+[; ;parallel.c: 68: case 0x05:
+"68
+[e :U 407 ]
+[; ;parallel.c: 69: return -20;
+"69
+[e ) -U -> 20 `i ]
 [e $UE 400  ]
 [; ;parallel.c: 70: break;
 "70
 [e $U 401  ]
-[; ;parallel.c: 71: case 0x02:
+[; ;parallel.c: 71: case 0x06:
 "71
-[e :U 404 ]
-[; ;parallel.c: 72: return -80;
+[e :U 408 ]
+[; ;parallel.c: 72: return 0;
 "72
-[e ) -U -> 80 `i ]
+[e ) -> 0 `i ]
 [e $UE 400  ]
 [; ;parallel.c: 73: break;
 "73
 [e $U 401  ]
-[; ;parallel.c: 74: case 0x03:
+[; ;parallel.c: 74: case 0x07:
 "74
-[e :U 405 ]
-[; ;parallel.c: 75: return -60;
+[e :U 409 ]
+[; ;parallel.c: 75: return 20;
 "75
-[e ) -U -> 60 `i ]
+[e ) -> 20 `i ]
 [e $UE 400  ]
 [; ;parallel.c: 76: break;
 "76
 [e $U 401  ]
-[; ;parallel.c: 77: case 0x04:
+[; ;parallel.c: 77: case 0x08:
 "77
-[e :U 406 ]
-[; ;parallel.c: 78: return -40;
+[e :U 410 ]
+[; ;parallel.c: 78: return 40;
 "78
-[e ) -U -> 40 `i ]
+[e ) -> 40 `i ]
 [e $UE 400  ]
 [; ;parallel.c: 79: break;
 "79
 [e $U 401  ]
-[; ;parallel.c: 80: case 0x05:
+[; ;parallel.c: 80: case 0x09:
 "80
-[e :U 407 ]
-[; ;parallel.c: 81: return -20;
+[e :U 411 ]
+[; ;parallel.c: 81: return 60;
 "81
-[e ) -U -> 20 `i ]
+[e ) -> 60 `i ]
 [e $UE 400  ]
 [; ;parallel.c: 82: break;
 "82
 [e $U 401  ]
-[; ;parallel.c: 83: case 0x06:
+[; ;parallel.c: 83: case 0x0a:
 "83
-[e :U 408 ]
-[; ;parallel.c: 84: return 0;
+[e :U 412 ]
+[; ;parallel.c: 84: return 80;
 "84
-[e ) -> 0 `i ]
+[e ) -> 80 `i ]
 [e $UE 400  ]
 [; ;parallel.c: 85: break;
 "85
 [e $U 401  ]
-[; ;parallel.c: 86: case 0x07:
+[; ;parallel.c: 86: case 0x0b:
 "86
-[e :U 409 ]
-[; ;parallel.c: 87: return 20;
+[e :U 413 ]
+[; ;parallel.c: 87: return 100;
 "87
-[e ) -> 20 `i ]
+[e ) -> 100 `i ]
 [e $UE 400  ]
 [; ;parallel.c: 88: break;
 "88
 [e $U 401  ]
-[; ;parallel.c: 89: case 0x08:
+[; ;parallel.c: 89: default:
 "89
-[e :U 410 ]
-[; ;parallel.c: 90: return 40;
+[e :U 414 ]
+[; ;parallel.c: 90: return 0;
 "90
-[e ) -> 40 `i ]
+[e ) -> 0 `i ]
 [e $UE 400  ]
 [; ;parallel.c: 91: break;
 "91
 [e $U 401  ]
-[; ;parallel.c: 92: case 0x09:
 "92
-[e :U 411 ]
-[; ;parallel.c: 93: return 60;
-"93
-[e ) -> 60 `i ]
-[e $UE 400  ]
-[; ;parallel.c: 94: break;
-"94
-[e $U 401  ]
-[; ;parallel.c: 95: case 0x0a:
-"95
-[e :U 412 ]
-[; ;parallel.c: 96: return 80;
-"96
-[e ) -> 80 `i ]
-[e $UE 400  ]
-[; ;parallel.c: 97: break;
-"97
-[e $U 401  ]
-[; ;parallel.c: 98: case 0x0b:
-"98
-[e :U 413 ]
-[; ;parallel.c: 99: return 100;
-"99
-[e ) -> 100 `i ]
-[e $UE 400  ]
-[; ;parallel.c: 100: break;
-"100
-[e $U 401  ]
-[; ;parallel.c: 101: default:
-"101
-[e :U 414 ]
-[; ;parallel.c: 102: return 0;
-"102
-[e ) -> 0 `i ]
-[e $UE 400  ]
-[; ;parallel.c: 103: break;
-"103
-[e $U 401  ]
-"104
 }
-[; ;parallel.c: 104: }
+[; ;parallel.c: 92: }
 [e $U 401  ]
-"67
+"55
 [e :U 402 ]
 [e [\ _velocity , $ -> -> 1 `i `uc 403
  , $ -> -> 2 `i `uc 404
@@ -4104,9 +4069,9 @@ Version 3.2 HI-TECH Software Intermediate Code
  , $ -> -> 10 `i `uc 412
  , $ -> -> 11 `i `uc 413
  414 ]
-"104
+"92
 [e :U 401 ]
-[; ;parallel.c: 105: }
-"105
+[; ;parallel.c: 93: }
+"93
 [e :UE 400 ]
 }

@@ -6,14 +6,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _MotorInit `(v ~T0 @X0 0 ef ]
 "8 TimerPWM.h
 [v _TimerPWMInit `(v ~T0 @X0 0 ef ]
-"9 motors.h
-[v _SetMotorLeft `(v ~T0 @X0 0 ef1`i ]
-"10
-[v _SetMotorRight `(v ~T0 @X0 0 ef1`i ]
 "78 lcd_hd44780_pic16.h
 [v _LCDInit `(v ~T0 @X0 0 ef1`uc ]
 "1 parallel.h
 [v _parallelInit `(v ~T0 @X0 0 ef ]
+"9 motors.h
+[v _SetMotorLeft `(v ~T0 @X0 0 ef1`i ]
+"10
+[v _SetMotorRight `(v ~T0 @X0 0 ef1`i ]
 "9 ADC.h
 [v _ADCInitiateConversion `(v ~T0 @X0 0 ef ]
 "1 driver.h
@@ -3780,10 +3780,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ADC.h: 25: unsigned int ReadDistanceCentral ();
 [; ;ADC.h: 27: void SetBattery (unsigned int lecture);
 [; ;ADC.h: 28: unsigned int ReadBattery ();
+[; ;ADC.h: 30: void ShowLecturesInLCD (void);
 [; ;motors.h: 8: void MotorInit();
 [; ;motors.h: 9: void SetMotorLeft(signed int speed);
 [; ;motors.h: 10: void SetMotorRight(signed int speed);
 [; ;motors.h: 11: void Stop();
+[; ;motors.h: 12: void WriteSpeedInLCD ();
 [; ;stdint.h: 13: typedef signed char int8_t;
 [; ;stdint.h: 20: typedef signed int int16_t;
 [; ;stdint.h: 28: typedef signed short long int int24_t;
@@ -3857,18 +3859,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 20: TimerPWMInit();
 "20
 [e ( _TimerPWMInit ..  ]
-[; ;main.c: 21: SetMotorLeft(0);
+[; ;main.c: 21: LCDInit(0B00000000);
 "21
-[e ( _SetMotorLeft (1 -> 0 `i ]
-[; ;main.c: 22: SetMotorRight(0);
-"22
-[e ( _SetMotorRight (1 -> 0 `i ]
-[; ;main.c: 23: LCDInit(0B00000000);
-"23
 [e ( _LCDInit (1 -> -> 0 `i `uc ]
-[; ;main.c: 24: parallelInit();
-"24
+[; ;main.c: 22: parallelInit();
+"22
 [e ( _parallelInit ..  ]
+[; ;main.c: 23: SetMotorLeft(0);
+"23
+[e ( _SetMotorLeft (1 -> 0 `i ]
+[; ;main.c: 24: SetMotorRight(0);
+"24
+[e ( _SetMotorRight (1 -> 0 `i ]
 [; ;main.c: 29: while(1) {
 "29
 [e :U 395 ]

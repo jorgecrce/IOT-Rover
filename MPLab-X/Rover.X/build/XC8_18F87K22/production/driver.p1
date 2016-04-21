@@ -3782,6 +3782,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;motors.h: 9: void SetMotorLeft(signed int speed);
 [; ;motors.h: 10: void SetMotorRight(signed int speed);
 [; ;motors.h: 11: void Stop();
+[; ;motors.h: 12: void WriteSpeedInLCD ();
 [; ;stdint.h: 13: typedef signed char int8_t;
 [; ;stdint.h: 20: typedef signed int int16_t;
 [; ;stdint.h: 28: typedef signed short long int int24_t;
@@ -3829,6 +3830,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ADC.h: 25: unsigned int ReadDistanceCentral ();
 [; ;ADC.h: 27: void SetBattery (unsigned int lecture);
 [; ;ADC.h: 28: unsigned int ReadBattery ();
+[; ;ADC.h: 30: void ShowLecturesInLCD (void);
 [; ;driver.h: 1: void Go(void);
 [; ;driver.h: 2: void TurnRight90(void);
 [; ;driver.h: 3: void TurnLeft90(void);
@@ -3919,9 +3921,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "28
 [e $ ! && > _SpeedRight -> 0 `i > _SpeedLeft -> 0 `i 399  ]
 {
-[; ;driver.c: 29: if ((ReadDistanceCentral()<35) || (ReadDistanceRight()<30) || (ReadDistanceLeft()<30)){
+[; ;driver.c: 29: if ((ReadDistanceCentral()<37) || (ReadDistanceRight()<30) || (ReadDistanceLeft()<30)){
 "29
-[e $ ! || || < ( _ReadDistanceCentral ..  -> -> 35 `i `ui < ( _ReadDistanceRight ..  -> -> 30 `i `ui < ( _ReadDistanceLeft ..  -> -> 30 `i `ui 400  ]
+[e $ ! || || < ( _ReadDistanceCentral ..  -> -> 37 `i `ui < ( _ReadDistanceRight ..  -> -> 30 `i `ui < ( _ReadDistanceLeft ..  -> -> 30 `i `ui 400  ]
 {
 [; ;driver.c: 30: SetMotorLeft(0);
 "30
@@ -3968,9 +3970,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 398 ]
 [e $ ! == ( _ReadMode ..  -> -> 1 `i `ui 404  ]
 {
-[; ;driver.c: 44: if (ReadDistanceCentral()<35){
+[; ;driver.c: 44: if (ReadDistanceCentral()<37){
 "44
-[e $ ! < ( _ReadDistanceCentral ..  -> -> 35 `i `ui 405  ]
+[e $ ! < ( _ReadDistanceCentral ..  -> -> 37 `i `ui 405  ]
 {
 [; ;driver.c: 45: if(ReadDistanceRight()>ReadDistanceLeft()){
 "45

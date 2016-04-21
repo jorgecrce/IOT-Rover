@@ -1,4 +1,6 @@
 #include <xc.h>
+#include "lcd_hd44780_pic16.h"
+#include "ADC.h"
 static unsigned int DistanceLeft=50;
 static unsigned int DistanceRight=50;
 static unsigned int DistanceCentral=50;
@@ -58,6 +60,7 @@ unsigned int ReadDistanceLeft (){
 }
 
 void SetDistanceRight (unsigned int lecture){
+    ShowLecturesInLCD ();
     DistanceRight=5+(1023-lecture)*0.042;//Not exact, but it gives us an idea.
 }
 
@@ -71,14 +74,32 @@ void SetDistanceCentral (unsigned int lecture){
 
 unsigned int ReadDistanceCentral (){
     return DistanceCentral;
+
 }
 
 void SetBattery (unsigned int lecture){
     //Measure bridge with 997+9800 ohm resistors
     //v/
-    Battery=lecture*3.548;//Hight accuracy.
+    Battery=((lecture*3.548)-11)*100;//Hight accuracy.
+    
 }
 
 unsigned int ReadBattery (){
     return Battery;
+}
+
+void ShowLecturesInLCD (void){
+//Show values in LCD
+    //LCDClear();
+    LCDGotoXY(0,0);
+    LCDWriteString("Right-Front-Left");
+    
+    LCDGotoXY(0,1);
+    LCDWriteInt(DistanceRight, 3);
+
+    LCDGotoXY(6,1);
+    LCDWriteInt(DistanceCentral, 3);
+    
+    LCDGotoXY(12,1);
+    LCDWriteInt(DistanceLeft,3);
 }

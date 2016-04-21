@@ -17,6 +17,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _SetPWMMotorRight `(v ~T0 @X0 0 ef1`ui ]
 "92 C:\Program Files (x86)\Microchip\xc8\v1.36\include\stdlib.h
 [v _abs `(i ~T0 @X0 0 ef1`i ]
+"81 lcd_hd44780_pic16.h
+[v _LCDGotoXY `(v ~T0 @X0 0 ef2`uc`uc ]
+"79
+[v _LCDWriteString `(v ~T0 @X0 0 ef1`*Cuc ]
+"80
+[v _LCDWriteInt `(v ~T0 @X0 0 ef2`i`c ]
 [; ;__size_t.h: 4: typedef unsigned size_t;
 [; ;stdarg.h: 7: typedef void * va_list[1];
 [; ;stdarg.h: 10: extern void * __va_start(void);
@@ -3854,154 +3860,268 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;motors.h: 9: void SetMotorLeft(signed int speed);
 [; ;motors.h: 10: void SetMotorRight(signed int speed);
 [; ;motors.h: 11: void Stop();
-"19 motors.c
+[; ;motors.h: 12: void WriteSpeedInLCD ();
+[; ;stdint.h: 13: typedef signed char int8_t;
+[; ;stdint.h: 20: typedef signed int int16_t;
+[; ;stdint.h: 28: typedef signed short long int int24_t;
+[; ;stdint.h: 36: typedef signed long int int32_t;
+[; ;stdint.h: 43: typedef unsigned char uint8_t;
+[; ;stdint.h: 49: typedef unsigned int uint16_t;
+[; ;stdint.h: 56: typedef unsigned short long int uint24_t;
+[; ;stdint.h: 63: typedef unsigned long int uint32_t;
+[; ;stdint.h: 71: typedef signed char int_least8_t;
+[; ;stdint.h: 78: typedef signed int int_least16_t;
+[; ;stdint.h: 90: typedef signed short long int int_least24_t;
+[; ;stdint.h: 98: typedef signed long int int_least32_t;
+[; ;stdint.h: 105: typedef unsigned char uint_least8_t;
+[; ;stdint.h: 111: typedef unsigned int uint_least16_t;
+[; ;stdint.h: 121: typedef unsigned short long int uint_least24_t;
+[; ;stdint.h: 128: typedef unsigned long int uint_least32_t;
+[; ;stdint.h: 137: typedef signed char int_fast8_t;
+[; ;stdint.h: 144: typedef signed int int_fast16_t;
+[; ;stdint.h: 156: typedef signed short long int int_fast24_t;
+[; ;stdint.h: 164: typedef signed long int int_fast32_t;
+[; ;stdint.h: 171: typedef unsigned char uint_fast8_t;
+[; ;stdint.h: 177: typedef unsigned int uint_fast16_t;
+[; ;stdint.h: 187: typedef unsigned short long int uint_fast24_t;
+[; ;stdint.h: 194: typedef unsigned long int uint_fast32_t;
+[; ;stdint.h: 200: typedef int32_t intmax_t;
+[; ;stdint.h: 205: typedef uint32_t uintmax_t;
+[; ;stdint.h: 210: typedef int16_t intptr_t;
+[; ;stdint.h: 215: typedef uint16_t uintptr_t;
+[; ;lcd_hd44780_pic16.h: 78: void LCDInit(uint8_t style);
+[; ;lcd_hd44780_pic16.h: 79: void LCDWriteString(const char *msg);
+[; ;lcd_hd44780_pic16.h: 80: void LCDWriteInt(int val,int8_t field_length);
+[; ;lcd_hd44780_pic16.h: 81: void LCDGotoXY(uint8_t x,uint8_t y);
+[; ;lcd_hd44780_pic16.h: 84: void LCDByte(uint8_t,uint8_t);
+[; ;lcd_hd44780_pic16.h: 88: void LCDBusyLoop();
+"20 motors.c
 [v _MotorRightSpeed `i ~T0 @X0 1 s ]
 [i _MotorRightSpeed
 -> 0 `i
 ]
-[; ;motors.c: 19: static signed int MotorRightSpeed=0;
-"20
+[; ;motors.c: 20: static signed int MotorRightSpeed=0;
+"21
 [v _MotorLeftSpeed `i ~T0 @X0 1 s ]
 [i _MotorLeftSpeed
 -> 0 `i
 ]
-[; ;motors.c: 20: static signed int MotorLeftSpeed=0;
-"27
+[; ;motors.c: 21: static signed int MotorLeftSpeed=0;
+"28
 [v _MotorInit `(v ~T0 @X0 1 ef ]
 {
-[; ;motors.c: 27: void MotorInit(){
+[; ;motors.c: 28: void MotorInit(){
 [e :U _MotorInit ]
 [f ]
-[; ;motors.c: 28: TRISC = 0b11000000;
-"28
-[e = _TRISC -> -> 192 `i `uc ]
-[; ;motors.c: 29: RC0=1;
+[; ;motors.c: 29: TRISC = 0b11000000;
 "29
-[e = _RC0 -> -> 1 `i `b ]
-[; ;motors.c: 30: RC1=0;
+[e = _TRISC -> -> 192 `i `uc ]
+[; ;motors.c: 30: RC0=1;
 "30
-[e = _RC1 -> -> 0 `i `b ]
-[; ;motors.c: 31: RC2=1;
+[e = _RC0 -> -> 1 `i `b ]
+[; ;motors.c: 31: RC1=0;
 "31
-[e = _RC2 -> -> 1 `i `b ]
-[; ;motors.c: 32: RC3=0;
+[e = _RC1 -> -> 0 `i `b ]
+[; ;motors.c: 32: RC2=1;
 "32
-[e = _RC3 -> -> 0 `i `b ]
-[; ;motors.c: 33: SetPWMMotorLeft(0);
+[e = _RC2 -> -> 1 `i `b ]
+[; ;motors.c: 33: RC3=0;
 "33
-[e ( _SetPWMMotorLeft (1 -> -> 0 `i `ui ]
-[; ;motors.c: 34: SetPWMMotorRight(0);
+[e = _RC3 -> -> 0 `i `b ]
+[; ;motors.c: 34: SetPWMMotorLeft(0);
 "34
-[e ( _SetPWMMotorRight (1 -> -> 0 `i `ui ]
-[; ;motors.c: 35: }
+[e ( _SetPWMMotorLeft (1 -> -> 0 `i `ui ]
+[; ;motors.c: 35: SetPWMMotorRight(0);
 "35
+[e ( _SetPWMMotorRight (1 -> -> 0 `i `ui ]
+[; ;motors.c: 36: }
+"36
 [e :UE 398 ]
 }
-"37
+"38
 [v _SetMotorLeft `(v ~T0 @X0 1 ef1`i ]
 {
-[; ;motors.c: 37: void SetMotorLeft(signed int speed){
+[; ;motors.c: 38: void SetMotorLeft(signed int speed){
 [e :U _SetMotorLeft ]
 [v _speed `i ~T0 @X0 1 r1 ]
 [f ]
-[; ;motors.c: 39: MotorLeftSpeed=speed;
-"39
+[; ;motors.c: 40: MotorLeftSpeed=speed;
+"40
 [e = _MotorLeftSpeed _speed ]
-[; ;motors.c: 42: if(speed>0){
-"42
+[; ;motors.c: 44: if(speed>0){
+"44
 [e $ ! > _speed -> 0 `i 400  ]
 {
-[; ;motors.c: 44: RC0=1;
-"44
-[e = _RC0 -> -> 1 `i `b ]
-[; ;motors.c: 45: RC1=0;
-"45
-[e = _RC1 -> -> 0 `i `b ]
+[; ;motors.c: 46: RC0=1;
 "46
+[e = _RC0 -> -> 1 `i `b ]
+[; ;motors.c: 47: RC1=0;
+"47
+[e = _RC1 -> -> 0 `i `b ]
+"48
 }
-[; ;motors.c: 46: }else if (speed<0){
+[; ;motors.c: 48: }else if (speed<0){
 [e $U 401  ]
 [e :U 400 ]
 [e $ ! < _speed -> 0 `i 402  ]
 {
-[; ;motors.c: 48: RC0=0;
-"48
-[e = _RC0 -> -> 0 `i `b ]
-[; ;motors.c: 49: RC1=1;
-"49
-[e = _RC1 -> -> 1 `i `b ]
+[; ;motors.c: 50: RC0=0;
 "50
+[e = _RC0 -> -> 0 `i `b ]
+[; ;motors.c: 51: RC1=1;
+"51
+[e = _RC1 -> -> 1 `i `b ]
+"52
 }
 [e :U 402 ]
-"62
+"55
 [e :U 401 ]
-[; ;motors.c: 50: }
-[; ;motors.c: 62: SetPWMMotorLeft(abs(speed));
+[; ;motors.c: 52: }
+[; ;motors.c: 55: SetPWMMotorLeft(abs(speed));
 [e ( _SetPWMMotorLeft (1 -> ( _abs (1 _speed `ui ]
-[; ;motors.c: 63: }
-"63
+[; ;motors.c: 56: }
+"56
 [e :UE 399 ]
 }
-"64
+"57
 [v _SetMotorRight `(v ~T0 @X0 1 ef1`i ]
 {
-[; ;motors.c: 64: void SetMotorRight(signed int speed){
+[; ;motors.c: 57: void SetMotorRight(signed int speed){
 [e :U _SetMotorRight ]
 [v _speed `i ~T0 @X0 1 r1 ]
 [f ]
-[; ;motors.c: 66: MotorRightSpeed=speed;
-"66
+[; ;motors.c: 59: MotorRightSpeed=speed;
+"59
 [e = _MotorRightSpeed _speed ]
-[; ;motors.c: 69: if(speed>0){
-"69
+[; ;motors.c: 63: if(speed>0){
+"63
 [e $ ! > _speed -> 0 `i 404  ]
 {
-[; ;motors.c: 71: RC2=1;
-"71
+[; ;motors.c: 65: RC2=1;
+"65
 [e = _RC2 -> -> 1 `i `b ]
-[; ;motors.c: 72: RC3=0;
-"72
+[; ;motors.c: 66: RC3=0;
+"66
 [e = _RC3 -> -> 0 `i `b ]
-"73
+"67
 }
-[; ;motors.c: 73: }else if (speed<0){
+[; ;motors.c: 67: }else if (speed<0){
 [e $U 405  ]
 [e :U 404 ]
 [e $ ! < _speed -> 0 `i 406  ]
 {
-[; ;motors.c: 75: RC2=0;
-"75
+[; ;motors.c: 69: RC2=0;
+"69
 [e = _RC2 -> -> 0 `i `b ]
-[; ;motors.c: 76: RC3=1;
-"76
+[; ;motors.c: 70: RC3=1;
+"70
 [e = _RC3 -> -> 1 `i `b ]
-"77
+"71
 }
 [e :U 406 ]
-"89
+"74
 [e :U 405 ]
-[; ;motors.c: 77: }
-[; ;motors.c: 89: SetPWMMotorRight(abs(speed));
+[; ;motors.c: 71: }
+[; ;motors.c: 74: SetPWMMotorRight(abs(speed));
 [e ( _SetPWMMotorRight (1 -> ( _abs (1 _speed `ui ]
-[; ;motors.c: 90: }
-"90
+[; ;motors.c: 75: }
+"75
 [e :UE 403 ]
 }
-"92
+"77
 [v _Stop `(v ~T0 @X0 1 ef ]
 {
-[; ;motors.c: 92: void Stop(){
+[; ;motors.c: 77: void Stop(){
 [e :U _Stop ]
 [f ]
-[; ;motors.c: 93: if((MotorLeftSpeed==0) && (MotorRightSpeed==0)){
-"93
+[; ;motors.c: 78: if((MotorLeftSpeed==0) && (MotorRightSpeed==0)){
+"78
 [e $ ! && == _MotorLeftSpeed -> 0 `i == _MotorRightSpeed -> 0 `i 408  ]
 {
-"96
+"81
 }
 [e :U 408 ]
-[; ;motors.c: 96: }
-[; ;motors.c: 98: }
-"98
+[; ;motors.c: 81: }
+[; ;motors.c: 83: }
+"83
 [e :UE 407 ]
 }
+"85
+[v _WriteSpeedInLCD `(v ~T0 @X0 1 ef ]
+{
+[; ;motors.c: 85: void WriteSpeedInLCD (){
+[e :U _WriteSpeedInLCD ]
+[f ]
+[; ;motors.c: 88: LCDGotoXY(0,0);
+"88
+[e ( _LCDGotoXY (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;motors.c: 89: LCDWriteString("<Right  -  Left>");
+"89
+[e ( _LCDWriteString (1 :s 1C ]
+[; ;motors.c: 91: LCDGotoXY(0,1);
+"91
+[e ( _LCDGotoXY (2 , -> -> 0 `i `uc -> -> 1 `i `uc ]
+[; ;motors.c: 92: if(MotorRightSpeed<0){
+"92
+[e $ ! < _MotorRightSpeed -> 0 `i 410  ]
+{
+[; ;motors.c: 93: LCDWriteString("-");
+"93
+[e ( _LCDWriteString (1 :s 2C ]
+"94
+}
+[; ;motors.c: 94: }else{
+[e $U 411  ]
+[e :U 410 ]
+{
+[; ;motors.c: 95: LCDWriteString("+");
+"95
+[e ( _LCDWriteString (1 :s 3C ]
+"96
+}
+[e :U 411 ]
+[; ;motors.c: 96: }
+[; ;motors.c: 98: LCDGotoXY(1,1);
+"98
+[e ( _LCDGotoXY (2 , -> -> 1 `i `uc -> -> 1 `i `uc ]
+[; ;motors.c: 99: LCDWriteInt(abs(MotorRightSpeed), 3);
+"99
+[e ( _LCDWriteInt (2 , ( _abs (1 _MotorRightSpeed -> -> 3 `i `c ]
+[; ;motors.c: 101: LCDGotoXY(12,1);
+"101
+[e ( _LCDGotoXY (2 , -> -> 12 `i `uc -> -> 1 `i `uc ]
+[; ;motors.c: 102: if(MotorLeftSpeed<0){
+"102
+[e $ ! < _MotorLeftSpeed -> 0 `i 412  ]
+{
+[; ;motors.c: 103: LCDWriteString("-");
+"103
+[e ( _LCDWriteString (1 :s 4C ]
+"104
+}
+[; ;motors.c: 104: }else{
+[e $U 413  ]
+[e :U 412 ]
+{
+[; ;motors.c: 105: LCDWriteString("+");
+"105
+[e ( _LCDWriteString (1 :s 5C ]
+"106
+}
+[e :U 413 ]
+[; ;motors.c: 106: }
+[; ;motors.c: 107: LCDGotoXY(13,1);
+"107
+[e ( _LCDGotoXY (2 , -> -> 13 `i `uc -> -> 1 `i `uc ]
+[; ;motors.c: 108: LCDWriteInt(abs(MotorLeftSpeed),3);
+"108
+[e ( _LCDWriteInt (2 , ( _abs (1 _MotorLeftSpeed -> -> 3 `i `c ]
+[; ;motors.c: 109: }
+"109
+[e :UE 409 ]
+}
+[a 1C 60 82 105 103 104 116 32 32 45 32 32 76 101 102 116 62 0 ]
+[a 2C 45 0 ]
+[a 4C 45 0 ]
+[a 3C 43 0 ]
+[a 5C 43 0 ]

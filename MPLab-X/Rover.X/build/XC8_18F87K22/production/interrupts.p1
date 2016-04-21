@@ -3847,6 +3847,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ADC.h: 25: unsigned int ReadDistanceCentral ();
 [; ;ADC.h: 27: void SetBattery (unsigned int lecture);
 [; ;ADC.h: 28: unsigned int ReadBattery ();
+[; ;ADC.h: 30: void ShowLecturesInLCD (void);
 [; ;PWM.h: 7: void PWMInit(void);
 [; ;PWM.h: 13: void PWMSetDutyCycle(unsigned long percentage);
 [; ;TimerPWM.h: 8: void TimerPWMInit();
@@ -3860,9 +3861,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;serial.h: 13: int ReadSpeedRight();
 [; ;serial.h: 14: int ReadSpeedLeft();
 [; ;serial.h: 15: int ConvertPicSpeed (char velocity);
-[v F4205 `(v ~T0 @X0 1 tf ]
+[v F4207 `(v ~T0 @X0 1 tf ]
 "10 interrupts.c
-[v _isr `IF4205 ~T0 @X0 1 e ]
+[v _isr `IF4207 ~T0 @X0 1 e ]
 {
 [; ;interrupts.c: 10: void interrupt isr(void) {
 [e :U _isr ]
@@ -3872,8 +3873,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $ ! == -> _ADIF `i -> 1 `i 394  ]
 {
 "16
-[v F4206 `ui ~T0 @X0 1 s Readport ]
-[i F4206
+[v F4208 `ui ~T0 @X0 1 s Readport ]
+[i F4208
 -> -> 0 `i `ui
 ]
 "17
@@ -3905,7 +3906,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _SetDistanceLeft (1 _read ]
 [; ;interrupts.c: 26: Readport++;
 "26
-[e ++ F4206 -> -> 1 `i `ui ]
+[e ++ F4208 -> -> 1 `i `ui ]
 [; ;interrupts.c: 27: break;
 "27
 [e $U 395  ]
@@ -3929,7 +3930,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _SetDistanceCentral (1 _read ]
 [; ;interrupts.c: 34: Readport++;
 "34
-[e ++ F4206 -> -> 1 `i `ui ]
+[e ++ F4208 -> -> 1 `i `ui ]
 [; ;interrupts.c: 35: break;
 "35
 [e $U 395  ]
@@ -3953,7 +3954,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _SetDistanceRight (1 _read ]
 [; ;interrupts.c: 42: Readport++;
 "42
-[e ++ F4206 -> -> 1 `i `ui ]
+[e ++ F4208 -> -> 1 `i `ui ]
 [; ;interrupts.c: 43: break;
 "43
 [e $U 395  ]
@@ -3977,7 +3978,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _SetBattery (1 _read ]
 [; ;interrupts.c: 50: Readport=0;
 "50
-[e = F4206 -> -> 0 `i `ui ]
+[e = F4208 -> -> 0 `i `ui ]
 [; ;interrupts.c: 51: break;
 "51
 [e $U 395  ]
@@ -3998,7 +3999,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _CHS0 -> -> 0 `i `b ]
 [; ;interrupts.c: 57: Readport=0;
 "57
-[e = F4206 -> -> 0 `i `ui ]
+[e = F4208 -> -> 0 `i `ui ]
 [; ;interrupts.c: 58: break;
 "58
 [e $U 395  ]
@@ -4008,7 +4009,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 395  ]
 "19
 [e :U 396 ]
-[e [\ F4206 , $ -> -> 0 `i `ui 397
+[e [\ F4208 , $ -> -> 0 `i `ui 397
  , $ -> -> 1 `i `ui 398
  , $ -> -> 2 `i `ui 399
  , $ -> -> 3 `i `ui 400
@@ -4029,17 +4030,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 "67
 {
 "68
-[v F4208 `ui ~T0 @X0 1 s PWMLeft ]
+[v F4210 `ui ~T0 @X0 1 s PWMLeft ]
 "69
-[v F4209 `ui ~T0 @X0 1 s PWMRight ]
+[v F4211 `ui ~T0 @X0 1 s PWMRight ]
 "70
-[v F4210 `ui ~T0 @X0 1 s iteration ]
+[v F4212 `ui ~T0 @X0 1 s iteration ]
 [; ;interrupts.c: 68: static unsigned int PWMLeft;
 [; ;interrupts.c: 69: static unsigned int PWMRight;
 [; ;interrupts.c: 70: static unsigned int iteration;
 [; ;interrupts.c: 72: if (iteration==20){
 "72
-[e $ ! == F4210 -> -> 20 `i `ui 403  ]
+[e $ ! == F4212 -> -> 20 `i `ui 403  ]
 {
 [; ;interrupts.c: 73: RC5=0;
 "73
@@ -4049,20 +4050,20 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _RC4 -> -> 0 `i `b ]
 [; ;interrupts.c: 75: iteration=0;
 "75
-[e = F4210 -> -> 0 `i `ui ]
+[e = F4212 -> -> 0 `i `ui ]
 [; ;interrupts.c: 76: PWMRight=ReadPWMMotorRight();
 "76
-[e = F4209 ( _ReadPWMMotorRight ..  ]
+[e = F4211 ( _ReadPWMMotorRight ..  ]
 [; ;interrupts.c: 77: PWMLeft=ReadPWMMotorLeft();
 "77
-[e = F4208 ( _ReadPWMMotorLeft ..  ]
+[e = F4210 ( _ReadPWMMotorLeft ..  ]
 "78
 }
 [e :U 403 ]
 [; ;interrupts.c: 78: }
 [; ;interrupts.c: 79: if (PWMRight==iteration){
 "79
-[e $ ! == F4209 F4210 404  ]
+[e $ ! == F4211 F4212 404  ]
 {
 [; ;interrupts.c: 80: RC5=1;
 "80
@@ -4073,7 +4074,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupts.c: 81: }
 [; ;interrupts.c: 82: if (PWMLeft==iteration){
 "82
-[e $ ! == F4208 F4210 405  ]
+[e $ ! == F4210 F4212 405  ]
 {
 [; ;interrupts.c: 83: RC4=1;
 "83
@@ -4084,7 +4085,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupts.c: 84: }
 [; ;interrupts.c: 85: iteration++;
 "85
-[e ++ F4210 -> -> 1 `i `ui ]
+[e ++ F4212 -> -> 1 `i `ui ]
 [; ;interrupts.c: 88: TMR0IF=0;
 "88
 [e = _TMR0IF -> -> 0 `i `b ]
@@ -4103,8 +4104,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $ ! == -> _RCIF `i -> 1 `i 406  ]
 {
 "96
-[v F4211 `i ~T0 @X0 1 s counter ]
-[i F4211
+[v F4213 `i ~T0 @X0 1 s counter ]
+[i F4213
 -> 0 `i
 ]
 "98
@@ -4114,7 +4115,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _CharRx ( _ReadUSART ..  ]
 [; ;interrupts.c: 100: if (counter==0){
 "100
-[e $ ! == F4211 -> 0 `i 407  ]
+[e $ ! == F4213 -> 0 `i 407  ]
 {
 [; ;interrupts.c: 101: if (CharRx=='b'){
 "101
@@ -4122,7 +4123,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;interrupts.c: 102: counter=1;
 "102
-[e = F4211 -> 1 `i ]
+[e = F4213 -> 1 `i ]
 "103
 }
 [; ;interrupts.c: 103: }else if (CharRx=='c'){
@@ -4132,7 +4133,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;interrupts.c: 104: counter=2;
 "104
-[e = F4211 -> 2 `i ]
+[e = F4213 -> 2 `i ]
 "105
 }
 [e :U 410 ]
@@ -4143,27 +4144,27 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupts.c: 106: }else if (counter==1){
 [e $U 411  ]
 [e :U 407 ]
-[e $ ! == F4211 -> 1 `i 412  ]
+[e $ ! == F4213 -> 1 `i 412  ]
 {
 [; ;interrupts.c: 107: SetSpeedRight(CharRx);
 "107
 [e ( _SetSpeedRight (1 _CharRx ]
 [; ;interrupts.c: 108: counter=0;
 "108
-[e = F4211 -> 0 `i ]
+[e = F4213 -> 0 `i ]
 "109
 }
 [; ;interrupts.c: 109: }else if (counter==2){
 [e $U 413  ]
 [e :U 412 ]
-[e $ ! == F4211 -> 2 `i 414  ]
+[e $ ! == F4213 -> 2 `i 414  ]
 {
 [; ;interrupts.c: 110: SetSpeedLeft(CharRx);
 "110
 [e ( _SetSpeedLeft (1 _CharRx ]
 [; ;interrupts.c: 111: counter=0;
 "111
-[e = F4211 -> 0 `i ]
+[e = F4213 -> 0 `i ]
 "112
 }
 [; ;interrupts.c: 112: }else{
@@ -4172,7 +4173,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;interrupts.c: 113: counter=0;
 "113
-[e = F4211 -> 0 `i ]
+[e = F4213 -> 0 `i ]
 "114
 }
 [e :U 415 ]

@@ -9,3 +9,4 @@ void MotorInit();
 void SetMotorLeft(signed int speed);
 void SetMotorRight(signed int speed);
 void Stop();
+void WriteSpeedInLCD ();

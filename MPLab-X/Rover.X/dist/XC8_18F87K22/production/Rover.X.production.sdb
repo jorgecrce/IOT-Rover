@@ -3,26 +3,28 @@
 [d edition pro ]
 [d chip 18F45K20 ]
 [d frameptr 4065 ]
-"8 D:\HRPD\MPLab-X\Rover.X\ADC.c
+"10 D:\HRPD\MPLab-X\Rover.X\ADC.c
 [v _ADCInit ADCInit `(v  1 e 1 0 ]
-"32
+"34
 [v _ADCInitiateConversion ADCInitiateConversion `(v  1 e 1 0 ]
-"36
+"38
 [v _ADCGetOutput ADCGetOutput `(ui  1 e 2 0 ]
-"52
+"54
 [v _SetDistanceLeft SetDistanceLeft `(v  1 e 1 0 ]
-"56
+"58
 [v _ReadDistanceLeft ReadDistanceLeft `(ui  1 e 2 0 ]
-"60
+"62
 [v _SetDistanceRight SetDistanceRight `(v  1 e 1 0 ]
-"64
+"67
 [v _ReadDistanceRight ReadDistanceRight `(ui  1 e 2 0 ]
-"68
+"71
 [v _SetDistanceCentral SetDistanceCentral `(v  1 e 1 0 ]
-"72
+"75
 [v _ReadDistanceCentral ReadDistanceCentral `(ui  1 e 2 0 ]
-"76
+"80
 [v _SetBattery SetBattery `(v  1 e 1 0 ]
+"91
+[v _ShowLecturesInLCD ShowLecturesInLCD `(v  1 e 1 0 ]
 "4 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\abs.c
 [v _abs abs `(i  1 e 2 0 ]
 "8 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\awdiv.c
@@ -77,33 +79,37 @@
 [v _isr isr `II(v  1 e 1 0 ]
 "83 D:\HRPD\MPLab-X\Rover.X\lcd_hd44780_pic16.c
 [v _LCDByte LCDByte `(v  1 e 1 0 ]
+[v i2_LCDByte LCDByte `(v  1 e 1 0 ]
 "138
 [v _LCDBusyLoop LCDBusyLoop `(v  1 e 1 0 ]
+[v i2_LCDBusyLoop LCDBusyLoop `(v  1 e 1 0 ]
 "196
 [v _LCDInit LCDInit `(v  1 e 1 0 ]
+"254
+[v _LCDWriteString LCDWriteString `(v  1 e 1 0 ]
 "310
 [v _LCDWriteInt LCDWriteInt `(v  1 e 1 0 ]
 "355
 [v _LCDGotoXY LCDGotoXY `(v  1 e 1 0 ]
 "11 D:\HRPD\MPLab-X\Rover.X\main.c
 [v _main main `(v  1 e 1 0 ]
-"27 D:\HRPD\MPLab-X\Rover.X\motors.c
+"28 D:\HRPD\MPLab-X\Rover.X\motors.c
 [v _MotorInit MotorInit `(v  1 e 1 0 ]
-"37
+"38
 [v _SetMotorLeft SetMotorLeft `(v  1 e 1 0 ]
-"64
+"57
 [v _SetMotorRight SetMotorRight `(v  1 e 1 0 ]
 "21 D:\HRPD\MPLab-X\Rover.X\parallel.c
 [v _parallelInit parallelInit `(v  1 e 1 0 ]
 "29
 [v _ReadParallel ReadParallel `(v  1 e 1 0 ]
-"56
+"44
 [v _ReadParallelSpeedRight ReadParallelSpeedRight `(i  1 e 2 0 ]
-"59
+"47
 [v _ReadParallelSpeedLeft ReadParallelSpeedLeft `(i  1 e 2 0 ]
-"63
+"51
 [v _ReadMode ReadMode `(ui  1 e 2 0 ]
-"66
+"54
 [v _ConvertParallelSpeed ConvertParallelSpeed `(i  1 e 2 0 ]
 "27 D:\HRPD\MPLab-X\Rover.X\serial.c
 [v _SetSpeedRight SetSpeedRight `(v  1 e 1 0 ]
@@ -121,13 +127,13 @@
 [v _ReadPWMMotorRight ReadPWMMotorRight `(ui  1 e 2 0 ]
 "42
 [v _ReadPWMMotorLeft ReadPWMMotorLeft `(ui  1 e 2 0 ]
-"2 D:\HRPD\MPLab-X\Rover.X\ADC.c
+"4 D:\HRPD\MPLab-X\Rover.X\ADC.c
 [v _DistanceLeft DistanceLeft `ui  1 s 2 DistanceLeft ]
-"3
-[v _DistanceRight DistanceRight `ui  1 s 2 DistanceRight ]
-"4
-[v _DistanceCentral DistanceCentral `ui  1 s 2 DistanceCentral ]
 "5
+[v _DistanceRight DistanceRight `ui  1 s 2 DistanceRight ]
+"6
+[v _DistanceCentral DistanceCentral `ui  1 s 2 DistanceCentral ]
+"7
 [v _Battery Battery `ui  1 s 2 Battery ]
 "489 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f45k20.h
 [v _ANSELH ANSELH `VEuc  1 e 1 @3967 ]
@@ -141,7 +147,7 @@
 [v _TRISC TRISC `VEuc  1 e 1 @3988 ]
 "2778
 [v _TRISD TRISD `VEuc  1 e 1 @3989 ]
-[s S317 . 1 `uc 1 TRISD0 1 0 :1:0 
+[s S349 . 1 `uc 1 TRISD0 1 0 :1:0 
 `uc 1 TRISD1 1 0 :1:1 
 `uc 1 TRISD2 1 0 :1:2 
 `uc 1 TRISD3 1 0 :1:3 
@@ -151,7 +157,7 @@
 `uc 1 TRISD7 1 0 :1:7 
 ]
 "2810
-[s S326 . 1 `uc 1 RD0 1 0 :1:0 
+[s S358 . 1 `uc 1 RD0 1 0 :1:0 
 `uc 1 RD1 1 0 :1:1 
 `uc 1 RD2 1 0 :1:2 
 `uc 1 RD3 1 0 :1:3 
@@ -160,9 +166,9 @@
 `uc 1 RD6 1 0 :1:6 
 `uc 1 RD7 1 0 :1:7 
 ]
-[u S335 . 1 `S317 1 . 1 0 `S326 1 . 1 0 ]
-[v _TRISDbits TRISDbits `VES335  1 e 1 @3989 ]
-[s S565 . 1 `uc 1 RX9D 1 0 :1:0 
+[u S367 . 1 `S349 1 . 1 0 `S358 1 . 1 0 ]
+[v _TRISDbits TRISDbits `VES367  1 e 1 @3989 ]
+[s S592 . 1 `uc 1 RX9D 1 0 :1:0 
 `uc 1 OERR 1 0 :1:1 
 `uc 1 FERR 1 0 :1:2 
 `uc 1 ADDEN 1 0 :1:3 
@@ -172,22 +178,22 @@
 `uc 1 SPEN 1 0 :1:7 
 ]
 "4025
-[s S574 . 1 `uc 1 . 1 0 :3:0 
+[s S601 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 ADEN 1 0 :1:3 
 ]
-[s S577 . 1 `uc 1 . 1 0 :5:0 
+[s S604 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 SRENA 1 0 :1:5 
 ]
-[s S580 . 1 `uc 1 . 1 0 :6:0 
+[s S607 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 RC8_9 1 0 :1:6 
 ]
-[s S583 . 1 `uc 1 . 1 0 :6:0 
+[s S610 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 RC9 1 0 :1:6 
 ]
-[s S586 . 1 `uc 1 RCD8 1 0 :1:0 
+[s S613 . 1 `uc 1 RCD8 1 0 :1:0 
 ]
-[u S588 . 1 `S565 1 . 1 0 `S574 1 . 1 0 `S577 1 . 1 0 `S580 1 . 1 0 `S583 1 . 1 0 `S586 1 . 1 0 ]
-[v _RCSTAbits RCSTAbits `VES588  1 e 1 @4011 ]
+[u S615 . 1 `S592 1 . 1 0 `S601 1 . 1 0 `S604 1 . 1 0 `S607 1 . 1 0 `S610 1 . 1 0 `S613 1 . 1 0 ]
+[v _RCSTAbits RCSTAbits `VES615  1 e 1 @4011 ]
 [s S78 . 1 `uc 1 TX9D 1 0 :1:0 
 `uc 1 TRMT 1 0 :1:1 
 `uc 1 BRGH 1 0 :1:2 
@@ -318,20 +324,20 @@
 [v _TRISA2 TRISA2 `VEb  1 e 0 @31890 ]
 "8509
 [v _TRISA3 TRISA3 `VEb  1 e 0 @31891 ]
-[s S821 . 1 `uc 1 RX_NINE 1 0 :1:0 
+[s S848 . 1 `uc 1 RX_NINE 1 0 :1:0 
 `uc 1 TX_NINE 1 0 :1:1 
 `uc 1 FRAME_ERROR 1 0 :1:2 
 `uc 1 OVERRUN_ERROR 1 0 :1:3 
 `uc 1 fill 1 0 :4:4 
 ]
 "5 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\pic18\plib\USART\udefs.c
-[u S827 USART 1 `uc 1 val 1 0 `S821 1 . 1 0 ]
-[v _USART_Status USART_Status `S827  1 e 1 0 ]
+[u S854 USART 1 `uc 1 val 1 0 `S848 1 . 1 0 ]
+[v _USART_Status USART_Status `S854  1 e 1 0 ]
 "15 D:\HRPD\MPLab-X\Rover.X\custom_char.h
 [v ___cgram __cgram `[64]uc  1 e 64 0 ]
-"19 D:\HRPD\MPLab-X\Rover.X\motors.c
+"20 D:\HRPD\MPLab-X\Rover.X\motors.c
 [v _MotorRightSpeed MotorRightSpeed `i  1 s 2 MotorRightSpeed ]
-"20
+"21
 [v _MotorLeftSpeed MotorLeftSpeed `i  1 s 2 MotorLeftSpeed ]
 "13 D:\HRPD\MPLab-X\Rover.X\parallel.c
 [v parallel@SpeedLeft SpeedLeft `i  1 s 2 SpeedLeft ]
@@ -362,10 +368,10 @@
 {
 "28
 } 0
-"27 D:\HRPD\MPLab-X\Rover.X\motors.c
+"28 D:\HRPD\MPLab-X\Rover.X\motors.c
 [v _MotorInit MotorInit `(v  1 e 1 0 ]
 {
-"35
+"36
 } 0
 "196 D:\HRPD\MPLab-X\Rover.X\lcd_hd44780_pic16.c
 [v _LCDInit LCDInit `(v  1 e 1 0 ]
@@ -378,148 +384,6 @@
 "212
 [v LCDInit@style style `uc  1 a 1 9 ]
 "253
-} 0
-"20 D:\HRPD\MPLab-X\Rover.X\driver.c
-[v _Go Go `(v  1 e 1 0 ]
-{
-"24
-[v Go@SpeedRight SpeedRight `i  1 a 2 31 ]
-[v Go@SpeedLeft SpeedLeft `i  1 a 2 29 ]
-"59
-} 0
-"60
-[v _TurnRight90 TurnRight90 `(v  1 e 1 0 ]
-{
-"64
-} 0
-"72
-[v _TurnRight135 TurnRight135 `(v  1 e 1 0 ]
-{
-"76
-} 0
-"66
-[v _TurnLeft90 TurnLeft90 `(v  1 e 1 0 ]
-{
-"70
-} 0
-"78
-[v _TurnLeft135 TurnLeft135 `(v  1 e 1 0 ]
-{
-"82
-} 0
-"64 D:\HRPD\MPLab-X\Rover.X\motors.c
-[v _SetMotorRight SetMotorRight `(v  1 e 1 0 ]
-{
-[v SetMotorRight@speed speed `i  1 p 2 9 ]
-"90
-} 0
-"34 D:\HRPD\MPLab-X\Rover.X\TimerPWM.c
-[v _SetPWMMotorRight SetPWMMotorRight `(v  1 e 1 0 ]
-{
-[v SetPWMMotorRight@percentage percentage `ui  1 p 2 7 ]
-"36
-} 0
-"37 D:\HRPD\MPLab-X\Rover.X\motors.c
-[v _SetMotorLeft SetMotorLeft `(v  1 e 1 0 ]
-{
-[v SetMotorLeft@speed speed `i  1 p 2 9 ]
-"63
-} 0
-"4 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\abs.c
-[v _abs abs `(i  1 e 2 0 ]
-{
-[v abs@a a `i  1 p 2 0 ]
-"9
-} 0
-"30 D:\HRPD\MPLab-X\Rover.X\TimerPWM.c
-[v _SetPWMMotorLeft SetPWMMotorLeft `(v  1 e 1 0 ]
-{
-[v SetPWMMotorLeft@percentage percentage `ui  1 p 2 7 ]
-"32
-} 0
-"8 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\lwdiv.c
-[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
-{
-"11
-[v ___lwdiv@quotient quotient `ui  1 a 2 4 ]
-"12
-[v ___lwdiv@counter counter `uc  1 a 1 6 ]
-"8
-[v ___lwdiv@dividend dividend `ui  1 p 2 0 ]
-[v ___lwdiv@divisor divisor `ui  1 p 2 2 ]
-"31
-} 0
-"56 D:\HRPD\MPLab-X\Rover.X\parallel.c
-[v _ReadParallelSpeedRight ReadParallelSpeedRight `(i  1 e 2 0 ]
-{
-"58
-} 0
-"59
-[v _ReadParallelSpeedLeft ReadParallelSpeedLeft `(i  1 e 2 0 ]
-{
-"61
-} 0
-"29
-[v _ReadParallel ReadParallel `(v  1 e 1 0 ]
-{
-"42
-[v ReadParallel@temp temp `i  1 a 2 22 ]
-"31
-[v ReadParallel@left left `uc  1 a 1 26 ]
-"32
-[v ReadParallel@right right `uc  1 a 1 25 ]
-"30
-[v ReadParallel@lecture lecture `uc  1 a 1 24 ]
-"52
-} 0
-"310 D:\HRPD\MPLab-X\Rover.X\lcd_hd44780_pic16.c
-[v _LCDWriteInt LCDWriteInt `(v  1 e 1 0 ]
-{
-"323
-[v LCDWriteInt@str str `[5]uc  1 a 5 13 ]
-"324
-[v LCDWriteInt@i i `i  1 a 2 20 ]
-[v LCDWriteInt@j j `i  1 a 2 18 ]
-"310
-[v LCDWriteInt@val val `i  1 p 2 8 ]
-[v LCDWriteInt@field_length field_length `c  1 p 1 10 ]
-"311
-[v LCDWriteInt@F4236 F4236 `[5]uc  1 s 5 F4236 ]
-"349
-} 0
-"8 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\awmod.c
-[v ___awmod __awmod `(i  1 e 2 0 ]
-{
-"11
-[v ___awmod@sign sign `uc  1 a 1 5 ]
-[v ___awmod@counter counter `uc  1 a 1 4 ]
-"8
-[v ___awmod@dividend dividend `i  1 p 2 0 ]
-[v ___awmod@divisor divisor `i  1 p 2 2 ]
-"35
-} 0
-"8 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\awdiv.c
-[v ___awdiv __awdiv `(i  1 e 2 0 ]
-{
-"11
-[v ___awdiv@quotient quotient `i  1 a 2 6 ]
-"12
-[v ___awdiv@sign sign `uc  1 a 1 5 ]
-[v ___awdiv@counter counter `uc  1 a 1 4 ]
-"8
-[v ___awdiv@dividend dividend `i  1 p 2 0 ]
-[v ___awdiv@divisor divisor `i  1 p 2 2 ]
-"42
-} 0
-"355 D:\HRPD\MPLab-X\Rover.X\lcd_hd44780_pic16.c
-[v _LCDGotoXY LCDGotoXY `(v  1 e 1 0 ]
-{
-[v LCDGotoXY@x x `uc  1 a 1 wreg ]
-[v LCDGotoXY@x x `uc  1 a 1 wreg ]
-[v LCDGotoXY@y y `uc  1 p 1 8 ]
-"357
-[v LCDGotoXY@x x `uc  1 a 1 9 ]
-"398
 } 0
 "83
 [v _LCDByte LCDByte `(v  1 e 1 0 ]
@@ -546,51 +410,142 @@
 [v LCDBusyLoop@busy busy `uc  1 a 1 0 ]
 "194
 } 0
-"66 D:\HRPD\MPLab-X\Rover.X\parallel.c
+"20 D:\HRPD\MPLab-X\Rover.X\driver.c
+[v _Go Go `(v  1 e 1 0 ]
+{
+"24
+[v Go@SpeedRight SpeedRight `i  1 a 2 16 ]
+[v Go@SpeedLeft SpeedLeft `i  1 a 2 14 ]
+"59
+} 0
+"60
+[v _TurnRight90 TurnRight90 `(v  1 e 1 0 ]
+{
+"64
+} 0
+"72
+[v _TurnRight135 TurnRight135 `(v  1 e 1 0 ]
+{
+"76
+} 0
+"66
+[v _TurnLeft90 TurnLeft90 `(v  1 e 1 0 ]
+{
+"70
+} 0
+"78
+[v _TurnLeft135 TurnLeft135 `(v  1 e 1 0 ]
+{
+"82
+} 0
+"57 D:\HRPD\MPLab-X\Rover.X\motors.c
+[v _SetMotorRight SetMotorRight `(v  1 e 1 0 ]
+{
+[v SetMotorRight@speed speed `i  1 p 2 9 ]
+"75
+} 0
+"34 D:\HRPD\MPLab-X\Rover.X\TimerPWM.c
+[v _SetPWMMotorRight SetPWMMotorRight `(v  1 e 1 0 ]
+{
+[v SetPWMMotorRight@percentage percentage `ui  1 p 2 7 ]
+"36
+} 0
+"38 D:\HRPD\MPLab-X\Rover.X\motors.c
+[v _SetMotorLeft SetMotorLeft `(v  1 e 1 0 ]
+{
+[v SetMotorLeft@speed speed `i  1 p 2 9 ]
+"56
+} 0
+"4 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\abs.c
+[v _abs abs `(i  1 e 2 0 ]
+{
+[v abs@a a `i  1 p 2 0 ]
+"9
+} 0
+"30 D:\HRPD\MPLab-X\Rover.X\TimerPWM.c
+[v _SetPWMMotorLeft SetPWMMotorLeft `(v  1 e 1 0 ]
+{
+[v SetPWMMotorLeft@percentage percentage `ui  1 p 2 7 ]
+"32
+} 0
+"8 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+{
+"11
+[v ___lwdiv@quotient quotient `ui  1 a 2 4 ]
+"12
+[v ___lwdiv@counter counter `uc  1 a 1 6 ]
+"8
+[v ___lwdiv@dividend dividend `ui  1 p 2 0 ]
+[v ___lwdiv@divisor divisor `ui  1 p 2 2 ]
+"31
+} 0
+"44 D:\HRPD\MPLab-X\Rover.X\parallel.c
+[v _ReadParallelSpeedRight ReadParallelSpeedRight `(i  1 e 2 0 ]
+{
+"46
+} 0
+"47
+[v _ReadParallelSpeedLeft ReadParallelSpeedLeft `(i  1 e 2 0 ]
+{
+"49
+} 0
+"29
+[v _ReadParallel ReadParallel `(v  1 e 1 0 ]
+{
+"31
+[v ReadParallel@left left `uc  1 a 1 5 ]
+"30
+[v ReadParallel@lecture lecture `uc  1 a 1 4 ]
+"32
+[v ReadParallel@right right `uc  1 a 1 3 ]
+"40
+} 0
+"54
 [v _ConvertParallelSpeed ConvertParallelSpeed `(i  1 e 2 0 ]
 {
 [v ConvertParallelSpeed@velocity velocity `uc  1 a 1 wreg ]
 [v ConvertParallelSpeed@velocity velocity `uc  1 a 1 wreg ]
 [v ConvertParallelSpeed@velocity velocity `uc  1 a 1 2 ]
-"105
+"93
 } 0
-"63
+"51
 [v _ReadMode ReadMode `(ui  1 e 2 0 ]
 {
-"65
+"53
 } 0
-"64 D:\HRPD\MPLab-X\Rover.X\ADC.c
+"67 D:\HRPD\MPLab-X\Rover.X\ADC.c
 [v _ReadDistanceRight ReadDistanceRight `(ui  1 e 2 0 ]
 {
-"66
+"69
 } 0
-"56
+"58
 [v _ReadDistanceLeft ReadDistanceLeft `(ui  1 e 2 0 ]
 {
-"58
+"60
 } 0
-"72
+"75
 [v _ReadDistanceCentral ReadDistanceCentral `(ui  1 e 2 0 ]
 {
-"74
+"78
 } 0
-"32
+"34
 [v _ADCInitiateConversion ADCInitiateConversion `(v  1 e 1 0 ]
 {
-"34
+"36
 } 0
-"8
+"10
 [v _ADCInit ADCInit `(v  1 e 1 0 ]
 {
-"30
+"32
 } 0
 "10 D:\HRPD\MPLab-X\Rover.X\interrupts.c
 [v _isr isr `II(v  1 e 1 0 ]
 {
 "98
-[v isr@CharRx CharRx `uc  1 a 1 75 ]
+[v isr@CharRx CharRx `uc  1 a 1 76 ]
 "17
-[v isr@read read `ui  1 a 2 73 ]
+[v isr@read read `ui  1 a 2 74 ]
 "16
 [v isr@Readport Readport `ui  1 s 2 Readport ]
 "68
@@ -642,41 +597,113 @@
 [v ConvertPicSpeed@velocity velocity `uc  1 a 1 2 ]
 "80
 } 0
-"60 D:\HRPD\MPLab-X\Rover.X\ADC.c
+"62 D:\HRPD\MPLab-X\Rover.X\ADC.c
 [v _SetDistanceRight SetDistanceRight `(v  1 e 1 0 ]
 {
 [v SetDistanceRight@lecture lecture `ui  1 p 2 53 ]
-"62
+"65
 } 0
-"52
+"91
+[v _ShowLecturesInLCD ShowLecturesInLCD `(v  1 e 1 0 ]
+{
+"105
+} 0
+"254 D:\HRPD\MPLab-X\Rover.X\lcd_hd44780_pic16.c
+[v _LCDWriteString LCDWriteString `(v  1 e 1 0 ]
+{
+"290
+[v LCDWriteString@cc cc `c  1 a 1 10 ]
+"254
+[v LCDWriteString@msg msg `*.25Cuc  1 p 2 8 ]
+"308
+} 0
+"310
+[v _LCDWriteInt LCDWriteInt `(v  1 e 1 0 ]
+{
+"323
+[v LCDWriteInt@str str `[5]uc  1 a 5 13 ]
+"324
+[v LCDWriteInt@i i `i  1 a 2 20 ]
+[v LCDWriteInt@j j `i  1 a 2 18 ]
+"310
+[v LCDWriteInt@val val `i  1 p 2 8 ]
+[v LCDWriteInt@field_length field_length `c  1 p 1 10 ]
+"311
+[v LCDWriteInt@F4236 F4236 `[5]uc  1 s 5 F4236 ]
+"349
+} 0
+"8 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\awmod.c
+[v ___awmod __awmod `(i  1 e 2 0 ]
+{
+"11
+[v ___awmod@sign sign `uc  1 a 1 5 ]
+[v ___awmod@counter counter `uc  1 a 1 4 ]
+"8
+[v ___awmod@dividend dividend `i  1 p 2 0 ]
+[v ___awmod@divisor divisor `i  1 p 2 2 ]
+"35
+} 0
+"8 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+{
+"11
+[v ___awdiv@quotient quotient `i  1 a 2 6 ]
+"12
+[v ___awdiv@sign sign `uc  1 a 1 5 ]
+[v ___awdiv@counter counter `uc  1 a 1 4 ]
+"8
+[v ___awdiv@dividend dividend `i  1 p 2 0 ]
+[v ___awdiv@divisor divisor `i  1 p 2 2 ]
+"42
+} 0
+"355 D:\HRPD\MPLab-X\Rover.X\lcd_hd44780_pic16.c
+[v _LCDGotoXY LCDGotoXY `(v  1 e 1 0 ]
+{
+[v LCDGotoXY@x x `uc  1 a 1 wreg ]
+[v LCDGotoXY@x x `uc  1 a 1 wreg ]
+[v LCDGotoXY@y y `uc  1 p 1 8 ]
+"357
+[v LCDGotoXY@x x `uc  1 a 1 9 ]
+"398
+} 0
+"83
+[v i2_LCDByte LCDByte `(v  1 e 1 0 ]
+{
+[v i2LCDByte@c c `uc  1 a 1 wreg ]
+[v i2LCDByte@temp LCDByte `uc  1 a 1 7 ]
+[v i2LCDByte@ln LCDByte `uc  1 a 1 5 ]
+[v i2LCDByte@hn LCDByte `uc  1 a 1 4 ]
+[v i2LCDByte@c c `uc  1 a 1 wreg ]
+[v i2LCDByte@isdata isdata `uc  1 p 1 3 ]
+"95
+[v i2LCDByte@c c `uc  1 a 1 6 ]
+"136
+} 0
+"138
+[v i2_LCDBusyLoop LCDBusyLoop `(v  1 e 1 0 ]
+{
+[v i2LCDBusyLoop@status LCDBusyLoop `uc  1 a 1 2 ]
+[v i2LCDBusyLoop@temp LCDBusyLoop `uc  1 a 1 1 ]
+[v i2LCDBusyLoop@busy LCDBusyLoop `uc  1 a 1 0 ]
+"194
+} 0
+"54 D:\HRPD\MPLab-X\Rover.X\ADC.c
 [v _SetDistanceLeft SetDistanceLeft `(v  1 e 1 0 ]
 {
 [v SetDistanceLeft@lecture lecture `ui  1 p 2 53 ]
-"54
+"56
 } 0
-"68
+"71
 [v _SetDistanceCentral SetDistanceCentral `(v  1 e 1 0 ]
 {
 [v SetDistanceCentral@lecture lecture `ui  1 p 2 53 ]
-"70
+"73
 } 0
-"86 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\ftadd.c
-[v ___ftadd __ftadd `(f  1 e 3 0 ]
-{
-"88
-[v ___ftadd@exp1 exp1 `uc  1 a 1 37 ]
-[v ___ftadd@exp2 exp2 `uc  1 a 1 36 ]
-[v ___ftadd@sign sign `uc  1 a 1 35 ]
-"86
-[v ___ftadd@f1 f1 `f  1 p 3 26 ]
-[v ___ftadd@f2 f2 `f  1 p 3 29 ]
-"148
-} 0
-"76 D:\HRPD\MPLab-X\Rover.X\ADC.c
+"80
 [v _SetBattery SetBattery `(v  1 e 1 0 ]
 {
 [v SetBattery@lecture lecture `ui  1 p 2 53 ]
-"80
+"85
 } 0
 "28 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\lwtoft.c
 [v ___lwtoft __lwtoft `(f  1 e 3 0 ]
@@ -710,6 +737,18 @@
 [v ___ftmul@f2 f2 `f  1 p 3 14 ]
 "157
 } 0
+"86 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\ftadd.c
+[v ___ftadd __ftadd `(f  1 e 3 0 ]
+{
+"88
+[v ___ftadd@exp1 exp1 `uc  1 a 1 37 ]
+[v ___ftadd@exp2 exp2 `uc  1 a 1 36 ]
+[v ___ftadd@sign sign `uc  1 a 1 35 ]
+"86
+[v ___ftadd@f1 f1 `f  1 p 3 26 ]
+[v ___ftadd@f2 f2 `f  1 p 3 29 ]
+"148
+} 0
 "62 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\float.c
 [v ___ftpack __ftpack `(f  1 e 3 0 ]
 {
@@ -735,10 +774,10 @@
 {
 "44
 } 0
-"36 D:\HRPD\MPLab-X\Rover.X\ADC.c
+"38 D:\HRPD\MPLab-X\Rover.X\ADC.c
 [v _ADCGetOutput ADCGetOutput `(ui  1 e 2 0 ]
 {
-"37
+"39
 [v ADCGetOutput@temp temp `i  1 a 2 4 ]
-"40
+"42
 } 0

@@ -37,18 +37,6 @@ void ReadParallel(){
     }else{
         Mode=0;
     }
-    
-    //Show values in LCD
-    int temp=(int)right;
-    LCDGotoXY(0,0);
-    LCDWriteInt(temp, 4);
-    LCDGotoXY(8,0);
-    LCDWriteInt(SpeedRight,4);
-    int temp=(int)left;
-    LCDGotoXY(0,1);
-    LCDWriteInt(temp, 4);
-    LCDGotoXY(8,1);
-    LCDWriteInt(SpeedLeft,4);
 }
 
 

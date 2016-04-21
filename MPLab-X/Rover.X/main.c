@@ -18,10 +18,10 @@ void main(void) {
     MotorInit();
     //SerialInit();
     TimerPWMInit();
-    SetMotorLeft(0);
-    SetMotorRight(0);
     LCDInit(LS_NONE); //Initialize the LCD Module
     parallelInit();
+    SetMotorLeft(0);
+    SetMotorRight(0);
     
     
 

@@ -5062,6 +5062,7 @@ void MotorInit();
 void SetMotorLeft(signed int speed);
 void SetMotorRight(signed int speed);
 void Stop();
+void WriteSpeedInLCD ();
 
 # 13 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\stdint.h"
 typedef signed char int8_t;
@@ -5191,6 +5192,8 @@ unsigned int ReadDistanceCentral ();
 void SetBattery (unsigned int lecture);
 unsigned int ReadBattery ();
 
+void ShowLecturesInLCD (void);
+
 # 1 "driver.h"
 void Go(void);
 void TurnRight90(void);
@@ -5289,7 +5292,7 @@ SpeedLeft=ReadParallelSpeedLeft();
 SpeedRight=ReadParallelSpeedRight();
 
 if(SpeedRight>0 && SpeedLeft>0){
-if ((ReadDistanceCentral()<35) || (ReadDistanceRight()<30) || (ReadDistanceLeft()<30)){
+if ((ReadDistanceCentral()<37) || (ReadDistanceRight()<30) || (ReadDistanceLeft()<30)){
 SetMotorLeft(0);
 SetMotorRight(0);
 }else{
@@ -5304,7 +5307,7 @@ SetMotorRight(SpeedRight);
 
 
 }else if (ReadMode()==1){
-if (ReadDistanceCentral()<35){
+if (ReadDistanceCentral()<37){
 if(ReadDistanceRight()>ReadDistanceLeft()){
 TurnRight135();
 }else{

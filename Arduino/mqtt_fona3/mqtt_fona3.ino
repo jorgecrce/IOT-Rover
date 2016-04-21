@@ -186,6 +186,9 @@ void logLocation(float latitude, float longitude, float altitude, Adafruit_MQTT_
   sendBuffer[index++] = ',';
   dtostrf(altitude, 2, 6, &sendBuffer[index]);
 
+  if (altitude==0 || latitude==0){
+      Serial.print(F("Bad GPS reception. Not publishing: "));  
+  }else{
   // Finally publish the string to the feed.
   Serial.print(F("Publishing location: "));
   Serial.println(sendBuffer);
@@ -196,6 +199,7 @@ void logLocation(float latitude, float longitude, float altitude, Adafruit_MQTT_
   else {
     Serial.println(F("Publish succeeded!"));
     //txFailures = 0;
+  }
   }
 }
 

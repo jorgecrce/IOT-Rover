@@ -5082,11 +5082,14 @@ unsigned int ReadDistanceCentral ();
 void SetBattery (unsigned int lecture);
 unsigned int ReadBattery ();
 
+void ShowLecturesInLCD (void);
+
 # 8 "motors.h"
 void MotorInit();
 void SetMotorLeft(signed int speed);
 void SetMotorRight(signed int speed);
 void Stop();
+void WriteSpeedInLCD ();
 
 # 13 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\stdint.h"
 typedef signed char int8_t;
@@ -5238,10 +5241,10 @@ ADCInit();
 MotorInit();
 
 TimerPWMInit();
-SetMotorLeft(0);
-SetMotorRight(0);
 LCDInit(0B00000000);
 parallelInit();
+SetMotorLeft(0);
+SetMotorRight(0);
 
 
 

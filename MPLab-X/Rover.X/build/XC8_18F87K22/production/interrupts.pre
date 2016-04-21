@@ -5082,6 +5082,8 @@ unsigned int ReadDistanceCentral ();
 void SetBattery (unsigned int lecture);
 unsigned int ReadBattery ();
 
+void ShowLecturesInLCD (void);
+
 # 7 "PWM.h"
 void PWMInit(void);
 

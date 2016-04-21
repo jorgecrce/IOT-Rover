@@ -35,6 +35,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _ADRESL `Vuc ~T0 @X0 0 e@4035 ]
 "5402
 [v _ADRESH `Vuc ~T0 @X0 0 e@4036 ]
+"30 ADC.h
+[v _ShowLecturesInLCD `(v ~T0 @X0 0 ef ]
+"81 lcd_hd44780_pic16.h
+[v _LCDGotoXY `(v ~T0 @X0 0 ef2`uc`uc ]
+"79
+[v _LCDWriteString `(v ~T0 @X0 0 ef1`*Cuc ]
+"80
+[v _LCDWriteInt `(v ~T0 @X0 0 ef2`i`c ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -3784,252 +3792,339 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic18.h: 156: extern __nonreentrant void _delay(unsigned long);
 [; ;pic18.h: 158: extern __nonreentrant void _delaywdt(unsigned long);
 [; ;pic18.h: 160: extern __nonreentrant void _delay3(unsigned char);
-"2 ADC.c
+[; ;stdint.h: 13: typedef signed char int8_t;
+[; ;stdint.h: 20: typedef signed int int16_t;
+[; ;stdint.h: 28: typedef signed short long int int24_t;
+[; ;stdint.h: 36: typedef signed long int int32_t;
+[; ;stdint.h: 43: typedef unsigned char uint8_t;
+[; ;stdint.h: 49: typedef unsigned int uint16_t;
+[; ;stdint.h: 56: typedef unsigned short long int uint24_t;
+[; ;stdint.h: 63: typedef unsigned long int uint32_t;
+[; ;stdint.h: 71: typedef signed char int_least8_t;
+[; ;stdint.h: 78: typedef signed int int_least16_t;
+[; ;stdint.h: 90: typedef signed short long int int_least24_t;
+[; ;stdint.h: 98: typedef signed long int int_least32_t;
+[; ;stdint.h: 105: typedef unsigned char uint_least8_t;
+[; ;stdint.h: 111: typedef unsigned int uint_least16_t;
+[; ;stdint.h: 121: typedef unsigned short long int uint_least24_t;
+[; ;stdint.h: 128: typedef unsigned long int uint_least32_t;
+[; ;stdint.h: 137: typedef signed char int_fast8_t;
+[; ;stdint.h: 144: typedef signed int int_fast16_t;
+[; ;stdint.h: 156: typedef signed short long int int_fast24_t;
+[; ;stdint.h: 164: typedef signed long int int_fast32_t;
+[; ;stdint.h: 171: typedef unsigned char uint_fast8_t;
+[; ;stdint.h: 177: typedef unsigned int uint_fast16_t;
+[; ;stdint.h: 187: typedef unsigned short long int uint_fast24_t;
+[; ;stdint.h: 194: typedef unsigned long int uint_fast32_t;
+[; ;stdint.h: 200: typedef int32_t intmax_t;
+[; ;stdint.h: 205: typedef uint32_t uintmax_t;
+[; ;stdint.h: 210: typedef int16_t intptr_t;
+[; ;stdint.h: 215: typedef uint16_t uintptr_t;
+[; ;lcd_hd44780_pic16.h: 78: void LCDInit(uint8_t style);
+[; ;lcd_hd44780_pic16.h: 79: void LCDWriteString(const char *msg);
+[; ;lcd_hd44780_pic16.h: 80: void LCDWriteInt(int val,int8_t field_length);
+[; ;lcd_hd44780_pic16.h: 81: void LCDGotoXY(uint8_t x,uint8_t y);
+[; ;lcd_hd44780_pic16.h: 84: void LCDByte(uint8_t,uint8_t);
+[; ;lcd_hd44780_pic16.h: 88: void LCDBusyLoop();
+[; ;ADC.h: 5: void ADCInit(void);
+[; ;ADC.h: 9: void ADCInitiateConversion(void);
+[; ;ADC.h: 12: unsigned int ADCGetOutput(void);
+[; ;ADC.h: 15: unsigned char ADCGetOutputLowByte();
+[; ;ADC.h: 18: unsigned char ADCGetOutputHighByte();
+[; ;ADC.h: 20: unsigned int ReadDistanceLeft ();
+[; ;ADC.h: 21: void SetDistanceLeft (unsigned int lecture);
+[; ;ADC.h: 22: void SetDistanceRight (unsigned int lecture);
+[; ;ADC.h: 23: unsigned int ReadDistanceRight ();
+[; ;ADC.h: 24: void SetDistanceCentral (unsigned int lecture);
+[; ;ADC.h: 25: unsigned int ReadDistanceCentral ();
+[; ;ADC.h: 27: void SetBattery (unsigned int lecture);
+[; ;ADC.h: 28: unsigned int ReadBattery ();
+[; ;ADC.h: 30: void ShowLecturesInLCD (void);
+"4 ADC.c
 [v _DistanceLeft `ui ~T0 @X0 1 s ]
 [i _DistanceLeft
 -> -> 50 `i `ui
 ]
-[; ;ADC.c: 2: static unsigned int DistanceLeft=50;
-"3
+[; ;ADC.c: 4: static unsigned int DistanceLeft=50;
+"5
 [v _DistanceRight `ui ~T0 @X0 1 s ]
 [i _DistanceRight
 -> -> 50 `i `ui
 ]
-[; ;ADC.c: 3: static unsigned int DistanceRight=50;
-"4
+[; ;ADC.c: 5: static unsigned int DistanceRight=50;
+"6
 [v _DistanceCentral `ui ~T0 @X0 1 s ]
 [i _DistanceCentral
 -> -> 50 `i `ui
 ]
-[; ;ADC.c: 4: static unsigned int DistanceCentral=50;
-"5
+[; ;ADC.c: 6: static unsigned int DistanceCentral=50;
+"7
 [v _Battery `ui ~T0 @X0 1 s ]
-[; ;ADC.c: 5: static unsigned int Battery;
-"8
+[; ;ADC.c: 7: static unsigned int Battery;
+"10
 [v _ADCInit `(v ~T0 @X0 1 ef ]
 {
-[; ;ADC.c: 8: void ADCInit(void) {
+[; ;ADC.c: 10: void ADCInit(void) {
 [e :U _ADCInit ]
 [f ]
-[; ;ADC.c: 11: TRISA0 = 1;
-"11
-[e = _TRISA0 -> -> 1 `i `b ]
-[; ;ADC.c: 12: TRISA1 = 1;
-"12
-[e = _TRISA1 -> -> 1 `i `b ]
-[; ;ADC.c: 13: TRISA2 = 1;
+[; ;ADC.c: 13: TRISA0 = 1;
 "13
-[e = _TRISA2 -> -> 1 `i `b ]
-[; ;ADC.c: 14: TRISA3 = 1;
+[e = _TRISA0 -> -> 1 `i `b ]
+[; ;ADC.c: 14: TRISA1 = 1;
 "14
-[e = _TRISA3 -> -> 1 `i `b ]
-[; ;ADC.c: 16: ANS0 = 1;
+[e = _TRISA1 -> -> 1 `i `b ]
+[; ;ADC.c: 15: TRISA2 = 1;
+"15
+[e = _TRISA2 -> -> 1 `i `b ]
+[; ;ADC.c: 16: TRISA3 = 1;
 "16
-[e = _ANS0 -> -> 1 `i `b ]
-[; ;ADC.c: 17: ANS1 = 1;
-"17
-[e = _ANS1 -> -> 1 `i `b ]
-[; ;ADC.c: 18: ANS2 = 1;
+[e = _TRISA3 -> -> 1 `i `b ]
+[; ;ADC.c: 18: ANS0 = 1;
 "18
-[e = _ANS2 -> -> 1 `i `b ]
-[; ;ADC.c: 19: ANS3 = 1;
+[e = _ANS0 -> -> 1 `i `b ]
+[; ;ADC.c: 19: ANS1 = 1;
 "19
-[e = _ANS3 -> -> 1 `i `b ]
-[; ;ADC.c: 21: ADON = 1;
+[e = _ANS1 -> -> 1 `i `b ]
+[; ;ADC.c: 20: ANS2 = 1;
+"20
+[e = _ANS2 -> -> 1 `i `b ]
+[; ;ADC.c: 21: ANS3 = 1;
 "21
-[e = _ADON -> -> 1 `i `b ]
-[; ;ADC.c: 22: ADCON1 = 0;
-"22
-[e = _ADCON1 -> -> 0 `i `uc ]
-[; ;ADC.c: 23: ADCON2 = 0x91;
+[e = _ANS3 -> -> 1 `i `b ]
+[; ;ADC.c: 23: ADON = 1;
 "23
-[e = _ADCON2 -> -> 145 `i `uc ]
-[; ;ADC.c: 24: ADIF = 0;
+[e = _ADON -> -> 1 `i `b ]
+[; ;ADC.c: 24: ADCON1 = 0;
 "24
-[e = _ADIF -> -> 0 `i `b ]
-[; ;ADC.c: 25: ADIE = 1;
+[e = _ADCON1 -> -> 0 `i `uc ]
+[; ;ADC.c: 25: ADCON2 = 0x91;
 "25
-[e = _ADIE -> -> 1 `i `b ]
-[; ;ADC.c: 27: PEIE = 1;
+[e = _ADCON2 -> -> 145 `i `uc ]
+[; ;ADC.c: 26: ADIF = 0;
+"26
+[e = _ADIF -> -> 0 `i `b ]
+[; ;ADC.c: 27: ADIE = 1;
 "27
+[e = _ADIE -> -> 1 `i `b ]
+[; ;ADC.c: 29: PEIE = 1;
+"29
 [e = _PEIE -> -> 1 `i `b ]
-[; ;ADC.c: 28: GIE = 1;
-"28
-[e = _GIE -> -> 1 `i `b ]
-[; ;ADC.c: 30: }
+[; ;ADC.c: 30: GIE = 1;
 "30
+[e = _GIE -> -> 1 `i `b ]
+[; ;ADC.c: 32: }
+"32
 [e :UE 393 ]
 }
-"32
+"34
 [v _ADCInitiateConversion `(v ~T0 @X0 1 ef ]
 {
-[; ;ADC.c: 32: void ADCInitiateConversion(void) {
+[; ;ADC.c: 34: void ADCInitiateConversion(void) {
 [e :U _ADCInitiateConversion ]
 [f ]
-[; ;ADC.c: 33: GO = 1;
-"33
+[; ;ADC.c: 35: GO = 1;
+"35
 [e = _GO -> -> 1 `i `b ]
-[; ;ADC.c: 34: }
-"34
+[; ;ADC.c: 36: }
+"36
 [e :UE 394 ]
 }
-"36
+"38
 [v _ADCGetOutput `(ui ~T0 @X0 1 ef ]
 {
-[; ;ADC.c: 36: unsigned int ADCGetOutput(void) {
+[; ;ADC.c: 38: unsigned int ADCGetOutput(void) {
 [e :U _ADCGetOutput ]
 [f ]
-"37
-[v _temp `i ~T0 @X0 1 a ]
-[; ;ADC.c: 37: int temp;
-[; ;ADC.c: 38: temp = ADRESL;
-"38
-[e = _temp -> _ADRESL `i ]
-[; ;ADC.c: 39: return temp + (ADRESH << 8);
 "39
+[v _temp `i ~T0 @X0 1 a ]
+[; ;ADC.c: 39: int temp;
+[; ;ADC.c: 40: temp = ADRESL;
+"40
+[e = _temp -> _ADRESL `i ]
+[; ;ADC.c: 41: return temp + (ADRESH << 8);
+"41
 [e ) -> + _temp << -> _ADRESH `i -> 8 `i `ui ]
 [e $UE 395  ]
-[; ;ADC.c: 40: }
-"40
+[; ;ADC.c: 42: }
+"42
 [e :UE 395 ]
 }
-"42
+"44
 [v _ADCGetOutputLowByte `(uc ~T0 @X0 1 ef ]
 {
-[; ;ADC.c: 42: unsigned char ADCGetOutputLowByte() {
+[; ;ADC.c: 44: unsigned char ADCGetOutputLowByte() {
 [e :U _ADCGetOutputLowByte ]
 [f ]
-[; ;ADC.c: 43: return ADRESL;
-"43
+[; ;ADC.c: 45: return ADRESL;
+"45
 [e ) _ADRESL ]
 [e $UE 396  ]
-[; ;ADC.c: 44: }
-"44
+[; ;ADC.c: 46: }
+"46
 [e :UE 396 ]
 }
-"46
+"48
 [v _ADCGetOutputHighByte `(uc ~T0 @X0 1 ef ]
 {
-[; ;ADC.c: 46: unsigned char ADCGetOutputHighByte() {
+[; ;ADC.c: 48: unsigned char ADCGetOutputHighByte() {
 [e :U _ADCGetOutputHighByte ]
 [f ]
-[; ;ADC.c: 47: return ADRESH;
-"47
+[; ;ADC.c: 49: return ADRESH;
+"49
 [e ) _ADRESH ]
 [e $UE 397  ]
-[; ;ADC.c: 48: }
-"48
+[; ;ADC.c: 50: }
+"50
 [e :UE 397 ]
 }
-"52
+"54
 [v _SetDistanceLeft `(v ~T0 @X0 1 ef1`ui ]
 {
-[; ;ADC.c: 52: void SetDistanceLeft (unsigned int lecture){
+[; ;ADC.c: 54: void SetDistanceLeft (unsigned int lecture){
 [e :U _SetDistanceLeft ]
 [v _lecture `ui ~T0 @X0 1 r1 ]
 [f ]
-[; ;ADC.c: 53: DistanceLeft=5+(1023-lecture)*0.042;
-"53
+[; ;ADC.c: 55: DistanceLeft=5+(1023-lecture)*0.042;
+"55
 [e = _DistanceLeft -> + -> -> 5 `i `d * -> - -> -> 1023 `i `ui _lecture `d .0.042 `ui ]
-[; ;ADC.c: 54: }
-"54
+[; ;ADC.c: 56: }
+"56
 [e :UE 398 ]
 }
-"56
+"58
 [v _ReadDistanceLeft `(ui ~T0 @X0 1 ef ]
 {
-[; ;ADC.c: 56: unsigned int ReadDistanceLeft (){
+[; ;ADC.c: 58: unsigned int ReadDistanceLeft (){
 [e :U _ReadDistanceLeft ]
 [f ]
-[; ;ADC.c: 57: return DistanceLeft;
-"57
+[; ;ADC.c: 59: return DistanceLeft;
+"59
 [e ) _DistanceLeft ]
 [e $UE 399  ]
-[; ;ADC.c: 58: }
-"58
+[; ;ADC.c: 60: }
+"60
 [e :UE 399 ]
 }
-"60
+"62
 [v _SetDistanceRight `(v ~T0 @X0 1 ef1`ui ]
 {
-[; ;ADC.c: 60: void SetDistanceRight (unsigned int lecture){
+[; ;ADC.c: 62: void SetDistanceRight (unsigned int lecture){
 [e :U _SetDistanceRight ]
 [v _lecture `ui ~T0 @X0 1 r1 ]
 [f ]
-[; ;ADC.c: 61: DistanceRight=5+(1023-lecture)*0.042;
-"61
+[; ;ADC.c: 63: ShowLecturesInLCD ();
+"63
+[e ( _ShowLecturesInLCD ..  ]
+[; ;ADC.c: 64: DistanceRight=5+(1023-lecture)*0.042;
+"64
 [e = _DistanceRight -> + -> -> 5 `i `d * -> - -> -> 1023 `i `ui _lecture `d .0.042 `ui ]
-[; ;ADC.c: 62: }
-"62
+[; ;ADC.c: 65: }
+"65
 [e :UE 400 ]
 }
-"64
+"67
 [v _ReadDistanceRight `(ui ~T0 @X0 1 ef ]
 {
-[; ;ADC.c: 64: unsigned int ReadDistanceRight (){
+[; ;ADC.c: 67: unsigned int ReadDistanceRight (){
 [e :U _ReadDistanceRight ]
 [f ]
-[; ;ADC.c: 65: return DistanceRight;
-"65
+[; ;ADC.c: 68: return DistanceRight;
+"68
 [e ) _DistanceRight ]
 [e $UE 401  ]
-[; ;ADC.c: 66: }
-"66
+[; ;ADC.c: 69: }
+"69
 [e :UE 401 ]
 }
-"68
+"71
 [v _SetDistanceCentral `(v ~T0 @X0 1 ef1`ui ]
 {
-[; ;ADC.c: 68: void SetDistanceCentral (unsigned int lecture){
+[; ;ADC.c: 71: void SetDistanceCentral (unsigned int lecture){
 [e :U _SetDistanceCentral ]
 [v _lecture `ui ~T0 @X0 1 r1 ]
 [f ]
-[; ;ADC.c: 69: DistanceCentral=5+(1023-lecture)*0.042;
-"69
+[; ;ADC.c: 72: DistanceCentral=5+(1023-lecture)*0.042;
+"72
 [e = _DistanceCentral -> + -> -> 5 `i `d * -> - -> -> 1023 `i `ui _lecture `d .0.042 `ui ]
-[; ;ADC.c: 70: }
-"70
+[; ;ADC.c: 73: }
+"73
 [e :UE 402 ]
 }
-"72
+"75
 [v _ReadDistanceCentral `(ui ~T0 @X0 1 ef ]
 {
-[; ;ADC.c: 72: unsigned int ReadDistanceCentral (){
+[; ;ADC.c: 75: unsigned int ReadDistanceCentral (){
 [e :U _ReadDistanceCentral ]
 [f ]
-[; ;ADC.c: 73: return DistanceCentral;
-"73
+[; ;ADC.c: 76: return DistanceCentral;
+"76
 [e ) _DistanceCentral ]
 [e $UE 403  ]
-[; ;ADC.c: 74: }
-"74
+[; ;ADC.c: 78: }
+"78
 [e :UE 403 ]
 }
-"76
+"80
 [v _SetBattery `(v ~T0 @X0 1 ef1`ui ]
 {
-[; ;ADC.c: 76: void SetBattery (unsigned int lecture){
+[; ;ADC.c: 80: void SetBattery (unsigned int lecture){
 [e :U _SetBattery ]
 [v _lecture `ui ~T0 @X0 1 r1 ]
 [f ]
-[; ;ADC.c: 79: Battery=lecture*3.548;
-"79
-[e = _Battery -> * -> _lecture `d .3.548 `ui ]
-[; ;ADC.c: 80: }
-"80
+[; ;ADC.c: 83: Battery=((lecture*3.548)-11)*100;
+"83
+[e = _Battery -> * - * -> _lecture `d .3.548 -> -> 11 `i `d -> -> 100 `i `d `ui ]
+[; ;ADC.c: 85: }
+"85
 [e :UE 404 ]
 }
-"82
+"87
 [v _ReadBattery `(ui ~T0 @X0 1 ef ]
 {
-[; ;ADC.c: 82: unsigned int ReadBattery (){
+[; ;ADC.c: 87: unsigned int ReadBattery (){
 [e :U _ReadBattery ]
 [f ]
-[; ;ADC.c: 83: return Battery;
-"83
+[; ;ADC.c: 88: return Battery;
+"88
 [e ) _Battery ]
 [e $UE 405  ]
-[; ;ADC.c: 84: }
-"84
+[; ;ADC.c: 89: }
+"89
 [e :UE 405 ]
 }
+"91
+[v _ShowLecturesInLCD `(v ~T0 @X0 1 ef ]
+{
+[; ;ADC.c: 91: void ShowLecturesInLCD (void){
+[e :U _ShowLecturesInLCD ]
+[f ]
+[; ;ADC.c: 94: LCDGotoXY(0,0);
+"94
+[e ( _LCDGotoXY (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;ADC.c: 95: LCDWriteString("Right-Front-Left");
+"95
+[e ( _LCDWriteString (1 :s 1C ]
+[; ;ADC.c: 97: LCDGotoXY(0,1);
+"97
+[e ( _LCDGotoXY (2 , -> -> 0 `i `uc -> -> 1 `i `uc ]
+[; ;ADC.c: 98: LCDWriteInt(DistanceRight, 3);
+"98
+[e ( _LCDWriteInt (2 , -> _DistanceRight `i -> -> 3 `i `c ]
+[; ;ADC.c: 100: LCDGotoXY(6,1);
+"100
+[e ( _LCDGotoXY (2 , -> -> 6 `i `uc -> -> 1 `i `uc ]
+[; ;ADC.c: 101: LCDWriteInt(DistanceCentral, 3);
+"101
+[e ( _LCDWriteInt (2 , -> _DistanceCentral `i -> -> 3 `i `c ]
+[; ;ADC.c: 103: LCDGotoXY(12,1);
+"103
+[e ( _LCDGotoXY (2 , -> -> 12 `i `uc -> -> 1 `i `uc ]
+[; ;ADC.c: 104: LCDWriteInt(DistanceLeft,3);
+"104
+[e ( _LCDWriteInt (2 , -> _DistanceLeft `i -> -> 3 `i `c ]
+[; ;ADC.c: 105: }
+"105
+[e :UE 406 ]
+}
+[a 1C 82 105 103 104 116 45 70 114 111 110 116 45 76 101 102 116 0 ]
+

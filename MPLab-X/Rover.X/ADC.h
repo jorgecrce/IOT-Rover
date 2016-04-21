@@ -26,3 +26,5 @@ unsigned int ReadDistanceCentral ();
 
 void SetBattery (unsigned int lecture);
 unsigned int ReadBattery ();
+
+void ShowLecturesInLCD (void);
