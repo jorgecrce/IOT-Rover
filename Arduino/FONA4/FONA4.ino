@@ -17,18 +17,18 @@
 
 
 //PIC Parallel Pins
-#define P0 36
-#define P1 34
-#define P2 32
-#define P3 30
-#define P4 28
-#define P5 26
-#define P6 24
-#define P7 22
+#define P0 37
+#define P1 35
+#define P2 33
+#define P3 31
+#define P4 29
+#define P5 27
+#define P6 25
+#define P7 23
 
 
 //Global Variables
-signed int  StartStopInt=0;
+signed int  StartStopInt=0, counter=0;
 
 // Configure Adafruit IO access.
 #define AIO_KEY "5c9f4f8e308a307c1594a197b4e6e028410dc3e1"
@@ -84,6 +84,9 @@ void setup() {
   //Delay to estabilize connection
   delay(4000);
 
+  fona.enableGPS(true);
+  delay(1000);
+
   //Start Adafruit IO Fona instance
   aio.begin();
 
@@ -107,9 +110,9 @@ void loop() {
   PICSpeed(StartStopInt);
 }
 
-void PICSpeed(int value){//Izquiera p7 - P6 - P5 - P4 - Derecha P3 - P2 - P1 - P0. 
+void PICSpeed(int value){//Left p7-P6-P5-P4 - Right P3-P2-P1-P0. 
   switch (value){
-    case -100://Alante 80 - 80
+    case -100://Front +80 - +80
       digitalWrite(P7, HIGH);
       digitalWrite(P6, LOW);
       digitalWrite(P5, HIGH);
@@ -120,7 +123,7 @@ void PICSpeed(int value){//Izquiera p7 - P6 - P5 - P4 - Derecha P3 - P2 - P1 - P
       digitalWrite(P0, LOW);
       //return '1';
       break;
-    case -80://Alante Izquierda 40 - 60
+    case -80://Front Left +40 - +60
       digitalWrite(P7, HIGH);
       digitalWrite(P6, LOW);
       digitalWrite(P5, LOW);
@@ -131,7 +134,7 @@ void PICSpeed(int value){//Izquiera p7 - P6 - P5 - P4 - Derecha P3 - P2 - P1 - P
       digitalWrite(P0, HIGH);
       //return '2';
       break;
-    case -60://Alante derecha 60 - 40
+    case -60://Front Right +60 - +40
       digitalWrite(P7, HIGH);
       digitalWrite(P6, LOW);
       digitalWrite(P5, LOW);
@@ -186,7 +189,7 @@ void PICSpeed(int value){//Izquiera p7 - P6 - P5 - P4 - Derecha P3 - P2 - P1 - P
       digitalWrite(P0, LOW);
       //return '7';
       break;
-    case 40://Derecha 40 - 0
+    case 40://Right +40 - 0
       digitalWrite(P7, HIGH);
       digitalWrite(P6, LOW);
       digitalWrite(P5, LOW);
@@ -197,7 +200,7 @@ void PICSpeed(int value){//Izquiera p7 - P6 - P5 - P4 - Derecha P3 - P2 - P1 - P
       digitalWrite(P0, LOW);
       //return '8';
       break;
-    case 60://Izquierda 0 - 40
+    case 60://Left 0 - +40
       digitalWrite(P7, LOW);
       digitalWrite(P6, LOW);
       digitalWrite(P5, LOW);
@@ -208,7 +211,7 @@ void PICSpeed(int value){//Izquiera p7 - P6 - P5 - P4 - Derecha P3 - P2 - P1 - P
       digitalWrite(P0, LOW);
       //return '9';
       break;
-    case 80: //Sobre Derecha 40 - -40
+    case 80: //.40 - -40
       digitalWrite(P7, HIGH);
       digitalWrite(P6, LOW);
       digitalWrite(P5, LOW);
@@ -219,7 +222,7 @@ void PICSpeed(int value){//Izquiera p7 - P6 - P5 - P4 - Derecha P3 - P2 - P1 - P
       digitalWrite(P0, LOW);
       //return 'a';
       break;
-    case 100://Sobre izquierda
+    case 100://-40 - +40
       digitalWrite(P7, LOW);
       digitalWrite(P6, HIGH);
       digitalWrite(P5, LOW);
@@ -230,7 +233,7 @@ void PICSpeed(int value){//Izquiera p7 - P6 - P5 - P4 - Derecha P3 - P2 - P1 - P
       digitalWrite(P0, LOW);
       //return 'b';
       break;
-    case 1://Modo automático
+    case 1://Automatic mode
       digitalWrite(P7, HIGH);
       digitalWrite(P6, HIGH);
       digitalWrite(P5, LOW);
@@ -250,7 +253,7 @@ void PICSpeed(int value){//Izquiera p7 - P6 - P5 - P4 - Derecha P3 - P2 - P1 - P
       digitalWrite(P2, LOW);
       digitalWrite(P1, LOW);
       digitalWrite(P0, LOW);
-      //return '6'; //(Speed=0)
+      //return '0'; //(Speed=0)
       break;
   }
 }

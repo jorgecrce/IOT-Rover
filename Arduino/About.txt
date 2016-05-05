@@ -1,0 +1,3 @@
+Use FONA 4 for http request.Not GPS support
+
+Use mqqt_fona3 for MQTT request and full GPS support, but sometimes crash.

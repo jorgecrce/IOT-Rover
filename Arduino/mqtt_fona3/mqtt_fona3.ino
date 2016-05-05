@@ -19,14 +19,14 @@
 
 
 //PIC Parallel Pins
-#define P0 36
-#define P1 34
-#define P2 32
-#define P3 30
-#define P4 28
-#define P5 26
-#define P6 24
-#define P7 22
+#define P0 37
+#define P1 35
+#define P2 33
+#define P3 31
+#define P4 29
+#define P5 27
+#define P6 25
+#define P7 23
 
 //Global Variables
 signed int  StartStopInt=0, counter=0;
@@ -315,7 +315,7 @@ void PICSpeed(int value){//Left p7-P6-P5-P4 - Right P3-P2-P1-P0.
       digitalWrite(P0, LOW);
       //return '9';
       break;
-    case 80: 40 - -40
+    case 80: //40 - -40
       digitalWrite(P7, HIGH);
       digitalWrite(P6, LOW);
       digitalWrite(P5, LOW);
